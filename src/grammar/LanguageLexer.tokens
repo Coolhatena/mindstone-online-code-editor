@@ -1,0 +1,25 @@
+T__0=1
+T__1=2
+T__2=3
+T__3=4
+T__4=5
+T__5=6
+T__6=7
+MAIN=8
+INT=9
+FLOAT=10
+CHAR=11
+SEMI=12
+ID=13
+INV_ID=14
+NEWLINE=15
+SPACES=16
+'{'=1
+'\n'=2
+'}'=3
+'='=4
+'ent'=5
+'pdec'=6
+'ctr'=7
+'start -->'=8
+'!'=12
