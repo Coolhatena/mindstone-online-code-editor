@@ -46,7 +46,7 @@ const OperationsInput = () => {
 				</button>
 			</div>
 			{
-				errors.length != 0 ?
+				errors.length ?
 				<>
 				{
 					errors.map((text, i) => (
@@ -58,20 +58,21 @@ const OperationsInput = () => {
 					null
 			}
 			{
-				(results.ent.length && errors.length === 0) ? 
-					<p>ent: {results.ent.join(', ')}</p>
+				(results.ent.length && !errors.length) ? 
+					<p>ent: {
+					results.ent.map( (obj) => obj.id ).join(', ')}</p>
 					:
 					null
 			}		
 			{
-				(results.pdec.length && errors.length === 0) ? 
-					<p>pdec: {results.pdec.join(', ')}</p>
+				(results.pdec.length && !errors.length) ? 
+					<p>pdec: {results.pdec.map( (obj) => obj.id ).join(', ')}</p>
 					:
 					null
 			}	
 			{
-				(results.ctr.length && errors.length === 0) ? 
-					<p>ctr: {results.ctr.join(', ')}</p>
+				(results.ctr.length && !errors.length) ? 
+					<p>ctr: {results.ctr.map( (obj) => obj.id ).join(', ')}</p>
 					:
 					null
 			}	
