@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import { vscodeDark } from "@uiw/codemirror-theme-vscode";
 
-const OperationsInput = () => {
+const CodeSpace = () => {
 	const [inputText, setInputText] = useState("");
 	const [results, setResults] = useState({
 											ent:[], 
@@ -118,4 +118,4 @@ const OperationsInput = () => {
 	);
 };
 
-export default OperationsInput;
+export default CodeSpace;

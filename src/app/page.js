@@ -1,13 +1,13 @@
 import React from 'react'
 import Header from './components/Header';
-import OperationsInput from './components/OperationsInput';
+import CodeSpace from './components/CodeSpace';
 
 const page = () => {
   return (
 	<>
 		<main>
 			<Header />
-			<OperationsInput />
+			<CodeSpace />
 		</main>
 	</>
   )
