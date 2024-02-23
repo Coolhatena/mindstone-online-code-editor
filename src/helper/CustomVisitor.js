@@ -10,7 +10,7 @@ export default class CustomVisitor extends LanguageVisitor {
 			"pdec": [],
 			"ctr": []
 		};
-		this.errors = [];
+		this.logs = [];
 	}
 
 	// HELPER METHODS
@@ -72,15 +72,15 @@ export default class CustomVisitor extends LanguageVisitor {
 				break;
 		
 			default:
-				this.errors.push(`El tipo de dato "${type}" no existe`);
+				this.logs.push({type: "error", text:`El tipo de dato "${type}" no existe`});
 				break;
 		}
 		
 		return isValid;
 	}
 
-	declare(){
-		console.log(declare)
+	declare(ctx){
+		console.log("Declare")
 		const TYPE = ctx.TYPE().getText();
 		const ID = ctx.ID().getText();
 		
@@ -88,7 +88,7 @@ export default class CustomVisitor extends LanguageVisitor {
 		if (!is_variable_defined){
 			this.variables[TYPE].push({"id":ID, "value": undefined});
 		} else {
-			this.errors.push(`La declaracion de "${ID}" está repetida`);
+			this.logs.push({type: "error", text:`La declaracion de "${ID}" está repetida`});
 		}
 
 		return [TYPE, ID];
@@ -96,9 +96,6 @@ export default class CustomVisitor extends LanguageVisitor {
 
 	declareAndAssign(ctx){
 		console.log("Declare and assign")
-		console.log(ctx.getText())
-		console.log("Valor:")
-		console.log(ctx.value().getText())
 		const TYPE = ctx.TYPE().getText();
 		const ID = ctx.ID().getText();
 
@@ -108,10 +105,10 @@ export default class CustomVisitor extends LanguageVisitor {
 			if(this.assertTypeWithValue(TYPE, VALUE)){
 				this.variables[TYPE].push({"id":ID, value: VALUE});
 			} else {
-				this.errors.push(`No se puede asignar el valor "${VALUE}" al tipo de dato "${TYPE}"`);
+				this.logs.push({type: "error", text:`No se puede asignar el valor "${VALUE}" al tipo de dato "${TYPE}"`});
 			}
 		} else {
-			this.errors.push(`La declaracion de "${ID}" está repetida`);
+			this.logs.push({type: "error", text:`La declaracion de "${ID}" está repetida`});
 		}
 
 		return [TYPE, ID];
@@ -122,8 +119,7 @@ export default class CustomVisitor extends LanguageVisitor {
 	visitFile(ctx) {
 		console.log("File Visited")
 		this.visitChildren(ctx);
-		console.log(this.variables)
-		return [this.variables, this.errors];
+		return [this.variables, this.logs];
 	}
   
   
@@ -158,7 +154,7 @@ export default class CustomVisitor extends LanguageVisitor {
 		console.log("Invalid Declaration Visited")
 		const TYPE = ctx.TYPE().getText();
 		const ID = ctx.id.text;
-		this.errors.push(`El ID "${ID}" no es valido`);
+		this.logs.push({type: "error", text:`El ID "${ID}" no es valido`});
 
 		return [TYPE, ID];
 	}
@@ -175,10 +171,10 @@ export default class CustomVisitor extends LanguageVisitor {
 				let variable = this.variables[TYPE].find(variable => variable.id === ID);
 				variable.value = VALUE;
 			} else {
-				this.errors.push(`No se puede asignar el valor "${VALUE}" al tipo de dato "${TYPE}"`);
+				this.logs.push({type: "error", text:`No se puede asignar el valor "${VALUE}" al tipo de dato "${TYPE}"`});
 			}
 		} else {
-			this.errors.push(`La variable "${ID}" no esta definida`);
+			this.logs.push({type: "error", text:`La variable "${ID}" no esta definida`});
 		}
 
 		return this.visitChildren(ctx);
@@ -188,7 +184,6 @@ export default class CustomVisitor extends LanguageVisitor {
 	visitPlusMinus(ctx) {
 		console.log("Plusminus Visited")
 		const operation_data = this.visitChildren(ctx);
-		console.log(operation_data)
 		return ctx.operation.type == LanguageParser.PLUS
 			? operation_data[0] + operation_data[2]
 			: operation_data[0] - operation_data[2];
@@ -205,14 +200,13 @@ export default class CustomVisitor extends LanguageVisitor {
 			return this.getVariableValue(ID, TYPE)
 		}
 
-		this.errors.push(`La variable "${ID}" no esta definida`);
+		this.logs.push({type: "error", text:`La variable "${ID}" no esta definida`});
 		return undefined;
 	}
 
 	// Visit a parse tree produced by LanguageParser#valueAsChar.
 	visitValueAsChar(ctx) {
 		console.log("Value as char Visited")
-		console.log(ctx.getText())
 		return ctx.getText();
 	}
 
@@ -220,12 +214,9 @@ export default class CustomVisitor extends LanguageVisitor {
 	// Visit a parse tree produced by LanguageParser#valueAsNumber.
 	visitValueAsNumber(ctx) {
 		console.log("Value as number Visited")
-		console.log("AQUIIII")
-		console.log(ctx.getText())
 		if (ctx.getText().includes('.')){
-			if(/\.0$/.test(ctx.getText())){2
-				this.errors.push("Los valores con decimal '.0' son enteros, use el tipo de dato correcto");
-				return null;
+			if(/\.0$/.test(ctx.getText())){
+				this.logs.push({type: "warning", text:"Los valores con decimal '.0' son enteros, use el tipo de dato correcto"});
 			}
 			return parseFloat(ctx.getText());
 		}

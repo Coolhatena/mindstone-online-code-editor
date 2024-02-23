@@ -2,9 +2,9 @@ import React from 'react'
 
 const Header = () => {
   return (
-	<main className='header'>
+	<div className='header'>
 		<h1>LANGUAGE-NAME</h1>
-	</main>
+	</div>
   )
 }
 

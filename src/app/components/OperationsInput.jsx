@@ -24,7 +24,7 @@ const OperationsInput = () => {
 		return () => clearTimeout(delayDebounceFn)
 	  }, [inputText])
 
-	let handleResolveClick = () => {
+	let handleRunClick = () => {
 		const [res, err] = analizer(inputText)
 		console.log(res);
 		setResults(res);
@@ -36,7 +36,18 @@ const OperationsInput = () => {
 	}
 
 	return (
-		<>
+		<div className='editor'>
+			<div className='editor-header'>
+				<h2>Editor</h2>
+				<div className='button-container'>
+					<button id="run" onClick={handleRunClick} className='editor-button'>
+						Run
+					</button>
+					<button id="clear" onClick={clean} className='editor-button'>
+						Clear
+					</button>
+				</div>
+			</div>
 			<CodeMirror
 					value={inputText}
 					onChange={(e) => setInputText(e)}
@@ -44,26 +55,46 @@ const OperationsInput = () => {
 					width='100%'
 					theme={vscodeDark}
 				/>
-			<div className='operations-input'>
-				
-				<div className='button-container'>
+				{/* <div className='button-container'>
 					<button id="resolve" onClick={clean} className='operations-input-button'>
 						Limpiar
 					</button>
+				</div> */}
+				<div className="container">
+					<div className="terminal-container">
+						<div className="terminal-header">
+							<div className="buttons">
+								<div className="btn red"></div>
+								<div className="btn yellow"></div>
+								<div className="btn green"></div>
+							</div>
+						</div>
+						<div className="terminal-content">
+							<p>Console Output:</p>
+							{
+							errors.length ?
+							<>
+							{
+								errors.map((log, i) => (
+									<p key={i} className={log.type}>{log.type.toUpperCase()}: {log.text}</p>
+									))
+								}
+							</> 
+								:
+								null
+							}
+							{/* <p class="grey">undefined</p>
+							<p>Hello..</p>
+							<p>Hello..</p>
+							<p>Hello..</p><p>Hello..</p>
+							<p class="grey">undefined</p>
+							<p class="last"></p> */}
+						</div>
+					</div>
 				</div>
-				{
-					errors.length ?
-					<>
-					{
-						errors.map((text, i) => (
-							<p key={i}>ERROR: {text}</p>
-							))
-						}
-					</> 
-						:
-						null
-					}
-				{
+				
+				
+				{/* {
 					(results.ent.length && !errors.length) ? 
 						<p>ent: {
 							results.ent.map( (obj) => obj.id ).join(', ')}</p>
@@ -81,10 +112,9 @@ const OperationsInput = () => {
 					<p>ctr: {results.ctr.map( (obj) => obj.id ).join(', ')}</p>
 						:
 						null
-				}	
+				}	 */}
 
-			</div>
-		</>
+		</div>
 	);
 };
 

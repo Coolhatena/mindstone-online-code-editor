@@ -3,12 +3,19 @@
 @tailwind utilities;
 
 :root {
-	--background: #202020
+	--background: #011627;
+	--background-header: #011627;
+	--background-editor-header: #202020;
+	--background-terminal-header: #F7F7F7;
+}
+
+body {
+	background-color: var(--background);
 }
 
 .header {
 	display: flex;
-	background-color: var(--background);
+	background-color: var(--background-header);
 	color: white;
 	padding: 1.5rem;
 	justify-content: center;
@@ -19,53 +26,110 @@
 	font-size: 1.5rem;
 }
 
-.operations-input {
+.editor {
+	height: 100%;
+}
+
+.editor-header {
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-}
-
-.operations-input-title {
-	font-size: 1.2rem;
-	font-weight: bold;
-}
-
-.operations-input-instruction {
-	font-size: 1rem;
-	text-align: center;
-}
-
-.operations-input-textarea {
-	border: 2px solid var(--background);	
-	min-width: 30rem;
-	min-height: 10rem;
+	flex-direction: row;
+	font-family: 'Source Code Pro', monospace;
+	justify-content: flex-start;
+	padding: 0.25rem;
+	background-color: var(--background-editor-header);
+	color: white;
 }
 
 .button-container {
 	display: flex;
+	margin-left: auto;
+	margin-right: 1rem;
 	flex-direction: row;
 }
 
-.operations-input-button {
+.editor-button {
 	padding: 0.2rem 0.5rem;
-	margin: 0.5rem;
+	margin: 0 0.25rem;
 	background-color: var(--background);
 	color: white;
 	border-radius: 5%;
 }
 
-.operations-input-result-title {
-	font-size: 1.5rem;
-	margin-top: 0.5rem;
+/* Terminal styles*/
+.terminal {
+	height: 100%;
 }
 
-.operations-input-result-container {
-	width: fit-content;
-}
+.container{
+	width: 100%;
+	height: 15rem;
+	margin: 1rem auto;
+  }
+  
+  .terminal-container{
+	margin: auto;
+	width: 100%;
+	height: 100%;
+	background: #000;
+	border: 0.5px solid #ccc;
+	border-radius: 7px;
+  }
+  
+  .terminal-header{
+	width: 100%;
+	height: 1.5rem;
+	border-radius: 5px 5px 0 0;
+  }
+  
+  .buttons{
+	grid-column-gap: 1px;
+	margin-top: 10px;
+	margin-left: 5px;
+  }
+  
+  .buttons .btn{
+	float:left;
+	margin-left: 7px;
+	width: 12px;
+	height: 12px;
+	border-radius: 100%;
+  }
+  
+  .buttons .btn:hover{
+	background:blue;
+  }
+  
+  .terminal-content {
+	width: 100%;
+	height: 100%;
+	font-family: 'Source Code Pro', monospace;
+	font-size: 0.8rem;
+	line-height: 1;
+  }
+  
+  .terminal-content p{
+	color: #fff;
+	padding: 5px 15px 0 15px;
+  
+  }
+  
+  .terminal-content p.error{
+	color: red;
+  }
 
-.operations-input-result {
-	text-align: center;
-	padding: 0.2rem 0.5rem;
-	font-size: 1.1rem;
-}
+  .terminal-content p.warning{
+	color: yellow;
+  }
+  
+  .red{
+	background: red;
+  }
+  
+  .yellow{
+	background: yellow;
+  }
+  
+  .green{
+	background: green
+  }
+  
