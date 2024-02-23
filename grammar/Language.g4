@@ -12,17 +12,20 @@ expression:
 	|	assign
 	;
 
-declaration:	type ID SEMI+								# validDeclaration
-			|	type ID '=' value=(INT|CHAR|FLOAT) SEMI+	# validDeclarationWithAssign
-			|	type id=(INV_ID|INT) SEMI+ 					# invalidDeclaration
+declaration:	TYPE ID (EQUALS value)? SEMI+?					# validDeclaration
+			|	TYPE id=(INV_ID|INT) (EQUALS value)? SEMI+? 	# invalidDeclaration
 			;
 
-assign: ID '=' value=(INT|CHAR|FLOAT) SEMI+;
+assign: ID '=' value SEMI+;
 
-type: 
-				'ent'
-			|	'pdec'
-			|	'ctr'
-			;	
+value:
+		value operation=(PLUS|MINUS) value	#PlusMinus
+	|	ID									#valueAsID	
+	|	FLOAT								#valueAsNumber
+    |	INT									#valueAsNumber
+	|	CHAR								#valueAsChar
+    ;
+
 
 MAIN: 'start -->';
+TYPE: ('ent'|'pdec'|'ctr');	
