@@ -16,15 +16,13 @@ const CodeSpace = () => {
 
 	useEffect(() => {
 		const delayDebounceFn = setTimeout(() => {
-			const [res, err] = analizer(inputText);
-			setResults(res);
-			setErrors(err);
+			handleRun();
 		}, 1000)
 	
 		return () => clearTimeout(delayDebounceFn)
 	  }, [inputText])
 
-	let handleRunClick = () => {
+	let handleRun = () => {
 		const [res, err] = analizer(inputText)
 		console.log(res);
 		setResults(res);
@@ -36,85 +34,60 @@ const CodeSpace = () => {
 	}
 
 	return (
-		<div className='editor'>
-			<div className='editor-header'>
-				<h2>Editor</h2>
-				<div className='button-container'>
-					<button id="run" onClick={handleRunClick} className='editor-button'>
-						Run
-					</button>
-					<button id="clear" onClick={clean} className='editor-button'>
-						Clear
-					</button>
-				</div>
-			</div>
-			<CodeMirror
-					value={inputText}
-					onChange={(e) => setInputText(e)}
-					height="20rem"
-					width='100%'
-					theme={vscodeDark}
-				/>
-				{/* <div className='button-container'>
-					<button id="resolve" onClick={clean} className='operations-input-button'>
-						Limpiar
-					</button>
-				</div> */}
-				<div className="container">
-					<div className="terminal-container">
-						<div className="terminal-header">
-							<div className="buttons">
-								<div className="btn red"></div>
-								<div className="btn yellow"></div>
-								<div className="btn green"></div>
-							</div>
-						</div>
-						<div className="terminal-content">
-							<p>Console Output:</p>
-							{
-							errors.length ?
-							<>
-							{
-								errors.map((log, i) => (
-									<p key={i} className={log.type}>{log.type.toUpperCase()}: {log.text}</p>
-									))
-								}
-							</> 
-								:
-								null
-							}
-							{/* <p class="grey">undefined</p>
-							<p>Hello..</p>
-							<p>Hello..</p>
-							<p>Hello..</p><p>Hello..</p>
-							<p class="grey">undefined</p>
-							<p class="last"></p> */}
+			<div className="container">
+				<div className='editor'>
+					<div className='editor-header'>
+						<h2>Editor</h2>
+						<div className='button-container'>
+							<button id="run" onClick={handleRun} className='editor-button'>
+								Run
+							</button>
+							<button id="clear" onClick={clean} className='editor-button'>
+								Clear
+							</button>
 						</div>
 					</div>
+					<CodeMirror
+							value={inputText}
+							onChange={(e) => setInputText(e)}
+							height="20rem"
+							width='100%'
+							theme={vscodeDark}
+					/>
 				</div>
 				
-				
-				{/* {
-					(results.ent.length && !errors.length) ? 
-						<p>ent: {
-							results.ent.map( (obj) => obj.id ).join(', ')}</p>
+				<div className="terminal-container">
+					<div className="terminal-header">
+						<div className="buttons">
+							<div className="btn red"></div>
+							<div className="btn yellow"></div>
+							<div className="btn green"></div>
+						</div>
+					</div>
+					<div className="terminal-content">
+						<p>Console Output:</p>
+						{
+						errors.length ?
+						<>
+						{
+							errors.map((log, i) => (
+								<p key={i} className={log.type}>{log.type.toUpperCase()}: {log.text}</p>
+								))
+							}
+						</> 
 							:
 							null
-						}		
-				{
-					(results.pdec.length && !errors.length) ? 
-					<p>pdec: {results.pdec.map( (obj) => obj.id ).join(', ')}</p>
-					:
-					null
-				}	
-				{
-					(results.ctr.length && !errors.length) ? 
-					<p>ctr: {results.ctr.map( (obj) => obj.id ).join(', ')}</p>
-						:
-						null
-				}	 */}
-
-		</div>
+						}
+						{/* <p class="grey">undefined</p>
+						<p>Hello..</p>
+						<p>Hello..</p>
+						<p>Hello..</p><p>Hello..</p>
+						<p class="grey">undefined</p>
+						<p class="last"></p> */}
+					</div>
+				</div>
+			</div>
+				
 	);
 };
 

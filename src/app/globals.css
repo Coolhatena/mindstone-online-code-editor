@@ -6,7 +6,7 @@
 	--background: #011627;
 	--background-header: #011627;
 	--background-editor-header: #202020;
-	--background-terminal-header: #F7F7F7;
+	--background-terminal-header: #f7f7f7;
 }
 
 body {
@@ -26,18 +26,29 @@ body {
 	font-size: 1.5rem;
 }
 
-.editor {
+.container {
 	height: 100%;
+	width: 100%;
+	height: 15rem;
+	margin: 1rem auto;
+}
+
+/* Code Editor Styles */
+
+.editor {
+	margin-bottom: 1rem;
+	border: 1px solid grey;
 }
 
 .editor-header {
 	display: flex;
 	flex-direction: row;
-	font-family: 'Source Code Pro', monospace;
+	font-family: "Source Code Pro", monospace;
 	justify-content: flex-start;
 	padding: 0.25rem;
 	background-color: var(--background-editor-header);
 	color: white;
+	border-bottom: 1px solid grey;
 }
 
 .button-container {
@@ -60,76 +71,68 @@ body {
 	height: 100%;
 }
 
-.container{
-	width: 100%;
-	height: 15rem;
-	margin: 1rem auto;
-  }
-  
-  .terminal-container{
+.terminal-container {
 	margin: auto;
 	width: 100%;
 	height: 100%;
 	background: #000;
 	border: 0.5px solid #ccc;
 	border-radius: 7px;
-  }
-  
-  .terminal-header{
+}
+
+.terminal-header {
 	width: 100%;
 	height: 1.5rem;
 	border-radius: 5px 5px 0 0;
-  }
-  
-  .buttons{
+}
+
+.buttons {
 	grid-column-gap: 1px;
 	margin-top: 10px;
 	margin-left: 5px;
-  }
-  
-  .buttons .btn{
-	float:left;
+}
+
+.buttons .btn {
+	float: left;
 	margin-left: 7px;
 	width: 12px;
 	height: 12px;
 	border-radius: 100%;
-  }
-  
-  .buttons .btn:hover{
-	background:blue;
-  }
-  
-  .terminal-content {
+}
+
+.buttons .btn:hover {
+	background: blue;
+}
+
+.terminal-content {
 	width: 100%;
 	height: 100%;
-	font-family: 'Source Code Pro', monospace;
+	font-family: "Source Code Pro", monospace;
 	font-size: 0.8rem;
 	line-height: 1;
-  }
-  
-  .terminal-content p{
+}
+
+.terminal-content p {
 	color: #fff;
 	padding: 5px 15px 0 15px;
-  
-  }
-  
-  .terminal-content p.error{
-	color: red;
-  }
+}
 
-  .terminal-content p.warning{
+.terminal-content p.error {
+	color: red;
+}
+
+.terminal-content p.warning {
 	color: yellow;
-  }
-  
-  .red{
+}
+
+.red {
 	background: red;
-  }
-  
-  .yellow{
+}
+
+.yellow {
 	background: yellow;
-  }
-  
-  .green{
-	background: green
-  }
-  
+}
+
+.green {
+	background: green;
+}
