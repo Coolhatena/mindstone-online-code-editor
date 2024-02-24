@@ -60,6 +60,12 @@ export default class LanguageVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by LanguageParser#parentheses.
+	visitParentheses(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 	// Visit a parse tree produced by LanguageParser#valueAsChar.
 	visitValueAsChar(ctx) {
 	  return this.visitChildren(ctx);
@@ -74,6 +80,18 @@ export default class LanguageVisitor extends antlr4.tree.ParseTreeVisitor {
 
 	// Visit a parse tree produced by LanguageParser#valueAsID.
 	visitValueAsID(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by LanguageParser#Multdiv.
+	visitMultdiv(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by LanguageParser#error.
+	visitError(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
