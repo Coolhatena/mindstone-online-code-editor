@@ -10,6 +10,7 @@ logic:	expression*;
 expression: 
 		declaration
 	|	assign
+	|	log
 	;
 
 declaration:	TYPE ID (EQUALS value)? SEMI+?					# validDeclaration
@@ -17,6 +18,8 @@ declaration:	TYPE ID (EQUALS value)? SEMI+?					# validDeclaration
 			;
 
 assign: ID '=' value SEMI+;
+
+log: PRINT '('value')' SEMI+;
 
 value:
 		value operation=(PLUS|MINUS) value	#PlusMinus

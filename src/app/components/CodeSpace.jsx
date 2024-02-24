@@ -71,7 +71,7 @@ const CodeSpace = () => {
 						<>
 						{
 							errors.map((log, i) => (
-								<p key={i} className={log.type}>{log.type.toUpperCase()}: {log.text}</p>
+								<p key={i} className={log.type}>{log.header}: {log.text}</p>
 								))
 							}
 						</> 
