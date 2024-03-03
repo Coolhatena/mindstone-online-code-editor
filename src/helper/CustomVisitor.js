@@ -139,9 +139,9 @@ export default class CustomVisitor extends LanguageVisitor {
 
 	// Visit a parse tree produced by LanguageParser#expression.
 	visitExpression(ctx) {
-		console.log("Expresion")
-		const SEMI = ctx.SEMI()
-		if(!SEMI){
+		console.log("Expresion");
+		const SEMI = ctx.SEMI();
+		if (!SEMI) {
 			this.logs.push({
 				type: "error",
 				header: "ERROR",
@@ -154,7 +154,7 @@ export default class CustomVisitor extends LanguageVisitor {
 
 	// Visit a parse tree produced by LanguageParser#validDeclaration.
 	visitValidDeclaration(ctx) {
-		console.log("ValidDec")
+		console.log("ValidDec");
 		let result;
 		if (ctx.EQUALS()) {
 			result = this.declareAndAssign(ctx);
@@ -167,7 +167,7 @@ export default class CustomVisitor extends LanguageVisitor {
 
 	// Visit a parse tree produced by LanguageParser#invalidDeclaration.
 	visitInvalidDeclaration(ctx) {
-		console.log("InvalidDec")
+		console.log("InvalidDec");
 		const TYPE = ctx.TYPE().getText();
 		const ID = ctx.id.text;
 		this.logs.push({
@@ -181,7 +181,7 @@ export default class CustomVisitor extends LanguageVisitor {
 
 	// Visit a parse tree produced by LanguageParser#assign.
 	visitAssign(ctx) {
-		console.log("Assign")
+		console.log("Assign");
 		const ID = ctx.ID().getText();
 		const VALUE = this.visit(ctx.value());
 		const TYPE = this.getVariableType(ID);
@@ -212,7 +212,7 @@ export default class CustomVisitor extends LanguageVisitor {
 
 	// Visit a parse tree produced by LanguageParser#Multdiv.
 	visitMultdiv(ctx) {
-		console.log("Multdiv")
+		console.log("Multdiv");
 		const operation_data = this.visitChildren(ctx);
 		return ctx.operation.type == LanguageParser.MULT
 			? operation_data[0] * operation_data[2]
@@ -221,7 +221,7 @@ export default class CustomVisitor extends LanguageVisitor {
 
 	// Visit a parse tree produced by LanguageParser#PlusMinus.
 	visitPlusMinus(ctx) {
-		console.log("plusminus")
+		console.log("plusminus");
 		const operation_data = this.visitChildren(ctx);
 		return ctx.operation.type == LanguageParser.PLUS
 			? operation_data[0] + operation_data[2]
@@ -230,7 +230,7 @@ export default class CustomVisitor extends LanguageVisitor {
 
 	// Visit a parse tree produced by LanguageParser#valueAsID.
 	visitValueAsID(ctx) {
-		console.log("ValueasID")
+		console.log("ValueasID");
 		const ID = ctx.ID().getText();
 		if (this.variableExist(ID)) {
 			const TYPE = this.getVariableType(ID);
@@ -248,13 +248,13 @@ export default class CustomVisitor extends LanguageVisitor {
 
 	// Visit a parse tree produced by LanguageParser#valueAsChar.
 	visitValueAsChar(ctx) {
-		console.log("Valueaschar")
+		console.log("Valueaschar");
 		return ctx.getText();
 	}
 
 	// Visit a parse tree produced by LanguageParser#valueAsNumber.
 	visitValueAsNumber(ctx) {
-		console.log("ValueAsnumber")
+		console.log("ValueAsnumber");
 		if (ctx.getText().includes(".")) {
 			if (/\.0$/.test(ctx.getText())) {
 				this.logs.push({
@@ -272,7 +272,7 @@ export default class CustomVisitor extends LanguageVisitor {
 
 	// Visit a parse tree produced by LanguageParser#log.
 	visitLog(ctx) {
-		console.log("log")
+		console.log("log");
 		const VALUE_HEADER = ctx.value().getText();
 		const VALUE = this.visit(ctx.value());
 		this.logs.push({
@@ -286,18 +286,8 @@ export default class CustomVisitor extends LanguageVisitor {
 
 	// Visit a parse tree produced by CalculadoraParser#parentheses.
 	visitParentheses(ctx) {
-		console.log("parenteses")
+		console.log("parenteses");
 		let visit = this.visitChildren(ctx);
 		return visit[1];
 	}
-	
-	// Visit a parse tree produced by LanguageParser#error.
-	visitError(ctx) {
-		this.logs.push({
-			type: "error",
-			header: "ERROR",
-			text: `Error de sintaxis en linea ${ctx.start.line}.`,
-		});
-		return this.visitChildren(ctx);
-	  }
 }

@@ -1,8 +1,8 @@
-import antlr4 from 'antlr4'
-import LanguageLexer from '@/grammar/LanguageLexer.js'; 
-import LanguageParser from '@/grammar/LanguageParser.js';
+import antlr4 from "antlr4";
+import LanguageLexer from "@/grammar/LanguageLexer.js";
+import LanguageParser from "@/grammar/LanguageParser.js";
 // import CalculadoraVisitor from '../grammar/CalculadoraVisitor.js';
-import CustomVisitor from '../helper/CustomVisitor.js';
+import CustomVisitor from "../helper/CustomVisitor.js";
 
 let analizer = (input) => {
 	const chars = new antlr4.InputStream(input);
@@ -15,17 +15,17 @@ let analizer = (input) => {
 	parser.buildParseTrees = true;
 	parser.removeErrorListeners();
 	parser.addErrorListener({
-	syntaxError: (recognizer, offendingSymbol, line, column, msg, err) => {
-		visitor.logs.push({
-			type: "error",
-			header: "ERROR",
-			text: `Error de sintaxis en la linea ${line}: ${offendingSymbol}`,
-		});
-	}});
+		syntaxError: (recognizer, offendingSymbol, line, column, msg, err) => {
+			visitor.logs.push({
+				type: "error",
+				header: "ERROR",
+				text: `Error de sintaxis en la linea ${line}: ${offendingSymbol}`,
+			});
+		},
+	});
 	const tree = parser.file();
 
-	
 	return visitor.visitFile(tree);
-}
+};
 
 export default analizer;
