@@ -12,25 +12,39 @@ const CodeSpace = () => {
 											pdec:[], 
 											ctr:[]
 										})
-	const [errors, setErrors] = useState([])
+	const [logs, setLogs] = useState([])
 
 	useEffect(() => {
 		const delayDebounceFn = setTimeout(() => {
-			handleRun();
+			if (inputText != ""){
+				handleRun();
+			}	
 		}, 1000)
 	
-		return () => clearTimeout(delayDebounceFn)
+		return () => {
+			clearTimeout(delayDebounceFn)
+		}
 	  }, [inputText])
 
 	let handleRun = () => {
 		const [res, err] = analizer(inputText)
 		console.log(res);
 		setResults(res);
-		setErrors(err);
+		setLogs(err);
 	};
 
 	let clean = () => {
 		setInputText('');
+	}
+
+	let filterLogs = () => {
+		let filteredLogs = []
+		for( let i = 0; i < logs.length;i++){
+			filteredLogs.push(logs[i]);
+			if (logs[i].type == "error") break
+		}
+		
+		return filteredLogs
 	}
 
 	return (
@@ -67,12 +81,12 @@ const CodeSpace = () => {
 					<div className="terminal-content">
 						<p>Console Output:</p>
 						{
-						errors.length ?
+						logs.length ?
 						<>
-						{
-							errors.map((log, i) => (
-								<p key={i} className={log.type}>{log.header}: {log.text}</p>
-								))
+							{
+								filterLogs().map((log, i) => (
+												<p key={i} className={log.type}>{log.header}: {log.text}</p>
+											))
 							}
 						</> 
 							:

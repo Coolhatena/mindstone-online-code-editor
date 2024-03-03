@@ -8,10 +8,10 @@ init: MAIN '{' logic '\n'? '}';
 logic:	expression*;
 
 expression: 
-		declaration SEMI+?
-	|	assign SEMI+?
-	|	log SEMI+?
-	|	error SEMI+?
+		declaration SEMI?
+	|	assign SEMI?
+	|	log SEMI?
+	// |	error SEMI+?
 	;
 
 declaration:	TYPE ID (EQUALS value)? 				# validDeclaration
@@ -31,7 +31,7 @@ value:	'('value')' 						#parentheses
 	|	CHAR								#valueAsChar
     ;
 
-error: .+?;
+// error: .+?;
 
 MAIN: 'start -->';
 TYPE: ('ent'|'pdec'|'ctr');	

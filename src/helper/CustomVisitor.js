@@ -141,7 +141,7 @@ export default class CustomVisitor extends LanguageVisitor {
 	visitExpression(ctx) {
 		console.log("Expresion")
 		const SEMI = ctx.SEMI()
-		if(!SEMI.length){
+		if(!SEMI){
 			this.logs.push({
 				type: "error",
 				header: "ERROR",

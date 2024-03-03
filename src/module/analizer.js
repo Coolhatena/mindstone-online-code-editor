@@ -8,10 +8,22 @@ let analizer = (input) => {
 	const chars = new antlr4.InputStream(input);
 	const lexer = new LanguageLexer(chars);
 	const tokens = new antlr4.CommonTokenStream(lexer);
+
+	const visitor = new CustomVisitor();
+
 	const parser = new LanguageParser(tokens);
 	parser.buildParseTrees = true;
+	parser.removeErrorListeners();
+	parser.addErrorListener({
+	syntaxError: (recognizer, offendingSymbol, line, column, msg, err) => {
+		visitor.logs.push({
+			type: "error",
+			header: "ERROR",
+			text: `Error de sintaxis en la linea ${line}: ${offendingSymbol}`,
+		});
+	}});
 	const tree = parser.file();
-	const visitor = new CustomVisitor();
+
 	
 	return visitor.visitFile(tree);
 }
