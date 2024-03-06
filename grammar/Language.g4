@@ -3,12 +3,11 @@ import CommonLexerRules;
 
 file: init+;         
 
-init: MAIN '{' logic '\n'? '}';
+init: MAIN OPEN_CURL '\n'? logic '\n'? CLOSE_CURL;
 
 logic:	expression*;
 
-expression: 
-		declaration SEMI?
+expression: declaration SEMI?
 	|	assign SEMI?
 	|	log SEMI?
 	// |	error SEMI+?
@@ -30,8 +29,6 @@ value:	'('value')' 						#parentheses
     |	INT									#valueAsNumber
 	|	CHAR								#valueAsChar
     ;
-
-// error: .+?;
 
 MAIN: 'start -->';
 TYPE: ('ent'|'pdec'|'ctr');	

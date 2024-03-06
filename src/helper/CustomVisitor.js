@@ -290,4 +290,13 @@ export default class CustomVisitor extends LanguageVisitor {
 		let visit = this.visitChildren(ctx);
 		return visit[1];
 	}
+
+	// Visit a parse tree produced by LanguageParser#anything_else.
+	visitAnything_else(ctx) {
+		this.logs.push({
+			type: "error",
+			header: "ERROR",
+			text: `Error de sintaxis en linea ${ctx.start.line}.`,
+		});
+	  }
 }
