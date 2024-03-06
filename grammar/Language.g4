@@ -5,7 +5,7 @@ file: init+;
 
 init: MAIN OPEN_CURL '\n'? logic '\n'? CLOSE_CURL;
 
-logic:	expression*;
+logic:	expression*'\n'?;
 
 expression: declaration SEMI?
 	|	assign SEMI?

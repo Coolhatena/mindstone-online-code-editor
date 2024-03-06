@@ -145,7 +145,7 @@ export default class CustomVisitor extends LanguageVisitor {
 			this.logs.push({
 				type: "error",
 				header: "ERROR",
-				text: `Falta semicolon en linea ${ctx.start.line}.`,
+				text: `Falta EOL en linea ${ctx.start.line}.`,
 			});
 		}
 
