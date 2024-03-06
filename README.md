@@ -1,3 +1,25 @@
+Welcome to MindStone Programming Language (Name in progress) 
+============================================================
+
+MindStone is a beginner programming language, designed to have the logical simplicity of languages like Python but the complexity in types and sintax from strongly-typed languages.
+
+## Getting Started
+To start coding in MindStone, just use the `Start -->` command followed by curly braces:
+```
+start --> {
+
+}
+```
+
+This will be your "main" function, inside those curly braces you can write all the code you need, some of the instruction you can use are:
+
+* **Variable declarations**
+You can declare any variables you want
+
+
+
+NEXT.js Project setup
+=====================
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
