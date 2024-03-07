@@ -5,23 +5,22 @@ file: init+;
 
 init: MAIN OPEN_CURL '\n'? logic '\n'? CLOSE_CURL;
 
-logic:	expression*'\n'?;
+logic:	expression*?;
 
 expression: declaration SEMI?
 	|	assign SEMI?
 	|	log SEMI?
-	// |	error SEMI+?
 	;
 
 declaration:	TYPE ID (EQUALS value)? 				# validDeclaration
 			|	TYPE id=(INV_ID|INT) (EQUALS value)? 	# invalidDeclaration
 			;
 
-assign: ID '=' value;
+assign: ID EQUALS value;
 
-log: PRINT '('value')';
+log: PRINT OPEN_PARENTH value CLOSE_PARENTH;
 
-value:	'('value')' 						#parentheses
+value:	OPEN_PARENTH value CLOSE_PARENTH 	#parentheses
 	|	value operation=(MULT|DIV) value	#Multdiv
 	|	value operation=(PLUS|MINUS) value	#PlusMinus
 	|	ID									#valueAsID	

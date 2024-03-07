@@ -1,8 +1,8 @@
 T__0=1
-T__1=2
-T__2=3
-MAIN=4
-TYPE=5
+MAIN=2
+TYPE=3
+OPEN_PARENTH=4
+CLOSE_PARENTH=5
 OPEN_CURL=6
 CLOSE_CURL=7
 EQUALS=8
@@ -20,9 +20,9 @@ INV_ID=19
 NEWLINE=20
 WS=21
 '\n'=1
-'('=2
-')'=3
-'start -->'=4
+'start -->'=2
+'('=4
+')'=5
 '{'=6
 '}'=7
 '='=8
