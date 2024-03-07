@@ -145,7 +145,7 @@ export default class CustomVisitor extends LanguageVisitor {
 			this.logs.push({
 				type: "error",
 				header: "ERROR",
-				text: `Falta EOL "!" en linea ${ctx.start.line}.`,
+				text: `Missing EOL "!" on line ${ctx.start.line}.`,
 			});
 		}
 
@@ -173,7 +173,7 @@ export default class CustomVisitor extends LanguageVisitor {
 		this.logs.push({
 			type: "error",
 			header: "ERROR",
-			text: `El ID "${ID}" no es valido`,
+			text: `ID "${ID}" is not a valid identifier`,
 		});
 
 		return [TYPE, ID];
@@ -196,14 +196,14 @@ export default class CustomVisitor extends LanguageVisitor {
 				this.logs.push({
 					type: "error",
 					header: "ERROR",
-					text: `No se puede asignar el valor "${VALUE}" al tipo de dato "${TYPE}"`,
+					text: `Cant assign "${VALUE}" to type "${TYPE}"`,
 				});
 			}
 		} else {
 			this.logs.push({
 				type: "error",
 				header: "ERROR",
-				text: `La variable "${ID}" no esta definida`,
+				text: `Variable "${ID}" is not defined`,
 			});
 		}
 
@@ -240,7 +240,7 @@ export default class CustomVisitor extends LanguageVisitor {
 		this.logs.push({
 			type: "error",
 			header: "ERROR",
-			text: `La variable "${ID}" no esta definida`,
+			text: `Variable "${ID}" is not defined`,
 		});
 
 		return undefined;
@@ -260,7 +260,7 @@ export default class CustomVisitor extends LanguageVisitor {
 				this.logs.push({
 					type: "warning",
 					header: "WARNING",
-					text: "Los valores con decimal '.0' son enteros, use el tipo de dato correcto",
+					text: "The decimal values with '.0' are integers, use the correct data type",
 				});
 			}
 
@@ -296,7 +296,7 @@ export default class CustomVisitor extends LanguageVisitor {
 		this.logs.push({
 			type: "error",
 			header: "ERROR",
-			text: `Error de sintaxis en linea ${ctx.start.line}.`,
+			text: `Syntax error on line ${ctx.start.line}.`,
 		});
 	  }
 }
