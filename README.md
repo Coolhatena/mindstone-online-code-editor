@@ -1,5 +1,5 @@
-Welcome to MindStone Programming Language (Name in progress) 
-============================================================
+Welcome to MindStone Programming Language
+=========================================
 
 MindStone is a beginner programming language, designed to have the logical simplicity of languages like Python but the complexity in types and sintax from strongly-typed languages.
 
@@ -11,12 +11,60 @@ start --> {
 }
 ```
 
-This will be your "main" function, inside those curly braces you can write all the code you need, some of the instruction you can use are:
+This will be your "main" function, inside those curly braces you can write all the code you need, note that all sentences should end with `!` as EOL.
 
-* **Variable declarations**
-You can declare any variables you want
+### **Variable declarations:**
 
+You can declare any variables you need on your program, the sintax is `DATA_TYPE` `VARIABLE_NAME` ( = `VALUE`)?!, note that the starting value of the variable is optional, if the starting value its not provided the variable will be assigned `null` by default. 
 
+The variables names on mindstone can use letters and numbers, but the starting character of the name should be a letter.
+
+Currently MindStone has 3 data types: 
+* ent: Used for Integer values, such as `3`, `7.0`, `27`.
+* pdec:  Used for Floating point values, such as `1.2`, `4.5`, `32.8`.
+* ctr: Used for Character values, such as `'a'`, `'q'`, `'z'`.
+
+So, for example, to make a program that just generates one variable with a specific value you could use the following code:
+```
+start --> {
+  ent var1 = 1!
+}
+```
+You can also use the result of a operation (+, -, *, /) as the value of a variable:
+```
+start --> {
+  ent var1 = 1!
+  ent var2 = var1 + 3!
+}
+```
+
+### **Variable assignations:**
+
+To change the value of a variable after declaration use the following sintax: `VARIABLENAME` = `NEW_VALUE`!
+
+Using the example seen before, we can re-assing the variable `var1` to another value:
+```
+start --> {
+  ent var1 = 1!
+  ent var2 = var1 + 3!
+  var1 = 2!
+}
+```
+
+### **Console prints**
+
+MindStone has a command to log any value you want on the native console of the editor, this value could be a variable, a operations result or a hard-typed value as `1` or `'a'`, the syntax for this is `ptr( VALUE )`.
+
+The following code will display `3`, `30` and `1` on the console respectively.
+
+```
+start --> {
+  ent var1 = 3!
+  ptr(var1)!
+  ptr(var1 * 10)!
+  ptr(1)!
+}
+```
 
 NEXT.js Project setup
 =====================
