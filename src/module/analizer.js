@@ -19,7 +19,7 @@ let analizer = (input) => {
 			visitor.logs.push({
 				type: "error",
 				header: "ERROR",
-				text: `Syntax error on line ${line}: ${offendingSymbol}`,
+				text: `Syntax error on line ${line}: ${offendingSymbol.text}`,
 			});
 		},
 	});

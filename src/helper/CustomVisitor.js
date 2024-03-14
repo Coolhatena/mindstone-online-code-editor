@@ -291,6 +291,49 @@ export default class CustomVisitor extends LanguageVisitor {
 		return visit[1];
 	}
 
+	// Visit a parse tree produced by LanguageParser#conditional.
+	visitConditional(ctx) {
+		let condition_result = this.visit(ctx.condition())
+		if (condition_result) {
+			console.log(ctx.expression())
+			this.visit(ctx.expression())
+		}
+		return null
+	}
+  
+  
+	// Visit a parse tree produced by LanguageParser#condition.
+	visitCondition(ctx) {
+		console.log(this.visitChildren(ctx))
+		let [first_val , , second_val] = this.visitChildren(ctx);
+		let symbol = ctx.cond_sym.text;
+		let result;
+
+		switch (symbol) {
+			case '>':
+				result = first_val > second_val;
+				break;
+
+			case '<':
+				result = first_val < second_val;
+				break;
+			
+			case '>=':
+				result = first_val >= second_val;
+				break;
+
+			case '<=':
+				result = first_val <= second_val;
+				break;
+		
+			default:
+				result = false;
+				break;
+		}
+
+		return result;
+	}
+
 	// Visit a parse tree produced by LanguageParser#anything_else.
 	visitAnything_else(ctx) {
 		this.logs.push({

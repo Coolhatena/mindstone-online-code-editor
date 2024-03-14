@@ -9,6 +9,7 @@ logic:	expression*?;
 
 expression: declaration SEMI?
 	|	assign SEMI?
+	|	conditional SEMI?
 	|	log SEMI?
 	;
 
@@ -28,6 +29,10 @@ value:	OPEN_PARENTH value CLOSE_PARENTH 	#parentheses
     |	INT									#valueAsNumber
 	|	CHAR								#valueAsChar
     ;
+
+conditional: IF_PR OPEN_PARENTH condition CLOSE_PARENTH OPEN_CURL expression* CLOSE_CURL;
+
+condition: value cond_sym=(COND_LOG|COND_MAT) value;
 
 MAIN: 'start -->';
 TYPE: ('ent'|'pdec'|'ctr');	
