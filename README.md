@@ -66,6 +66,12 @@ start --> {
 }
 ```
 
+# INTERNAL DEVELOPMENT ONLY
+
+ANTL4 Setup
+===========
+Run `antlr -Dlanguage=JavaScript -o ./src/ -visitor -no-listener ./grammar/Language.g4` every time the grammar is changed on the project
+
 NEXT.js Project setup
 =====================
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
