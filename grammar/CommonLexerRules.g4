@@ -17,7 +17,7 @@ ID				: [a-zA-Z]([a-zA-Z0-9_]+)?;
 CHAR			: [a-zA-Z];	
 SEMI			: '!''\n'?;
 COND_MAT		: ('<'|'>'|'<='|'>=');
-COND_LOG		: ('||'|'&&'|'==');
+COND_LOG		: ('||'|'&&'|'=='|'!=');
 INV_ID 			: [A-Za-z0-9+\-]+;
 NEWLINE 		: '\r'? '\n';
 WS				: [ \t\r\n]+ -> skip;

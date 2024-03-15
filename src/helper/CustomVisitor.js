@@ -295,7 +295,6 @@ export default class CustomVisitor extends LanguageVisitor {
 	visitConditional(ctx) {
 		let condition_result = this.visit(ctx.condition())
 		if (condition_result) {
-			console.log(ctx.expression())
 			this.visit(ctx.expression())
 		}
 		return null
@@ -305,33 +304,39 @@ export default class CustomVisitor extends LanguageVisitor {
 	// Visit a parse tree produced by LanguageParser#condition.
 	visitCondition(ctx) {
 		console.log(this.visitChildren(ctx))
-		let [first_val , , second_val] = this.visitChildren(ctx);
+		let [first_val, second_val] = this.visit(ctx.value());
 		let symbol = ctx.cond_sym.text;
-		let result;
 
 		switch (symbol) {
 			case '>':
-				result = first_val > second_val;
-				break;
+				return first_val > second_val;
 
 			case '<':
-				result = first_val < second_val;
-				break;
+				return first_val < second_val;
 			
 			case '>=':
-				result = first_val >= second_val;
-				break;
+				return first_val >= second_val;
 
 			case '<=':
-				result = first_val <= second_val;
-				break;
+				return first_val <= second_val;
+
+			case '||':
+				return first_val || second_val;
+
+			case '&&':
+				return first_val && second_val;
+
+			case '==':
+				return first_val == second_val;
+			
+			case '!=':
+				return first_val != second_val;
 		
 			default:
-				result = false;
-				break;
+				return false;
 		}
 
-		return result;
+		
 	}
 
 	// Visit a parse tree produced by LanguageParser#anything_else.

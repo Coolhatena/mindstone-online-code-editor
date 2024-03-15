@@ -32,7 +32,9 @@ value:	OPEN_PARENTH value CLOSE_PARENTH 	#parentheses
 
 conditional: IF_PR OPEN_PARENTH condition CLOSE_PARENTH OPEN_CURL expression* CLOSE_CURL;
 
-condition: value cond_sym=(COND_LOG|COND_MAT) value;
+condition:	value cond_sym=(COND_LOG|COND_MAT) value
+		|	condition cond_sym=(COND_LOG|COND_MAT) condition
+		;
 
 MAIN: 'start -->';
 TYPE: ('ent'|'pdec'|'ctr');	
