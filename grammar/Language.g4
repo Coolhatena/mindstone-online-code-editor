@@ -24,15 +24,17 @@ log: PRINT OPEN_PARENTH value CLOSE_PARENTH;
 value:	OPEN_PARENTH value CLOSE_PARENTH 	#parentheses
 	|	value operation=(MULT|DIV) value	#Multdiv
 	|	value operation=(PLUS|MINUS) value	#PlusMinus
+	|	STRING								#valueAsChar
+	|	CHAR								#valueAsChar
 	|	ID									#valueAsID	
 	|	FLOAT								#valueAsNumber
     |	INT									#valueAsNumber
-	|	CHAR								#valueAsChar
     ;
 
 conditional: IF_PR OPEN_PARENTH condition CLOSE_PARENTH OPEN_CURL expression* CLOSE_CURL;
 
-condition:	value cond_sym=(COND_LOG|COND_MAT) value
+condition:	cond_sym=(COND_LOG|COND_MAT)
+		|	value cond_sym=(COND_LOG|COND_MAT) value
 		|	condition cond_sym=(COND_LOG|COND_MAT) condition
 		;
 

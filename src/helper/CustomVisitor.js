@@ -303,10 +303,9 @@ export default class CustomVisitor extends LanguageVisitor {
   
 	// Visit a parse tree produced by LanguageParser#condition.
 	visitCondition(ctx) {
-		console.log(this.visitChildren(ctx))
 		let [first_val, second_val] = this.visit(ctx.value());
 		let symbol = ctx.cond_sym.text;
-
+		console.log(symbol)
 		switch (symbol) {
 			case '>':
 				return first_val > second_val;
@@ -331,6 +330,12 @@ export default class CustomVisitor extends LanguageVisitor {
 			
 			case '!=':
 				return first_val != second_val;
+			
+			case 'true':
+				return true
+
+			case 'false':
+				return false
 		
 			default:
 				return false;
