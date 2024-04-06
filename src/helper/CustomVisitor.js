@@ -296,16 +296,12 @@ export default class CustomVisitor extends LanguageVisitor {
 	visitChained_conditional(ctx) {
 		console.log("Chained conditional");
 		let isIfTrue = this.visit(ctx.conditional())
-		console.log(`isIfTrue: ${isIfTrue}`)
 
 		if(!isIfTrue){
-			console.log('aaaaaaAAAAAAAAAAAAA')
 			const elifs = ctx.conditional__elif();
 			let isElifTrue = false;
 			for (let i = 0; i < elifs.length; i++) {
 				isElifTrue = this.visit(elifs[i]);
-				console.log(`elif: ${isElifTrue}`)
-
 				if (isElifTrue) break;
 			}
 
@@ -319,12 +315,13 @@ export default class CustomVisitor extends LanguageVisitor {
 
 	// Visit a parse tree produced by LanguageParser#conditional__elif.
 	visitConditional__elif(ctx) {
-		//console.log("Conditional__else");
+		console.log("Conditional__elif");
 		return this.visit(ctx.conditional());
 	}
 
 	// Visit a parse tree produced by LanguageParser#conditional__else.
 	visitConditional__else(ctx) {
+		console.log("Conditional__else");
 		this.visit(ctx.expression())
 		return null
 	}
@@ -332,7 +329,7 @@ export default class CustomVisitor extends LanguageVisitor {
 
 	// Visit a parse tree produced by LanguageParser#conditional.
 	visitConditional(ctx) {
-		//console.log("Conditional");
+		console.log("Conditional");
 		let condition_result = this.visit(ctx.condition())
 		if (condition_result) {
 			this.visit(ctx.expression())
