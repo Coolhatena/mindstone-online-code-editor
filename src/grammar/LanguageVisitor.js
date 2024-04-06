@@ -90,8 +90,26 @@ export default class LanguageVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by LanguageParser#chained_conditional.
+	visitChained_conditional(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 	// Visit a parse tree produced by LanguageParser#conditional.
 	visitConditional(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by LanguageParser#conditional__elif.
+	visitConditional__elif(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by LanguageParser#conditional__else.
+	visitConditional__else(ctx) {
 	  return this.visitChildren(ctx);
 	}
 

@@ -11,6 +11,7 @@ MULT			: '*';
 PRINT			: 'ptr';
 DIV				: '/'; 
 IF_PR			: 'if';
+ELSE_PR			: 'else';
 COND_MAT		: ('<'|'>'|'<='|'>=');
 COND_LOG		: ('||'|'&&'|'=='|'!='|'true'|'false');
 STRING			: '"'[a-zA-Z ]+'"';	

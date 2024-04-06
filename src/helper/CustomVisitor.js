@@ -291,13 +291,53 @@ export default class CustomVisitor extends LanguageVisitor {
 		return visit[1];
 	}
 
+
+	// Visit a parse tree produced by LanguageParser#chained_conditional.
+	visitChained_conditional(ctx) {
+		console.log("Chained conditional");
+		let isIfTrue = this.visit(ctx.conditional())
+		console.log(`isIfTrue: ${isIfTrue}`)
+
+		if(!isIfTrue){
+			console.log('aaaaaaAAAAAAAAAAAAA')
+			const elifs = ctx.conditional__elif();
+			let isElifTrue = false;
+			for (let i = 0; i < elifs.length; i++) {
+				isElifTrue = this.visit(elifs[i]);
+				console.log(`elif: ${isElifTrue}`)
+
+				if (isElifTrue) break;
+			}
+
+			if(!isElifTrue){
+				this.visit(ctx.conditional__else())
+			}
+		}
+
+		return null;
+	}
+
+	// Visit a parse tree produced by LanguageParser#conditional__elif.
+	visitConditional__elif(ctx) {
+		//console.log("Conditional__else");
+		return this.visit(ctx.conditional());
+	}
+
+	// Visit a parse tree produced by LanguageParser#conditional__else.
+	visitConditional__else(ctx) {
+		this.visit(ctx.expression())
+		return null
+	}
+  
+
 	// Visit a parse tree produced by LanguageParser#conditional.
 	visitConditional(ctx) {
+		//console.log("Conditional");
 		let condition_result = this.visit(ctx.condition())
 		if (condition_result) {
 			this.visit(ctx.expression())
 		}
-		return null
+		return condition_result
 	}
   
   
@@ -305,7 +345,6 @@ export default class CustomVisitor extends LanguageVisitor {
 	visitCondition(ctx) {
 		let [first_val, second_val] = this.visit(ctx.value());
 		let symbol = ctx.cond_sym.text;
-		console.log(symbol)
 		switch (symbol) {
 			case '>':
 				return first_val > second_val;

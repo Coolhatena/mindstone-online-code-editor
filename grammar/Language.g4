@@ -9,7 +9,8 @@ logic:	expression*?;
 
 expression: declaration SEMI?
 	|	assign SEMI?
-	|	conditional SEMI?
+	| chained_conditional SEMI?
+	//|	conditional SEMI?
 	|	log SEMI?
 	;
 
@@ -31,7 +32,13 @@ value:	OPEN_PARENTH value CLOSE_PARENTH 	#parentheses
     |	INT									#valueAsNumber
     ;
 
+chained_conditional: conditional conditional__elif* conditional__else?;
+
 conditional: IF_PR OPEN_PARENTH condition CLOSE_PARENTH OPEN_CURL expression* CLOSE_CURL;
+
+conditional__elif: ELSE_PR conditional;
+
+conditional__else: ELSE_PR OPEN_CURL expression* CLOSE_CURL;
 
 condition:	cond_sym=(COND_LOG|COND_MAT)
 		|	value cond_sym=(COND_LOG|COND_MAT) value
