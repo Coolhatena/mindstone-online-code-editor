@@ -304,8 +304,8 @@ export default class CustomVisitor extends LanguageVisitor {
 				isElifTrue = this.visit(elifs[i]);
 				if (isElifTrue) break;
 			}
-
-			if(!isElifTrue){
+			console.log(ctx.conditional__else())
+			if(!isElifTrue && ctx.conditional__else()){
 				this.visit(ctx.conditional__else())
 			}
 		}
