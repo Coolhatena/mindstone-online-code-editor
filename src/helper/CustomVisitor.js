@@ -330,6 +330,8 @@ export default class CustomVisitor extends LanguageVisitor {
 	// Visit a parse tree produced by LanguageParser#conditional.
 	visitConditional(ctx) {
 		console.log("Conditional");
+		if(!ctx.condition()) return false
+		
 		let condition_result = this.visit(ctx.condition())
 		if (condition_result) {
 			this.visit(ctx.expression())
