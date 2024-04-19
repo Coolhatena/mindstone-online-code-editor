@@ -6,6 +6,7 @@
 	--background: #011627;
 	--background-header: #011627;
 	--background-editor-header: #202020;
+	--background-editor-header-hover: #323232;
 	--background-terminal-header: #f7f7f7;
 }
 
@@ -28,7 +29,42 @@ body {
 
 .container {
 	height: 100%;
-	width: 100%;
+	width: 90%;
+	height: 15rem;
+	margin: 1rem auto;
+}
+
+/* Windows switch styles */
+.SwitchButton-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.SwitchButton {
+	color: #fff;
+	background-color: var(--background-editor-header);
+	font-size: 1.3rem;
+	min-width: 15%;
+	width: 7rem;
+	border: 1px solid #fff;
+}
+
+.SwitchButton:hover,
+.SwitchButton_selected {
+	background-color: var(--background-editor-header-hover);
+	cursor: pointer;
+}
+/* Translator Styles */
+.translator {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.container-translator{
+	height: 100%;
+	width: 45%;
 	height: 15rem;
 	margin: 1rem auto;
 }
@@ -38,6 +74,10 @@ body {
 .editor {
 	margin-bottom: 1rem;
 	border: 1px solid grey;
+}
+
+.lowerEditor {
+	margin-top: 10rem;
 }
 
 .editor-header {

@@ -5,8 +5,8 @@ import React, { useState, useEffect } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import { vscodeDark } from "@uiw/codemirror-theme-vscode";
 
-const CodeSpace = () => {
-	const [inputText, setInputText] = useState("");
+const CodeSpace = ({ codeState=["", () => {}] }) => {
+	const [inputText, setInputText] = codeState;
 	const [results, setResults] = useState({
 		ent: [],
 		pdec: [],
