@@ -30,8 +30,50 @@ export default class CtoMSVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by CtoMSParser#declaration.
+	visitDeclaration(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by CtoMSParser#assign.
+	visitAssign(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 	// Visit a parse tree produced by CtoMSParser#log.
 	visitLog(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by CtoMSParser#chained_conditional.
+	visitChained_conditional(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by CtoMSParser#conditional.
+	visitConditional(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by CtoMSParser#conditional__elif.
+	visitConditional__elif(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by CtoMSParser#conditional__else.
+	visitConditional__else(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by CtoMSParser#condition.
+	visitCondition(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
