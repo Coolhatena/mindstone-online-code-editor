@@ -15,15 +15,30 @@ export default class CtoMSCustomVisitor extends CtoMSVisitor {
 
 	visitInit(ctx) {
 		this.translatedCode += "start --> {"
-		let content = this.visit(ctx.logic());
-		console.log(content);
-		this.translatedCode += `\n${content}`
+		this.visit(ctx.logic());
 		this.translatedCode += "\n}"
 		return
 	}
 
 	visitLogic(ctx) {
-		return ctx.getText();
+		return this.visitChildren(ctx);
 	}
 
-}
+	// Visit a parse tree produced by CtoMSParser#expression.
+	visitExpression(ctx) {
+		return this.visitChildren(ctx);
+	  }
+  
+  
+	  // Visit a parse tree produced by CtoMSParser#log.
+	  visitLog(ctx) {
+		let content = this.visit(ctx.value()) 
+		this.translatedCode += `\nptr(${content})!`
+		return
+	  }
+
+	  visitValue(ctx) {
+		return ctx.getText();
+	  }
+  
+  }

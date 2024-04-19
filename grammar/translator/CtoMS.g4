@@ -9,4 +9,14 @@ logic:	expression*?;
 
 expression: log SEMI?;
 
-log: PRINT OPEN_PARENTH .+? CLOSE_PARENTH;
+log: PRINT OPEN_PARENTH value CLOSE_PARENTH;
+
+value:	OPEN_PARENTH value CLOSE_PARENTH
+	|	value operation=(MULT|DIV) value	
+	|	value operation=(PLUS|MINUS) value	
+	|	STRING								
+	|	CHAR								
+	|	ID										
+	|	FLOAT								
+    |	INT									
+    ;

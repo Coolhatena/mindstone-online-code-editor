@@ -36,5 +36,11 @@ export default class CtoMSVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by CtoMSParser#value.
+	visitValue(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 
 }
