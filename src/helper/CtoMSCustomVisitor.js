@@ -79,7 +79,10 @@ export default class CtoMSCustomVisitor extends CtoMSVisitor {
 
 	// Visit a parse tree produced by CtoMSParser#chained_conditional.
 	visitChained_conditional(ctx) {
-		return this.visitChildren(ctx);
+		this.visit(ctx.conditional())
+		if(ctx.conditional__elif()) this.visit(ctx.conditional__elif())
+		if(ctx.conditional__else()) this.visit(ctx.conditional__else())
+		this.translatedCode += `!`;
 	}
 
 	// Visit a parse tree produced by CtoMSParser#conditional.
