@@ -23,7 +23,6 @@ export default class CtoMSCustomVisitor extends CtoMSVisitor {
 	isElif(){
 		let state = this.translatedCode
 		let len = this.translatedCode.length
-		console.log(state[len-4] + state[len-3] + state[len-2] + state[len-1])
 		return "else" ==  state[len-4] + state[len-3] + state[len-2] + state[len-1]
 	}
 
@@ -44,8 +43,8 @@ export default class CtoMSCustomVisitor extends CtoMSVisitor {
 	}
 
 	visitExpression(ctx) {
-		console.log(this.visitChildren(ctx));
-		return;
+		console.log("Expression");
+		return this.visitChildren(ctx);
 	}
 
 	visitDeclaration(ctx) {
@@ -85,8 +84,7 @@ export default class CtoMSCustomVisitor extends CtoMSVisitor {
 
 	// Visit a parse tree produced by CtoMSParser#conditional.
 	visitConditional(ctx) {
-		let CONDITION = this.visit(ctx.condition());
-		console.log(CONDITION)
+		let CONDITION = this.visit(ctx.value());
 		this.translatedCode += `${this.isElif() ? " if" : "\nif"}(${CONDITION}){`;	
 		this.visit(ctx.expression())
 		this.translatedCode += `\n}`;	
@@ -106,11 +104,6 @@ export default class CtoMSCustomVisitor extends CtoMSVisitor {
 		this.visit(ctx.expression())
 		this.translatedCode += `\n}`;
 		return
-	}
-
-	// Visit a parse tree produced by CtoMSParser#condition.
-	visitCondition(ctx) {
-		return ctx.getText();
 	}
 
 	visitValue(ctx) {

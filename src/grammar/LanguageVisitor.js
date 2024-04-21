@@ -72,6 +72,12 @@ export default class LanguageVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by LanguageParser#normalCondition.
+	visitNormalCondition(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 	// Visit a parse tree produced by LanguageParser#valueAsNumber.
 	visitValueAsNumber(ctx) {
 	  return this.visitChildren(ctx);
@@ -110,12 +116,6 @@ export default class LanguageVisitor extends antlr4.tree.ParseTreeVisitor {
 
 	// Visit a parse tree produced by LanguageParser#conditional__else.
 	visitConditional__else(ctx) {
-	  return this.visitChildren(ctx);
-	}
-
-
-	// Visit a parse tree produced by LanguageParser#condition.
-	visitCondition(ctx) {
 	  return this.visitChildren(ctx);
 	}
 

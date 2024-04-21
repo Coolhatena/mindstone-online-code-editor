@@ -304,7 +304,7 @@ export default class CustomVisitor extends LanguageVisitor {
 				isElifTrue = this.visit(elifs[i]);
 				if (isElifTrue) break;
 			}
-			console.log(ctx.conditional__else())
+			
 			if(!isElifTrue && ctx.conditional__else()){
 				this.visit(ctx.conditional__else())
 			}
@@ -330,20 +330,21 @@ export default class CustomVisitor extends LanguageVisitor {
 	// Visit a parse tree produced by LanguageParser#conditional.
 	visitConditional(ctx) {
 		console.log("Conditional");
-		if(!ctx.condition()) return false
+		if(!ctx.value()) return false
 		
-		let condition_result = this.visit(ctx.condition())
+		let condition_result = this.visit(ctx.value())
 		if (condition_result) {
 			this.visit(ctx.expression())
 		}
 		return condition_result
 	}
-  
-  
-	// Visit a parse tree produced by LanguageParser#condition.
-	visitCondition(ctx) {
+
+	// Visit a parse tree produced by LanguageParser#normalCondition.
+	visitNormalCondition(ctx) {
+		console.log("Condition")
 		let [first_val, second_val] = this.visit(ctx.value());
 		let symbol = ctx.cond_sym.text;
+
 		switch (symbol) {
 			case '>':
 				return first_val > second_val;
@@ -378,10 +379,16 @@ export default class CustomVisitor extends LanguageVisitor {
 			default:
 				return false;
 		}
-
-		
-	}
-
+	  }
+  
+  
+	  // Visit a parse tree produced by LanguageParser#parenthesesCondition.
+	  visitParenthesesCondition(ctx) {
+		console.log("PARENTHESES CONDITION")
+		let result = this.visit(ctx.condition());
+		return result
+	  }
+  
 	// Visit a parse tree produced by LanguageParser#anything_else.
 	visitAnything_else(ctx) {
 		this.logs.push({

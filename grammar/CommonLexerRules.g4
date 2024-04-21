@@ -20,6 +20,6 @@ INT 			: [0-9]+ ;
 FLOAT 			: [0-9]+[.][0-9]+;
 ID				: [a-zA-Z]([a-zA-Z0-9_]+)?;
 SEMI			: '!''\n'?;
-INV_ID 			: [A-Za-z0-9+\-]+;
+INV_ID 			: [A-Za-z]+;
 NEWLINE 		: '\r'? '\n';
 WS				: [ \t\r\n]+ -> skip;
