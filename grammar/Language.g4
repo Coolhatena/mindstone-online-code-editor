@@ -13,24 +13,21 @@ expression: declaration SEMI?
 	|	log SEMI?
 	;
 
-declaration:	TYPE ID (EQUALS value)? 				# validDeclaration
-			|	TYPE id=(INV_ID|INT) (EQUALS value)? 	# invalidDeclaration
-			;
+declaration: TYPE ID (EQUALS value)?;
 
 assign: ID EQUALS value;
 
 log: PRINT OPEN_PARENTH value CLOSE_PARENTH;
 
 value:	OPEN_PARENTH value CLOSE_PARENTH 			#parentheses
-	|	value operation=(MULT|DIV) value			#Multdiv
-	|	value operation=(PLUS|MINUS) value			#PlusMinus
+	|	value operation=(MULT|DIV|PLUS|MINUS) value	#arithmetic
 	|	cond_sym=(COND_LOG|COND_MAT)				#normalCondition
 	|	value cond_sym=(COND_LOG|COND_MAT) value	#normalCondition
 	|	STRING										#valueAsChar
 	|	CHAR										#valueAsChar
-	|	ID											#valueAsID	
 	|	FLOAT										#valueAsNumber
     |	INT											#valueAsNumber
+	|	ID											#valueAsID	
     ;
 
 chained_conditional: conditional conditional__elif* conditional__else?;

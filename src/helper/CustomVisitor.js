@@ -62,7 +62,7 @@ export default class CustomVisitor extends LanguageVisitor {
 		let isValid = false;
 		switch (type) {
 			case "ent":
-				isValid = /^[0-9]+$/.test(value);
+				isValid = /(^[0-9]+$)|(^-[0-9]+$)/.test(value);
 				break;
 
 			case "pdec":
@@ -152,32 +152,32 @@ export default class CustomVisitor extends LanguageVisitor {
 		return this.visitChildren(ctx);
 	}
 
-	// Visit a parse tree produced by LanguageParser#validDeclaration.
-	visitValidDeclaration(ctx) {
-		console.log("ValidDec");
-		let result;
-		if (ctx.EQUALS()) {
-			result = this.declareAndAssign(ctx);
+	visitDeclaration(ctx) {
+		console.log("Declaration")
+		let ID = ctx.ID().getText()
+		let VARIABLE_PATTERN = /^[A-Za-z]([A-Za-z0-9-_]+)?/
+
+		if(VARIABLE_PATTERN.test(ID)){
+			let result;
+			if (ctx.EQUALS()) {
+				result = this.declareAndAssign(ctx);
+			} else {
+				result = this.declare(ctx);
+			}
+
+			return result;
+
 		} else {
-			result = this.declare(ctx);
+			const TYPE = ctx.TYPE().getText();
+			this.logs.push({
+				type: "error",
+				header: "ERROR",
+				text: `ID "${ID}" is not a valid identifier`,
+			});
+
+			return [TYPE, ID];
 		}
-
-		return result;
-	}
-
-	// Visit a parse tree produced by LanguageParser#invalidDeclaration.
-	visitInvalidDeclaration(ctx) {
-		console.log("InvalidDec");
-		const TYPE = ctx.TYPE().getText();
-		const ID = ctx.id.text;
-		this.logs.push({
-			type: "error",
-			header: "ERROR",
-			text: `ID "${ID}" is not a valid identifier`,
-		});
-
-		return [TYPE, ID];
-	}
+	  }
 
 	// Visit a parse tree produced by LanguageParser#assign.
 	visitAssign(ctx) {
@@ -210,22 +210,21 @@ export default class CustomVisitor extends LanguageVisitor {
 		return this.visitChildren(ctx);
 	}
 
-	// Visit a parse tree produced by LanguageParser#Multdiv.
-	visitMultdiv(ctx) {
-		console.log("Multdiv");
+	// Visit a parse tree produced by LanguageParser#arithmetic.
+	visitArithmetic(ctx) {
+		console.log("Arithmetic")
 		const operation_data = this.visitChildren(ctx);
-		return ctx.operation.type == LanguageParser.MULT
-			? operation_data[0] * operation_data[2]
-			: operation_data[0] / operation_data[2];
-	}
-
-	// Visit a parse tree produced by LanguageParser#PlusMinus.
-	visitPlusMinus(ctx) {
-		console.log("plusminus");
-		const operation_data = this.visitChildren(ctx);
-		return ctx.operation.type == LanguageParser.PLUS
-			? operation_data[0] + operation_data[2]
-			: operation_data[0] - operation_data[2];
+		let SYMBOL = ctx.operation.type
+		switch (SYMBOL) {
+			case LanguageParser.MULT:
+				return operation_data[0] * operation_data[2];
+			case LanguageParser.DIV:
+				return operation_data[0] / operation_data[2];
+			case LanguageParser.PLUS:
+				return operation_data[0] + operation_data[2];
+			case LanguageParser.MINUS:
+				return operation_data[0] - operation_data[2];
+		}
 	}
 
 	// Visit a parse tree produced by LanguageParser#valueAsID.
