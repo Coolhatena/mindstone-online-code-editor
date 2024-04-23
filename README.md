@@ -66,6 +66,51 @@ start --> {
 }
 ```
 
+### **Conditional sentences**
+Conditionals are the pillar of responsive programing, in MindStone, you can change the flow of your code based on a condition using the conditional sentences.
+#### If Statement
+This is the most basic conditional, if the boolean value of the condition space is true,the code inside the brackets is executed 
+```
+start --> {
+  if (5 > 3) {
+    ptr("Hello World!")!
+  }!
+```
+#### Else If Statement
+You can chain multiple condition evaluations using else if, so if the first condition its not a truthy value you can still evaluate other conditions before taking and ultimate decision.
+```
+start --> {
+  if (3 > 5) { // False
+    ptr("Hello World!")!
+  } else if( 5 < 3 ) { // true
+    ptr("Hello else if")!
+  }!
+```
+#### Else Statement
+If theres no truthy condition on the conditional chain, the code flow will end on the else code block.
+```
+start --> {
+  if (3 > 5) { // False
+    ptr("Hello World!")!
+  } else if( false ) { // false
+    ptr("Hello else if")!
+  } else {
+    ptr("Hello else!")!
+  }!
+```
+#### Condition operators
+Currently, MindStone has the following condition operators available:
+- '>'
+- '<'
+- '>='
+- '<='
+- '||'
+- '&&'
+- '=='
+- '!='
+- 'true'
+- 'false'
+
 # INTERNAL DEVELOPMENT ONLY
 
 ANTL4 Setup
