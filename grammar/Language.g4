@@ -9,7 +9,7 @@ logic:	expression*?;
 
 expression: declaration SEMI?
 	|	assign SEMI?
-	| chained_conditional SEMI?
+	|	chained_conditional SEMI?
 	|	log SEMI?
 	;
 

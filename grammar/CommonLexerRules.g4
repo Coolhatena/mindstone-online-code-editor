@@ -15,7 +15,7 @@ ELSE_PR			: 'else';
 COND_MAT		: ('<'|'>'|'<='|'>=');
 COND_LOG		: ('||'|'&&'|'=='|'!='|'true'|'false');
 STRING			: '"'.+?'"';	
-CHAR			: '"'[a-zA-Z ]'"';	
+CHAR			: '"'[a-zA-Z ]?'"';	
 INT 			: [0-9]+ ;
 FLOAT 			: [0-9]+[.][0-9]+;
 SEMI			: '!''\n'?;
