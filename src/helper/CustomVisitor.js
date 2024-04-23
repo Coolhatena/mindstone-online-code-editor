@@ -140,6 +140,9 @@ export default class CustomVisitor extends LanguageVisitor {
 	// Visit a parse tree produced by LanguageParser#expression.
 	visitExpression(ctx) {
 		console.log("Expresion");
+		if (ctx.loop__while()) return this.visitChildren(ctx);
+		if (ctx.chained_conditional()) return this.visitChildren(ctx);
+
 		const SEMI = ctx.SEMI();
 		if (!SEMI) {
 			this.logs.push({
@@ -248,6 +251,7 @@ export default class CustomVisitor extends LanguageVisitor {
 	// Visit a parse tree produced by LanguageParser#valueAsChar.
 	visitValueAsChar(ctx) {
 		console.log("Valueaschar");
+		console.log(ctx.getText())
 		return ctx.getText();
 	}
 

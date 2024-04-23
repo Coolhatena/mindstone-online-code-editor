@@ -10,6 +10,7 @@ logic:	expression*?;
 expression: declaration SEMI?
 	|	assign SEMI?
 	|	chained_conditional SEMI?
+	|	loop__while SEMI?
 	|	log SEMI?
 	;
 
@@ -37,6 +38,8 @@ conditional: IF_PR OPEN_PARENTH value CLOSE_PARENTH OPEN_CURL expression* CLOSE_
 conditional__elif: ELSE_PR conditional;
 
 conditional__else: ELSE_PR OPEN_CURL expression* CLOSE_CURL;
+
+loop__while: WHILE_PR OPEN_PARENTH value CLOSE_PARENTH OPEN_CURL expression* CLOSE_CURL;
 
 MAIN: 'start -->';
 TYPE: ('ent'|'pdec'|'ctr');	

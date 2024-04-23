@@ -108,5 +108,11 @@ export default class LanguageVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by LanguageParser#loop__while.
+	visitLoop__while(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 
 }
