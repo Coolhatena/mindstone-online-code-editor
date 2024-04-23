@@ -114,7 +114,8 @@ body {
 .terminal-container {
 	margin: auto;
 	width: 100%;
-	height: 100%;
+	height: fit-content;
+	min-height: 100%;
 	background: #000;
 	border: 0.5px solid #ccc;
 	border-radius: 7px;
@@ -163,6 +164,10 @@ body {
 
 .terminal-content p.warning {
 	color: yellow;
+}
+
+.log:last-of-type {
+	margin-bottom: 1rem;
 }
 
 .red {

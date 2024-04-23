@@ -9,6 +9,7 @@ export default class CustomVisitor extends LanguageVisitor {
 			ent: [],
 			pdec: [],
 			ctr: [],
+			bool: [],
 		};
 		this.logs = [];
 	}
@@ -71,6 +72,10 @@ export default class CustomVisitor extends LanguageVisitor {
 
 			case "ctr":
 				isValid = /^[a-zA-Z]$/.test(value);
+				break;
+
+			case "bool":
+				isValid = /true|false/.test(value);
 				break;
 
 			default:
@@ -156,11 +161,11 @@ export default class CustomVisitor extends LanguageVisitor {
 	}
 
 	visitDeclaration(ctx) {
-		console.log("Declaration")
-		let ID = ctx.ID().getText()
-		let VARIABLE_PATTERN = /^[A-Za-z]([A-Za-z0-9-_]+)?/
+		console.log("Declaration");
+		let ID = ctx.ID().getText();
+		let VARIABLE_PATTERN = /^[A-Za-z]([A-Za-z0-9-_]+)?/;
 
-		if(VARIABLE_PATTERN.test(ID)){
+		if (VARIABLE_PATTERN.test(ID)) {
 			let result;
 			if (ctx.EQUALS()) {
 				result = this.declareAndAssign(ctx);
@@ -169,7 +174,6 @@ export default class CustomVisitor extends LanguageVisitor {
 			}
 
 			return result;
-
 		} else {
 			const TYPE = ctx.TYPE().getText();
 			this.logs.push({
@@ -180,7 +184,7 @@ export default class CustomVisitor extends LanguageVisitor {
 
 			return [TYPE, ID];
 		}
-	  }
+	}
 
 	// Visit a parse tree produced by LanguageParser#assign.
 	visitAssign(ctx) {
@@ -215,9 +219,9 @@ export default class CustomVisitor extends LanguageVisitor {
 
 	// Visit a parse tree produced by LanguageParser#arithmetic.
 	visitArithmetic(ctx) {
-		console.log("Arithmetic")
+		console.log("Arithmetic");
 		const operation_data = this.visitChildren(ctx);
-		let SYMBOL = ctx.operation.type
+		let SYMBOL = ctx.operation.type;
 		switch (SYMBOL) {
 			case LanguageParser.MULT:
 				return operation_data[0] * operation_data[2];
@@ -251,7 +255,7 @@ export default class CustomVisitor extends LanguageVisitor {
 	// Visit a parse tree produced by LanguageParser#valueAsChar.
 	visitValueAsChar(ctx) {
 		console.log("Valueaschar");
-		console.log(ctx.getText())
+		console.log(ctx.getText());
 		return ctx.getText();
 	}
 
@@ -294,22 +298,21 @@ export default class CustomVisitor extends LanguageVisitor {
 		return visit[1];
 	}
 
-
 	// Visit a parse tree produced by LanguageParser#chained_conditional.
 	visitChained_conditional(ctx) {
 		console.log("Chained conditional");
-		let isIfTrue = this.visit(ctx.conditional())
+		let isIfTrue = this.visit(ctx.conditional());
 
-		if(!isIfTrue){
+		if (!isIfTrue) {
 			const elifs = ctx.conditional__elif();
 			let isElifTrue = false;
 			for (let i = 0; i < elifs.length; i++) {
 				isElifTrue = this.visit(elifs[i]);
 				if (isElifTrue) break;
 			}
-			
-			if(!isElifTrue && ctx.conditional__else()){
-				this.visit(ctx.conditional__else())
+
+			if (!isElifTrue && ctx.conditional__else()) {
+				this.visit(ctx.conditional__else());
 			}
 		}
 
@@ -325,73 +328,88 @@ export default class CustomVisitor extends LanguageVisitor {
 	// Visit a parse tree produced by LanguageParser#conditional__else.
 	visitConditional__else(ctx) {
 		console.log("Conditional__else");
-		this.visit(ctx.expression())
-		return null
+		this.visit(ctx.expression());
+		return null;
 	}
-  
 
 	// Visit a parse tree produced by LanguageParser#conditional.
 	visitConditional(ctx) {
 		console.log("Conditional");
-		if(!ctx.value()) return false
-		
-		let condition_result = this.visit(ctx.value())
+		if (!ctx.value()) return false;
+
+		let condition_result = this.visit(ctx.value());
 		if (condition_result) {
-			this.visit(ctx.expression())
+			this.visit(ctx.expression());
 		}
-		return condition_result
+		return condition_result;
 	}
 
 	// Visit a parse tree produced by LanguageParser#normalCondition.
 	visitNormalCondition(ctx) {
-		console.log("Condition")
+		console.log("Condition");
 		let [first_val, second_val] = this.visit(ctx.value());
 		let symbol = ctx.cond_sym.text;
 
 		switch (symbol) {
-			case '>':
+			case ">":
 				return first_val > second_val;
 
-			case '<':
+			case "<":
 				return first_val < second_val;
-			
-			case '>=':
+
+			case ">=":
 				return first_val >= second_val;
 
-			case '<=':
+			case "<=":
 				return first_val <= second_val;
 
-			case '||':
+			case "||":
 				return first_val || second_val;
 
-			case '&&':
+			case "&&":
 				return first_val && second_val;
 
-			case '==':
+			case "==":
 				return first_val == second_val;
-			
-			case '!=':
-				return first_val != second_val;
-			
-			case 'true':
-				return true
 
-			case 'false':
-				return false
-		
+			case "!=":
+				return first_val != second_val;
+
+			case "true":
+				return true;
+
+			case "false":
+				return false;
+
 			default:
 				return false;
 		}
-	  }
-  
-  
-	  // Visit a parse tree produced by LanguageParser#parenthesesCondition.
-	  visitParenthesesCondition(ctx) {
-		console.log("PARENTHESES CONDITION")
+	}
+
+	// Visit a parse tree produced by LanguageParser#parenthesesCondition.
+	visitParenthesesCondition(ctx) {
+		console.log("PARENTHESES CONDITION");
 		let result = this.visit(ctx.condition());
-		return result
+		return result;
+	}
+
+	// Visit a parse tree produced by LanguageParser#loop__while.
+	visitLoop__while(ctx) {
+		let condition = this.visit(ctx.value());
+		console.log(condition)
+		let time = performance.now()
+		while(condition){
+			this.visit(ctx.expression())
+			condition = this.visit(ctx.value());
+			console.log(condition)
+			console.log(performance.now() - time)
+			if (performance.now() - time > 500) {
+				break
+			}
+		}
+		return condition
 	  }
-  
+
 	// Visit a parse tree produced by LanguageParser#anything_else.
 	visitAnything_else(ctx) {
 		this.logs.push({
@@ -399,5 +417,5 @@ export default class CustomVisitor extends LanguageVisitor {
 			header: "ERROR",
 			text: `Syntax error on line ${ctx.start.line}.`,
 		});
-	  }
+	}
 }

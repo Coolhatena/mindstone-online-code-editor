@@ -42,4 +42,4 @@ conditional__else: ELSE_PR OPEN_CURL expression* CLOSE_CURL;
 loop__while: WHILE_PR OPEN_PARENTH value CLOSE_PARENTH OPEN_CURL expression* CLOSE_CURL;
 
 MAIN: 'start -->';
-TYPE: ('ent'|'pdec'|'ctr');	
+TYPE: ('ent'|'pdec'|'ctr'|'bool');	
