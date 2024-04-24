@@ -12,7 +12,7 @@ export default class CustomVisitor extends LanguageVisitor {
 			bool: [],
 		};
 		this.logs = [];
-		this.max_loop_time = 1000;
+		this.max_loop_time = 500;
 	}
 
 	// HELPER METHODS
@@ -404,6 +404,11 @@ export default class CustomVisitor extends LanguageVisitor {
 			this.visit(ctx.expression())
 			condition = this.visit(ctx.value());
 			if (performance.now() - time > this.max_loop_time) {
+				this.logs.push({
+					type: "warning",
+					header: "WARNING",
+					text: "Posible infinite loop detected, stopping loop...",
+				});
 				break
 			}
 		}
@@ -421,6 +426,11 @@ export default class CustomVisitor extends LanguageVisitor {
 			this.visit(ctx.expression())
 			condition = this.visit(ctx.value());
 			if (performance.now() - time > this.max_loop_time) {
+				this.logs.push({
+					type: "warning",
+					header: "WARNING",
+					text: "Posible infinite loop detected, stopping loop...",
+				});
 				break
 			}
 		}
