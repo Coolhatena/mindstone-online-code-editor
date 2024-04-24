@@ -436,14 +436,4 @@ export default class CustomVisitor extends LanguageVisitor {
 		}
 		return condition
 	  }
-
-
-	// Visit a parse tree produced by LanguageParser#anything_else.
-	visitAnything_else(ctx) {
-		this.logs.push({
-			type: "error",
-			header: "ERROR",
-			text: `Syntax error on line ${ctx.start.line}.`,
-		});
-	}
 }
