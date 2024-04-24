@@ -13,6 +13,7 @@ DIV				: '/';
 IF_PR			: 'if';
 ELSE_PR			: 'else';
 WHILE_PR		: 'while';
+DO_PR			: 'do';
 COND_MAT		: ('<'|'>'|'<='|'>=');
 COND_LOG		: ('||'|'&&'|'=='|'!='|'true'|'false');
 STRING			: '"'.*?'"';	

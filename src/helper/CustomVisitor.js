@@ -12,6 +12,7 @@ export default class CustomVisitor extends LanguageVisitor {
 			bool: [],
 		};
 		this.logs = [];
+		this.max_loop_time = 1000;
 	}
 
 	// HELPER METHODS
@@ -146,6 +147,7 @@ export default class CustomVisitor extends LanguageVisitor {
 	visitExpression(ctx) {
 		console.log("Expresion");
 		if (ctx.loop__while()) return this.visitChildren(ctx);
+		if (ctx.loop__do_while()) return this.visitChildren(ctx);
 		if (ctx.chained_conditional()) return this.visitChildren(ctx);
 
 		const SEMI = ctx.SEMI();
@@ -255,7 +257,6 @@ export default class CustomVisitor extends LanguageVisitor {
 	// Visit a parse tree produced by LanguageParser#valueAsChar.
 	visitValueAsChar(ctx) {
 		console.log("Valueaschar");
-		console.log(ctx.getText());
 		return ctx.getText();
 	}
 
@@ -395,20 +396,37 @@ export default class CustomVisitor extends LanguageVisitor {
 
 	// Visit a parse tree produced by LanguageParser#loop__while.
 	visitLoop__while(ctx) {
+		console.log("Visitando While");
+		if(!ctx.value()) return false;
 		let condition = this.visit(ctx.value());
-		console.log(condition)
 		let time = performance.now()
 		while(condition){
 			this.visit(ctx.expression())
 			condition = this.visit(ctx.value());
-			console.log(condition)
-			console.log(performance.now() - time)
-			if (performance.now() - time > 500) {
+			if (performance.now() - time > this.max_loop_time) {
 				break
 			}
 		}
 		return condition
 	  }
+
+	  // Visit a parse tree produced by LanguageParser#loop__do_while.
+	visitLoop__do_while(ctx) {
+		console.log("Visitando do while");
+		this.visit(ctx.expression())
+		if(!ctx.value()) return false;
+		let condition = this.visit(ctx.value());
+		let time = performance.now()
+		while(condition){
+			this.visit(ctx.expression())
+			condition = this.visit(ctx.value());
+			if (performance.now() - time > this.max_loop_time) {
+				break
+			}
+		}
+		return condition
+	  }
+
 
 	// Visit a parse tree produced by LanguageParser#anything_else.
 	visitAnything_else(ctx) {
