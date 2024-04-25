@@ -109,6 +109,25 @@ export default class CtoMSCustomVisitor extends CtoMSVisitor {
 		return
 	}
 
+	// Visit a parse tree produced by CtoMSParser#loop__while.
+	visitLoop__while(ctx) {
+		console.log("YES")
+		let CONDITION = this.visit(ctx.value());
+		this.translatedCode += `\nwhile (${CONDITION}){`;	
+		this.visit(ctx.expression())
+		this.translatedCode += `\n}`;	
+		return
+	}
+  
+  
+	// Visit a parse tree produced by CtoMSParser#loop__do_while.
+	visitLoop__do_while(ctx) {
+		this.translatedCode += `do {`;	
+		this.visit(ctx.expression())
+		this.translatedCode += `\n} while (${CONDITION})`;	
+		return
+	}
+
 	visitValue(ctx) {
 		return ctx.getText();
 	}

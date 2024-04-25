@@ -12,6 +12,8 @@ expression:
 		|	declaration SEMI
 		|	assign SEMI
 		|	chained_conditional
+		|	loop__while
+		|	loop__do_while
 		;
 
 declaration:	TYPE ID (EQUALS value)? 
@@ -30,9 +32,12 @@ conditional__elif: ELSE_PR conditional;
 
 conditional__else: ELSE_PR OPEN_CURL expression* CLOSE_CURL;
 
+loop__while: WHILE_PR OPEN_PARENTH value CLOSE_PARENTH OPEN_CURL expression* CLOSE_CURL;
+
+loop__do_while: DO_PR OPEN_CURL expression* CLOSE_CURL WHILE_PR OPEN_PARENTH value CLOSE_PARENTH;
+
 value:	OPEN_PARENTH value CLOSE_PARENTH
-	|	value operation=(MULT|DIV) value	
-	|	value operation=(PLUS|MINUS) value	
+	|	value operation=(MULT|DIV|PLUS|MINUS) value	
 	|	value cond_sym=(COND_LOG|COND_MAT) value
 	|	cond_sym=(COND_LOG|COND_MAT)
 	|	STRING								

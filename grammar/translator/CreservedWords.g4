@@ -13,6 +13,8 @@ DOUBLE_QUOTE	: '"';
 SEMI			: ';';
 IF_PR			: 'if';
 ELSE_PR			: 'else';
+WHILE_PR		: 'while';
+DO_PR			: 'do';
 COND_MAT		: ('<'|'>'|'<='|'>=');
 COND_LOG		: ('||'|'&&'|'=='|'!='|'true'|'false');
 PRINT			: 'printf';
