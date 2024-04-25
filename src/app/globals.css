@@ -58,8 +58,14 @@ body {
 /* Translator Styles */
 .translator {
 	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
+	flex-direction: column;
+}
+
+@media (min-width: 768px) {
+	.translator {
+		flex-direction: row;
+		justify-content: space-evenly;
+	}
 }
 
 .container-translator{
@@ -67,6 +73,17 @@ body {
 	width: 45%;
 	height: 15rem;
 	margin: 1rem auto;
+}
+
+.container-translator:last-of-type {
+	margin-top: 10rem;
+	margin-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+	.container-translator:last-of-type {
+		margin-top: 1rem;
+	}
 }
 
 /* Code Editor Styles */
@@ -104,6 +121,7 @@ body {
 	background-color: var(--background);
 	color: white;
 	border-radius: 5%;
+	max-height: fit-content;
 }
 
 .file-reader {
