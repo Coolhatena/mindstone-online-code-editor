@@ -70,7 +70,7 @@ body {
 
 .container-translator{
 	height: 100%;
-	width: 45%;
+	width: 90%;
 	height: 15rem;
 	margin: 1rem auto;
 }
@@ -81,6 +81,10 @@ body {
 }
 
 @media (min-width: 768px) {
+	.container-translator{
+		width: 45%;
+	}
+
 	.container-translator:last-of-type {
 		margin-top: 1rem;
 	}
