@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 import CodeMirror from "@uiw/react-codemirror";
 import { vscodeDark } from "@uiw/codemirror-theme-vscode";
@@ -9,18 +9,36 @@ import CtoMSTranslator from '@/module/CtoMSTranslator';
 const Translator = ({ codeState=["", () => {}] }) => {
 	const [inputText, setInputText] = codeState;
 	const [inputTextCLang, setInputTextCLang] = useState("")
-
-	let handleRun = () => {
-		console.log("None");
-	};
+	const inputFile = useRef(null) 
 
 	let handleTranslateCtoMS = () => {
 		let result = CtoMSTranslator(inputTextCLang)
 		setInputText(result)
 	};
 
-	let clean = () => {
+	let handleFileLoad = (e) => {
+		e.preventDefault()
+		const reader = new FileReader();
+		if (e.target.files.length){
+			reader.readAsText(e.target.files[0]);
+			reader.onload = (e) => {
+				const file = e.target.result;
+				setInputTextCLang(file);
+			}
+		}
+	};
+
+	let handleClickFileLoad = () => {
+		inputFile.current.click();
+		inputFile.current.value = ""
+	}
+
+	let HandleCleanMs = () => {
 		setInputText("");
+	};
+
+	let HandleCleanC = () => {
+		setInputTextCLang("");
 	};
 
 	return (
@@ -30,8 +48,13 @@ const Translator = ({ codeState=["", () => {}] }) => {
 					<div className="editor-header">
 						<h2>C Code</h2>
 						<div className="button-container">
+							<button id="load-file-button" className="editor-button" onClick={handleClickFileLoad}>
+								Load file
+								<input type='file' name='load-file' id="load-file" accept=".txt, .c" ref={inputFile} onChange={(e) => handleFileLoad(e)} className="file-reader" />	
+							</button>
+							
 							<button id="translateC" onClick={handleTranslateCtoMS} className="editor-button">Translate</button>
-							<button id="clear" onClick={clean} className="editor-button">Clear</button>
+							<button id="clear" onClick={HandleCleanC} className="editor-button">Clear</button>
 						</div>
 					</div>
 					<CodeMirror
@@ -50,7 +73,7 @@ const Translator = ({ codeState=["", () => {}] }) => {
 						<h2>MindStone Code</h2>
 						<div className="button-container">
 							<button id="translateMS" onClick={handleTranslateCtoMS} className="editor-button">Translate</button>
-							<button id="clear" onClick={clean} className="editor-button">Clear</button>
+							<button id="clear" onClick={HandleCleanMs} className="editor-button">Clear</button>
 						</div>
 					</div>
 					<CodeMirror

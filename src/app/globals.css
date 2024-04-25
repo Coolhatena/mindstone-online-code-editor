@@ -106,6 +106,10 @@ body {
 	border-radius: 5%;
 }
 
+.file-reader {
+	display: none;
+}
+
 /* Terminal styles*/
 .terminal {
 	height: 100%;
