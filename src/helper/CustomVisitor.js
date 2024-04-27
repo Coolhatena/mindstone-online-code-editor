@@ -139,6 +139,7 @@ export default class CustomVisitor extends LanguageVisitor {
 	// VISIT METHODS
 	// Visit a parse tree produced by LanguageParser#file.
 	visitFile(ctx) {
+		console.log(ctx.getText())
 		this.visitChildren(ctx);
 		return [this.variables, this.logs];
 	}
@@ -146,6 +147,7 @@ export default class CustomVisitor extends LanguageVisitor {
 	// Visit a parse tree produced by LanguageParser#expression.
 	visitExpression(ctx) {
 		console.log("Expresion");
+		console.log(ctx.getText())
 		if (ctx.loop__while()) return this.visitChildren(ctx);
 		if (ctx.loop__do_while()) return this.visitChildren(ctx);
 		if (ctx.chained_conditional()) return this.visitChildren(ctx);
@@ -219,20 +221,26 @@ export default class CustomVisitor extends LanguageVisitor {
 		return this.visitChildren(ctx);
 	}
 
-	// Visit a parse tree produced by LanguageParser#arithmetic.
-	visitArithmetic(ctx) {
-		console.log("Arithmetic");
+	// Visit a parse tree produced by LanguageParser#multDiv.
+	visitMultDiv(ctx) {
 		const operation_data = this.visitChildren(ctx);
 		let SYMBOL = ctx.operation.type;
-		switch (SYMBOL) {
-			case LanguageParser.MULT:
-				return operation_data[0] * operation_data[2];
-			case LanguageParser.DIV:
-				return operation_data[0] / operation_data[2];
-			case LanguageParser.PLUS:
-				return operation_data[0] + operation_data[2];
-			case LanguageParser.MINUS:
-				return operation_data[0] - operation_data[2];
+		if (SYMBOL == LanguageParser.MULT) {
+			return operation_data[0] * operation_data[2];
+		} else {
+			return operation_data[0] / operation_data[2];
+		}
+	}
+
+
+	// Visit a parse tree produced by LanguageParser#sumRes.
+	visitSumRes(ctx) {
+		const operation_data = this.visitChildren(ctx);
+		let SYMBOL = ctx.operation.type;
+		if (SYMBOL == LanguageParser.PLUS) {
+			return operation_data[0] + operation_data[2];
+		} else {
+			return operation_data[0] - operation_data[2];
 		}
 	}
 
