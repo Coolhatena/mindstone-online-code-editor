@@ -24,6 +24,7 @@ log: PRINT OPEN_PARENTH value CLOSE_PARENTH;
 value:	OPEN_PARENTH value CLOSE_PARENTH 			#parentheses
 	|	value operation=(MULT|DIV) value			#multDiv
 	|	value operation=(PLUS|MINUS) value			#sumRes
+	|	operation=(PLUS|MINUS) value				#signNumbers
 	|	cond_sym=(COND_LOG|COND_MAT)				#normalCondition
 	|	value cond_sym=(COND_LOG|COND_MAT) value	#normalCondition
 	|	STRING										#valueAsChar

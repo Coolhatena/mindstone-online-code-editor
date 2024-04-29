@@ -244,6 +244,12 @@ export default class CustomVisitor extends LanguageVisitor {
 		}
 	}
 
+	visitSignNumbers(ctx) {
+		let sign = ctx.operation.text
+		let number = this.visit(ctx.value())
+		return Number(`${sign}${number}`);
+	}
+
 	// Visit a parse tree produced by LanguageParser#valueAsID.
 	visitValueAsID(ctx) {
 		console.log("ValueasID");
