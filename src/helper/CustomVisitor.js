@@ -15,6 +15,7 @@ export default class CustomVisitor extends LanguageVisitor {
 		this.max_loop_time = 500;
 	}
 
+	
 	// HELPER METHODS
 	variableExist(variable_name) {
 		let isVariableDefined = false;
@@ -30,6 +31,7 @@ export default class CustomVisitor extends LanguageVisitor {
 
 		return isVariableDefined;
 	}
+
 
 	getVariableType(variable_name) {
 		let variable_type = undefined;
@@ -50,6 +52,7 @@ export default class CustomVisitor extends LanguageVisitor {
 		return variable_type;
 	}
 
+
 	getVariableValue(variable_name, variable_type) {
 		for (let variable of this.variables[variable_type]) {
 			if (variable.id == variable_name) {
@@ -59,6 +62,7 @@ export default class CustomVisitor extends LanguageVisitor {
 
 		return undefined;
 	}
+
 
 	assertTypeWithValue(type, value) {
 		let isValid = false;
@@ -91,6 +95,7 @@ export default class CustomVisitor extends LanguageVisitor {
 		return isValid;
 	}
 
+
 	declare(ctx) {
 		const TYPE = ctx.TYPE().getText();
 		const ID = ctx.ID().getText();
@@ -108,6 +113,7 @@ export default class CustomVisitor extends LanguageVisitor {
 
 		return [TYPE, ID];
 	}
+
 
 	declareAndAssign(ctx) {
 		const TYPE = ctx.TYPE().getText();
@@ -137,17 +143,16 @@ export default class CustomVisitor extends LanguageVisitor {
 	}
 
 	// VISIT METHODS
-	// Visit a parse tree produced by LanguageParser#file.
 	visitFile(ctx) {
-		console.log(ctx.getText())
+		console.log(ctx.getText());
 		this.visitChildren(ctx);
 		return [this.variables, this.logs];
 	}
 
-	// Visit a parse tree produced by LanguageParser#expression.
+	
 	visitExpression(ctx) {
 		console.log("Expresion");
-		console.log(ctx.getText())
+		console.log(ctx.getText());
 		if (ctx.loop__while()) return this.visitChildren(ctx);
 		if (ctx.loop__do_while()) return this.visitChildren(ctx);
 		if (ctx.chained_conditional()) return this.visitChildren(ctx);
@@ -190,7 +195,7 @@ export default class CustomVisitor extends LanguageVisitor {
 		}
 	}
 
-	// Visit a parse tree produced by LanguageParser#assign.
+	
 	visitAssign(ctx) {
 		console.log("Assign");
 		const ID = ctx.ID().getText();
@@ -221,7 +226,7 @@ export default class CustomVisitor extends LanguageVisitor {
 		return this.visitChildren(ctx);
 	}
 
-	// Visit a parse tree produced by LanguageParser#multDiv.
+	
 	visitMultDiv(ctx) {
 		const operation_data = this.visitChildren(ctx);
 		let SYMBOL = ctx.operation.type;
@@ -232,8 +237,7 @@ export default class CustomVisitor extends LanguageVisitor {
 		}
 	}
 
-
-	// Visit a parse tree produced by LanguageParser#sumRes.
+	
 	visitSumRes(ctx) {
 		const operation_data = this.visitChildren(ctx);
 		let SYMBOL = ctx.operation.type;
@@ -244,23 +248,25 @@ export default class CustomVisitor extends LanguageVisitor {
 		}
 	}
 
+
 	visitSignNumbers(ctx) {
-		let sign = ctx.operation.text
-		let number = this.visit(ctx.value())
+		let sign = ctx.operation.text;
+		let number = this.visit(ctx.value());
 		return Number(`${sign}${number}`);
 	}
+
 
 	visitIncrement(ctx) {
 		console.log("Visitando incremento");
 		const ID = ctx.ID().getText();
 		const TYPE = this.getVariableType(ID);
 
-		console.log(ctx.PLUS().length > 0)
+		console.log(ctx.PLUS().length > 0);
 		if (TYPE) {
 			let variable = this.variables[TYPE].find(
 				(variable) => variable.id === ID
 			);
-			if( ctx.PLUS().length > 0 ){
+			if (ctx.PLUS().length > 0) {
 				variable.value = variable.value + 1;
 			} else {
 				variable.value = variable.value - 1;
@@ -276,7 +282,7 @@ export default class CustomVisitor extends LanguageVisitor {
 		return this.visitChildren(ctx);
 	}
 
-	// Visit a parse tree produced by LanguageParser#valueAsID.
+	
 	visitValueAsID(ctx) {
 		console.log("ValueasID");
 		const ID = ctx.ID().getText();
@@ -294,13 +300,13 @@ export default class CustomVisitor extends LanguageVisitor {
 		return undefined;
 	}
 
-	// Visit a parse tree produced by LanguageParser#valueAsChar.
+	
 	visitValueAsChar(ctx) {
 		console.log("Valueaschar");
 		return ctx.getText();
 	}
 
-	// Visit a parse tree produced by LanguageParser#valueAsNumber.
+	
 	visitValueAsNumber(ctx) {
 		console.log("ValueAsnumber");
 		if (ctx.getText().includes(".")) {
@@ -318,7 +324,7 @@ export default class CustomVisitor extends LanguageVisitor {
 		return Number(ctx.getText());
 	}
 
-	// Visit a parse tree produced by LanguageParser#log.
+	
 	visitLog(ctx) {
 		console.log("log");
 		const VALUE_HEADER = ctx.value().getText();
@@ -332,14 +338,14 @@ export default class CustomVisitor extends LanguageVisitor {
 		return undefined;
 	}
 
-	// Visit a parse tree produced by CalculadoraParser#parentheses.
+	
 	visitParentheses(ctx) {
 		console.log("parenteses");
 		let visit = this.visitChildren(ctx);
 		return visit[1];
 	}
 
-	// Visit a parse tree produced by LanguageParser#chained_conditional.
+	
 	visitChained_conditional(ctx) {
 		console.log("Chained conditional");
 		let isIfTrue = this.visit(ctx.conditional());
@@ -360,20 +366,20 @@ export default class CustomVisitor extends LanguageVisitor {
 		return null;
 	}
 
-	// Visit a parse tree produced by LanguageParser#conditional__elif.
+	
 	visitConditional__elif(ctx) {
 		console.log("Conditional__elif");
 		return this.visit(ctx.conditional());
 	}
 
-	// Visit a parse tree produced by LanguageParser#conditional__else.
+	
 	visitConditional__else(ctx) {
 		console.log("Conditional__else");
 		this.visit(ctx.expression());
 		return null;
 	}
 
-	// Visit a parse tree produced by LanguageParser#conditional.
+	
 	visitConditional(ctx) {
 		console.log("Conditional");
 		if (!ctx.value()) return false;
@@ -385,7 +391,7 @@ export default class CustomVisitor extends LanguageVisitor {
 		return condition_result;
 	}
 
-	// Visit a parse tree produced by LanguageParser#normalCondition.
+	
 	visitNormalCondition(ctx) {
 		console.log("Condition");
 		let [first_val, second_val] = this.visit(ctx.value());
@@ -427,21 +433,21 @@ export default class CustomVisitor extends LanguageVisitor {
 		}
 	}
 
-	// Visit a parse tree produced by LanguageParser#parenthesesCondition.
+	
 	visitParenthesesCondition(ctx) {
 		console.log("PARENTHESES CONDITION");
 		let result = this.visit(ctx.condition());
 		return result;
 	}
 
-	// Visit a parse tree produced by LanguageParser#loop__while.
+	
 	visitLoop__while(ctx) {
 		console.log("Visitando While");
-		if(!ctx.value()) return false;
+		if (!ctx.value()) return false;
 		let condition = this.visit(ctx.value());
-		let time = performance.now()
-		while(condition){
-			this.visit(ctx.expression())
+		let time = performance.now();
+		while (condition) {
+			this.visit(ctx.expression());
 			condition = this.visit(ctx.value());
 			if (performance.now() - time > this.max_loop_time) {
 				this.logs.push({
@@ -449,21 +455,21 @@ export default class CustomVisitor extends LanguageVisitor {
 					header: "WARNING",
 					text: "Posible infinite loop detected, stopping loop...",
 				});
-				break
+				break;
 			}
 		}
-		return condition
-	  }
+		return condition;
+	}
 
-	  // Visit a parse tree produced by LanguageParser#loop__do_while.
+
 	visitLoop__do_while(ctx) {
 		console.log("Visitando do while");
-		this.visit(ctx.expression())
-		if(!ctx.value()) return false;
+		this.visit(ctx.expression());
+		if (!ctx.value()) return false;
 		let condition = this.visit(ctx.value());
-		let time = performance.now()
-		while(condition){
-			this.visit(ctx.expression())
+		let time = performance.now();
+		while (condition) {
+			this.visit(ctx.expression());
 			condition = this.visit(ctx.value());
 			if (performance.now() - time > this.max_loop_time) {
 				this.logs.push({
@@ -471,9 +477,9 @@ export default class CustomVisitor extends LanguageVisitor {
 					header: "WARNING",
 					text: "Posible infinite loop detected, stopping loop...",
 				});
-				break
+				break;
 			}
 		}
-		return condition
-	  }
+		return condition;
+	}
 }
