@@ -250,6 +250,32 @@ export default class CustomVisitor extends LanguageVisitor {
 		return Number(`${sign}${number}`);
 	}
 
+	visitIncrement(ctx) {
+		console.log("Visitando incremento");
+		const ID = ctx.ID().getText();
+		const TYPE = this.getVariableType(ID);
+
+		console.log(ctx.PLUS().length > 0)
+		if (TYPE) {
+			let variable = this.variables[TYPE].find(
+				(variable) => variable.id === ID
+			);
+			if( ctx.PLUS().length > 0 ){
+				variable.value = variable.value + 1;
+			} else {
+				variable.value = variable.value - 1;
+			}
+		} else {
+			this.logs.push({
+				type: "error",
+				header: "ERROR",
+				text: `Variable "${ID}" is not defined`,
+			});
+		}
+
+		return this.visitChildren(ctx);
+	}
+
 	// Visit a parse tree produced by LanguageParser#valueAsID.
 	visitValueAsID(ctx) {
 		console.log("ValueasID");

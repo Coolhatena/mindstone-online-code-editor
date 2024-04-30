@@ -13,6 +13,7 @@ expression: declaration SEMI?
 	|	loop__while SEMI?
 	|	loop__do_while SEMI?
 	|	log SEMI?
+	|	increment SEMI?
 	;
 
 declaration: TYPE ID (EQUALS value)?;
@@ -33,6 +34,8 @@ value:	OPEN_PARENTH value CLOSE_PARENTH 			#parentheses
     |	INT											#valueAsNumber
 	|	ID											#valueAsID	
     ;
+
+increment:	ID (PLUS PLUS | MINUS MINUS);
 
 chained_conditional: conditional conditional__elif* conditional__else?;
 
