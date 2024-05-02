@@ -71,6 +71,18 @@ export default class CtoMSCustomVisitor extends CtoMSVisitor {
 		return;
 	}
 
+	visitIncrement(ctx) {
+		console.log("Increment")
+		let ID = ctx.ID().getText();
+		if (ctx.PLUS().length > 0) {
+			this.translatedCode += `\n${ID}++!`;
+		} else {
+			this.translatedCode += `\n${ID}--!`;
+		}
+
+		return;
+	}
+
 	visitLog(ctx) {
 		let content = this.visit(ctx.value());
 		this.translatedCode += `\nptr(${content})!`;

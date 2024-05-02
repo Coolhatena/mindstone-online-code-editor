@@ -8,6 +8,7 @@ EQUALS			: '=';
 PLUS			: '+';
 MINUS			: '-'; 
 MULT			: '*';
+MOD				: '%';
 PRINT			: 'ptr';
 DIV				: '/'; 
 IF_PR			: 'if';

@@ -232,8 +232,14 @@ export default class CustomVisitor extends LanguageVisitor {
 		let SYMBOL = ctx.operation.type;
 		if (SYMBOL == LanguageParser.MULT) {
 			return operation_data[0] * operation_data[2];
-		} else {
+		}
+		
+		if(SYMBOL == LanguageParser.DIV){
 			return operation_data[0] / operation_data[2];
+		}
+
+		if(SYMBOL == LanguageParser.MOD){
+			return operation_data[0] % operation_data[2];
 		}
 	}
 

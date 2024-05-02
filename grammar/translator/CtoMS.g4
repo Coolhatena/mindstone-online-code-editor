@@ -11,6 +11,7 @@ expression:
 			log SEMI
 		|	declaration SEMI
 		|	assign SEMI
+		|	increment SEMI
 		|	chained_conditional
 		|	loop__while
 		|	loop__do_while
@@ -21,6 +22,8 @@ declaration:	TYPE ID (EQUALS value)?
 			;
 
 assign: ID EQUALS value;
+
+increment: ID (PLUS PLUS | MINUS MINUS);
 
 log: PRINT OPEN_PARENTH value CLOSE_PARENTH;
 

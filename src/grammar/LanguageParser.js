@@ -3,7 +3,7 @@
 import antlr4 from 'antlr4';
 import LanguageVisitor from './LanguageVisitor.js';
 
-const serializedATN = [4,1,27,197,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
+const serializedATN = [4,1,28,197,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
 4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,
 2,13,7,13,2,14,7,14,1,0,4,0,32,8,0,11,0,12,0,33,1,1,1,1,1,1,3,1,39,8,1,1,
 1,1,1,3,1,43,8,1,1,1,1,1,1,2,5,2,48,8,2,10,2,12,2,51,9,2,1,3,1,3,3,3,55,
@@ -17,8 +17,8 @@ const serializedATN = [4,1,27,197,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
 1,12,5,12,163,8,12,10,12,12,12,166,9,12,1,12,1,12,1,13,1,13,1,13,1,13,1,
 13,1,13,5,13,176,8,13,10,13,12,13,179,9,13,1,13,1,13,1,14,1,14,1,14,5,14,
 186,8,14,10,14,12,14,189,9,14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,49,1,
-14,15,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,0,3,1,0,9,10,1,0,18,19,2,0,
-11,11,13,13,216,0,31,1,0,0,0,2,35,1,0,0,0,4,49,1,0,0,0,6,80,1,0,0,0,8,82,
+14,15,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,0,3,1,0,9,10,1,0,19,20,2,0,
+11,12,14,14,216,0,31,1,0,0,0,2,35,1,0,0,0,4,49,1,0,0,0,6,80,1,0,0,0,8,82,
 1,0,0,0,10,88,1,0,0,0,12,92,1,0,0,0,14,110,1,0,0,0,16,126,1,0,0,0,18,133,
 1,0,0,0,20,143,1,0,0,0,22,156,1,0,0,0,24,159,1,0,0,0,26,169,1,0,0,0,28,182,
 1,0,0,0,30,32,3,2,1,0,31,30,1,0,0,0,32,33,1,0,0,0,33,31,1,0,0,0,33,34,1,
@@ -26,43 +26,43 @@ const serializedATN = [4,1,27,197,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
 0,38,39,1,0,0,0,39,40,1,0,0,0,40,42,3,4,2,0,41,43,5,1,0,0,42,41,1,0,0,0,
 42,43,1,0,0,0,43,44,1,0,0,0,44,45,5,7,0,0,45,3,1,0,0,0,46,48,3,6,3,0,47,
 46,1,0,0,0,48,51,1,0,0,0,49,50,1,0,0,0,49,47,1,0,0,0,50,5,1,0,0,0,51,49,
-1,0,0,0,52,54,3,8,4,0,53,55,5,24,0,0,54,53,1,0,0,0,54,55,1,0,0,0,55,81,1,
-0,0,0,56,58,3,10,5,0,57,59,5,24,0,0,58,57,1,0,0,0,58,59,1,0,0,0,59,81,1,
-0,0,0,60,62,3,18,9,0,61,63,5,24,0,0,62,61,1,0,0,0,62,63,1,0,0,0,63,81,1,
-0,0,0,64,66,3,26,13,0,65,67,5,24,0,0,66,65,1,0,0,0,66,67,1,0,0,0,67,81,1,
-0,0,0,68,70,3,28,14,0,69,71,5,24,0,0,70,69,1,0,0,0,70,71,1,0,0,0,71,81,1,
-0,0,0,72,74,3,12,6,0,73,75,5,24,0,0,74,73,1,0,0,0,74,75,1,0,0,0,75,81,1,
-0,0,0,76,78,3,16,8,0,77,79,5,24,0,0,78,77,1,0,0,0,78,79,1,0,0,0,79,81,1,
+1,0,0,0,52,54,3,8,4,0,53,55,5,25,0,0,54,53,1,0,0,0,54,55,1,0,0,0,55,81,1,
+0,0,0,56,58,3,10,5,0,57,59,5,25,0,0,58,57,1,0,0,0,58,59,1,0,0,0,59,81,1,
+0,0,0,60,62,3,18,9,0,61,63,5,25,0,0,62,61,1,0,0,0,62,63,1,0,0,0,63,81,1,
+0,0,0,64,66,3,26,13,0,65,67,5,25,0,0,66,65,1,0,0,0,66,67,1,0,0,0,67,81,1,
+0,0,0,68,70,3,28,14,0,69,71,5,25,0,0,70,69,1,0,0,0,70,71,1,0,0,0,71,81,1,
+0,0,0,72,74,3,12,6,0,73,75,5,25,0,0,74,73,1,0,0,0,74,75,1,0,0,0,75,81,1,
+0,0,0,76,78,3,16,8,0,77,79,5,25,0,0,78,77,1,0,0,0,78,79,1,0,0,0,79,81,1,
 0,0,0,80,52,1,0,0,0,80,56,1,0,0,0,80,60,1,0,0,0,80,64,1,0,0,0,80,68,1,0,
-0,0,80,72,1,0,0,0,80,76,1,0,0,0,81,7,1,0,0,0,82,83,5,3,0,0,83,86,5,26,0,
+0,0,80,72,1,0,0,0,80,76,1,0,0,0,81,7,1,0,0,0,82,83,5,3,0,0,83,86,5,27,0,
 0,84,85,5,8,0,0,85,87,3,14,7,0,86,84,1,0,0,0,86,87,1,0,0,0,87,9,1,0,0,0,
-88,89,5,26,0,0,89,90,5,8,0,0,90,91,3,14,7,0,91,11,1,0,0,0,92,93,5,12,0,0,
+88,89,5,27,0,0,89,90,5,8,0,0,90,91,3,14,7,0,91,11,1,0,0,0,92,93,5,13,0,0,
 93,94,5,4,0,0,94,95,3,14,7,0,95,96,5,5,0,0,96,13,1,0,0,0,97,98,6,7,-1,0,
 98,99,5,4,0,0,99,100,3,14,7,0,100,101,5,5,0,0,101,111,1,0,0,0,102,103,7,
-0,0,0,103,111,3,14,7,8,104,111,7,1,0,0,105,111,5,20,0,0,106,111,5,21,0,0,
-107,111,5,23,0,0,108,111,5,22,0,0,109,111,5,26,0,0,110,97,1,0,0,0,110,102,
+0,0,0,103,111,3,14,7,8,104,111,7,1,0,0,105,111,5,21,0,0,106,111,5,22,0,0,
+107,111,5,24,0,0,108,111,5,23,0,0,109,111,5,27,0,0,110,97,1,0,0,0,110,102,
 1,0,0,0,110,104,1,0,0,0,110,105,1,0,0,0,110,106,1,0,0,0,110,107,1,0,0,0,
 110,108,1,0,0,0,110,109,1,0,0,0,111,123,1,0,0,0,112,113,10,10,0,0,113,114,
 7,2,0,0,114,122,3,14,7,11,115,116,10,9,0,0,116,117,7,0,0,0,117,122,3,14,
 7,10,118,119,10,6,0,0,119,120,7,1,0,0,120,122,3,14,7,7,121,112,1,0,0,0,121,
 115,1,0,0,0,121,118,1,0,0,0,122,125,1,0,0,0,123,121,1,0,0,0,123,124,1,0,
-0,0,124,15,1,0,0,0,125,123,1,0,0,0,126,131,5,26,0,0,127,128,5,9,0,0,128,
+0,0,124,15,1,0,0,0,125,123,1,0,0,0,126,131,5,27,0,0,127,128,5,9,0,0,128,
 132,5,9,0,0,129,130,5,10,0,0,130,132,5,10,0,0,131,127,1,0,0,0,131,129,1,
 0,0,0,132,17,1,0,0,0,133,137,3,20,10,0,134,136,3,22,11,0,135,134,1,0,0,0,
 136,139,1,0,0,0,137,135,1,0,0,0,137,138,1,0,0,0,138,141,1,0,0,0,139,137,
 1,0,0,0,140,142,3,24,12,0,141,140,1,0,0,0,141,142,1,0,0,0,142,19,1,0,0,0,
-143,144,5,14,0,0,144,145,5,4,0,0,145,146,3,14,7,0,146,147,5,5,0,0,147,151,
+143,144,5,15,0,0,144,145,5,4,0,0,145,146,3,14,7,0,146,147,5,5,0,0,147,151,
 5,6,0,0,148,150,3,6,3,0,149,148,1,0,0,0,150,153,1,0,0,0,151,149,1,0,0,0,
 151,152,1,0,0,0,152,154,1,0,0,0,153,151,1,0,0,0,154,155,5,7,0,0,155,21,1,
-0,0,0,156,157,5,15,0,0,157,158,3,20,10,0,158,23,1,0,0,0,159,160,5,15,0,0,
+0,0,0,156,157,5,16,0,0,157,158,3,20,10,0,158,23,1,0,0,0,159,160,5,16,0,0,
 160,164,5,6,0,0,161,163,3,6,3,0,162,161,1,0,0,0,163,166,1,0,0,0,164,162,
 1,0,0,0,164,165,1,0,0,0,165,167,1,0,0,0,166,164,1,0,0,0,167,168,5,7,0,0,
-168,25,1,0,0,0,169,170,5,16,0,0,170,171,5,4,0,0,171,172,3,14,7,0,172,173,
+168,25,1,0,0,0,169,170,5,17,0,0,170,171,5,4,0,0,171,172,3,14,7,0,172,173,
 5,5,0,0,173,177,5,6,0,0,174,176,3,6,3,0,175,174,1,0,0,0,176,179,1,0,0,0,
 177,175,1,0,0,0,177,178,1,0,0,0,178,180,1,0,0,0,179,177,1,0,0,0,180,181,
-5,7,0,0,181,27,1,0,0,0,182,183,5,17,0,0,183,187,5,6,0,0,184,186,3,6,3,0,
+5,7,0,0,181,27,1,0,0,0,182,183,5,18,0,0,183,187,5,6,0,0,184,186,3,6,3,0,
 185,184,1,0,0,0,186,189,1,0,0,0,187,185,1,0,0,0,187,188,1,0,0,0,188,190,
-1,0,0,0,189,187,1,0,0,0,190,191,5,7,0,0,191,192,5,16,0,0,192,193,5,4,0,0,
+1,0,0,0,189,187,1,0,0,0,190,191,5,7,0,0,191,192,5,17,0,0,192,193,5,4,0,0,
 193,194,3,14,7,0,194,195,5,5,0,0,195,29,1,0,0,0,23,33,38,42,49,54,58,62,
 66,70,74,78,80,86,110,121,123,131,137,141,151,164,177,187];
 
@@ -77,11 +77,12 @@ export default class LanguageParser extends antlr4.Parser {
 
     static grammarFileName = "Language.g4";
     static literalNames = [ null, "'\\n'", "'start -->'", null, "'('", "')'", 
-                            "'{'", "'}'", "'='", "'+'", "'-'", "'*'", "'ptr'", 
-                            "'/'", "'if'", "'else'", "'while'", "'do'" ];
+                            "'{'", "'}'", "'='", "'+'", "'-'", "'*'", "'%'", 
+                            "'ptr'", "'/'", "'if'", "'else'", "'while'", 
+                            "'do'" ];
     static symbolicNames = [ null, null, "MAIN", "TYPE", "OPEN_PARENTH", 
                              "CLOSE_PARENTH", "OPEN_CURL", "CLOSE_CURL", 
-                             "EQUALS", "PLUS", "MINUS", "MULT", "PRINT", 
+                             "EQUALS", "PLUS", "MINUS", "MULT", "MOD", "PRINT", 
                              "DIV", "IF_PR", "ELSE_PR", "WHILE_PR", "DO_PR", 
                              "COND_MAT", "COND_LOG", "STRING", "CHAR", "INT", 
                              "FLOAT", "SEMI", "NEWLINE", "ID", "WS" ];
@@ -251,7 +252,7 @@ export default class LanguageParser extends antlr4.Parser {
 	            this.state = 54;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	            if(_la===24) {
+	            if(_la===25) {
 	                this.state = 53;
 	                this.match(LanguageParser.SEMI);
 	            }
@@ -265,7 +266,7 @@ export default class LanguageParser extends antlr4.Parser {
 	            this.state = 58;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	            if(_la===24) {
+	            if(_la===25) {
 	                this.state = 57;
 	                this.match(LanguageParser.SEMI);
 	            }
@@ -279,7 +280,7 @@ export default class LanguageParser extends antlr4.Parser {
 	            this.state = 62;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	            if(_la===24) {
+	            if(_la===25) {
 	                this.state = 61;
 	                this.match(LanguageParser.SEMI);
 	            }
@@ -293,7 +294,7 @@ export default class LanguageParser extends antlr4.Parser {
 	            this.state = 66;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	            if(_la===24) {
+	            if(_la===25) {
 	                this.state = 65;
 	                this.match(LanguageParser.SEMI);
 	            }
@@ -307,7 +308,7 @@ export default class LanguageParser extends antlr4.Parser {
 	            this.state = 70;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	            if(_la===24) {
+	            if(_la===25) {
 	                this.state = 69;
 	                this.match(LanguageParser.SEMI);
 	            }
@@ -321,7 +322,7 @@ export default class LanguageParser extends antlr4.Parser {
 	            this.state = 74;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	            if(_la===24) {
+	            if(_la===25) {
 	                this.state = 73;
 	                this.match(LanguageParser.SEMI);
 	            }
@@ -335,7 +336,7 @@ export default class LanguageParser extends antlr4.Parser {
 	            this.state = 78;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	            if(_la===24) {
+	            if(_la===25) {
 	                this.state = 77;
 	                this.match(LanguageParser.SEMI);
 	            }
@@ -496,15 +497,15 @@ export default class LanguageParser extends antlr4.Parser {
 	            this.state = 103;
 	            this.value(8);
 	            break;
-	        case 18:
 	        case 19:
+	        case 20:
 	            localctx = new NormalConditionContext(this, localctx);
 	            this._ctx = localctx;
 	            _prevctx = localctx;
 	            this.state = 104;
 	            localctx.cond_sym = this._input.LT(1);
 	            _la = this._input.LA(1);
-	            if(!(_la===18 || _la===19)) {
+	            if(!(_la===19 || _la===20)) {
 	                localctx.cond_sym = this._errHandler.recoverInline(this);
 	            }
 	            else {
@@ -512,35 +513,35 @@ export default class LanguageParser extends antlr4.Parser {
 	                this.consume();
 	            }
 	            break;
-	        case 20:
+	        case 21:
 	            localctx = new ValueAsCharContext(this, localctx);
 	            this._ctx = localctx;
 	            _prevctx = localctx;
 	            this.state = 105;
 	            this.match(LanguageParser.STRING);
 	            break;
-	        case 21:
+	        case 22:
 	            localctx = new ValueAsCharContext(this, localctx);
 	            this._ctx = localctx;
 	            _prevctx = localctx;
 	            this.state = 106;
 	            this.match(LanguageParser.CHAR);
 	            break;
-	        case 23:
+	        case 24:
 	            localctx = new ValueAsNumberContext(this, localctx);
 	            this._ctx = localctx;
 	            _prevctx = localctx;
 	            this.state = 107;
 	            this.match(LanguageParser.FLOAT);
 	            break;
-	        case 22:
+	        case 23:
 	            localctx = new ValueAsNumberContext(this, localctx);
 	            this._ctx = localctx;
 	            _prevctx = localctx;
 	            this.state = 108;
 	            this.match(LanguageParser.INT);
 	            break;
-	        case 26:
+	        case 27:
 	            localctx = new ValueAsIDContext(this, localctx);
 	            this._ctx = localctx;
 	            _prevctx = localctx;
@@ -574,7 +575,7 @@ export default class LanguageParser extends antlr4.Parser {
 	                    this.state = 113;
 	                    localctx.operation = this._input.LT(1);
 	                    _la = this._input.LA(1);
-	                    if(!(_la===11 || _la===13)) {
+	                    if(!((((_la) & ~0x1f) === 0 && ((1 << _la) & 22528) !== 0))) {
 	                        localctx.operation = this._errHandler.recoverInline(this);
 	                    }
 	                    else {
@@ -616,7 +617,7 @@ export default class LanguageParser extends antlr4.Parser {
 	                    this.state = 119;
 	                    localctx.cond_sym = this._input.LT(1);
 	                    _la = this._input.LA(1);
-	                    if(!(_la===18 || _la===19)) {
+	                    if(!(_la===19 || _la===20)) {
 	                        localctx.cond_sym = this._errHandler.recoverInline(this);
 	                    }
 	                    else {
@@ -715,7 +716,7 @@ export default class LanguageParser extends antlr4.Parser {
 	        this.state = 141;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if(_la===15) {
+	        if(_la===16) {
 	            this.state = 140;
 	            this.conditional__else();
 	        }
@@ -755,7 +756,7 @@ export default class LanguageParser extends antlr4.Parser {
 	        this.state = 151;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 67325960) !== 0)) {
+	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 134651912) !== 0)) {
 	            this.state = 148;
 	            this.expression();
 	            this.state = 153;
@@ -818,7 +819,7 @@ export default class LanguageParser extends antlr4.Parser {
 	        this.state = 164;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 67325960) !== 0)) {
+	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 134651912) !== 0)) {
 	            this.state = 161;
 	            this.expression();
 	            this.state = 166;
@@ -862,7 +863,7 @@ export default class LanguageParser extends antlr4.Parser {
 	        this.state = 177;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 67325960) !== 0)) {
+	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 134651912) !== 0)) {
 	            this.state = 174;
 	            this.expression();
 	            this.state = 179;
@@ -900,7 +901,7 @@ export default class LanguageParser extends antlr4.Parser {
 	        this.state = 187;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 67325960) !== 0)) {
+	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 134651912) !== 0)) {
 	            this.state = 184;
 	            this.expression();
 	            this.state = 189;
@@ -946,22 +947,23 @@ LanguageParser.EQUALS = 8;
 LanguageParser.PLUS = 9;
 LanguageParser.MINUS = 10;
 LanguageParser.MULT = 11;
-LanguageParser.PRINT = 12;
-LanguageParser.DIV = 13;
-LanguageParser.IF_PR = 14;
-LanguageParser.ELSE_PR = 15;
-LanguageParser.WHILE_PR = 16;
-LanguageParser.DO_PR = 17;
-LanguageParser.COND_MAT = 18;
-LanguageParser.COND_LOG = 19;
-LanguageParser.STRING = 20;
-LanguageParser.CHAR = 21;
-LanguageParser.INT = 22;
-LanguageParser.FLOAT = 23;
-LanguageParser.SEMI = 24;
-LanguageParser.NEWLINE = 25;
-LanguageParser.ID = 26;
-LanguageParser.WS = 27;
+LanguageParser.MOD = 12;
+LanguageParser.PRINT = 13;
+LanguageParser.DIV = 14;
+LanguageParser.IF_PR = 15;
+LanguageParser.ELSE_PR = 16;
+LanguageParser.WHILE_PR = 17;
+LanguageParser.DO_PR = 18;
+LanguageParser.COND_MAT = 19;
+LanguageParser.COND_LOG = 20;
+LanguageParser.STRING = 21;
+LanguageParser.CHAR = 22;
+LanguageParser.INT = 23;
+LanguageParser.FLOAT = 24;
+LanguageParser.SEMI = 25;
+LanguageParser.NEWLINE = 26;
+LanguageParser.ID = 27;
+LanguageParser.WS = 28;
 
 LanguageParser.RULE_file = 0;
 LanguageParser.RULE_init = 1;
@@ -1390,6 +1392,10 @@ class MultDivContext extends ValueContext {
 
 	DIV() {
 	    return this.getToken(LanguageParser.DIV, 0);
+	};
+
+	MOD() {
+	    return this.getToken(LanguageParser.MOD, 0);
 	};
 
 	accept(visitor) {

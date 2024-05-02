@@ -9,6 +9,7 @@ PLUS			: '+';
 MINUS			: '-'; 
 MULT			: '*';
 DIV				: '/'; 
+MOD				: '%';
 DOUBLE_QUOTE	: '"';
 SEMI			: ';';
 IF_PR			: 'if';
