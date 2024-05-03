@@ -6,7 +6,7 @@ OPEN_CURL		: '{';
 CLOSE_CURL		: '}';
 EQUALS			: '=';
 PLUS			: '+';
-MINUS			: '-';
+SUB				: '-';
 MULT			: '*';
 DIV				: '/'; 
 MOD				: '%';

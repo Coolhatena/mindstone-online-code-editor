@@ -88,13 +88,13 @@ export default class CtoMSLexer extends antlr4.Lexer {
                          "';'", "'if'", "'else'", "'while'", "'do'", null, 
                          null, "'printf'", "'void main()'" ];
 	static symbolicNames = [ null, null, "TYPE", "OPEN_PARENTH", "CLOSE_PARENTH", 
-                          "OPEN_CURL", "CLOSE_CURL", "EQUALS", "PLUS", "MINUS", 
+                          "OPEN_CURL", "CLOSE_CURL", "EQUALS", "PLUS", "SUB", 
                           "MULT", "DIV", "MOD", "DOUBLE_QUOTE", "SEMI", 
                           "IF_PR", "ELSE_PR", "WHILE_PR", "DO_PR", "COND_MAT", 
                           "COND_LOG", "PRINT", "MAIN", "CHAR", "INT", "FLOAT", 
                           "STRING", "ID", "INV_ID", "WS" ];
 	static ruleNames = [ "T__0", "TYPE", "OPEN_PARENTH", "CLOSE_PARENTH", "OPEN_CURL", 
-                      "CLOSE_CURL", "EQUALS", "PLUS", "MINUS", "MULT", "DIV", 
+                      "CLOSE_CURL", "EQUALS", "PLUS", "SUB", "MULT", "DIV", 
                       "MOD", "DOUBLE_QUOTE", "SEMI", "IF_PR", "ELSE_PR", 
                       "WHILE_PR", "DO_PR", "COND_MAT", "COND_LOG", "PRINT", 
                       "MAIN", "CHAR", "INT", "FLOAT", "STRING", "ID", "INV_ID", 
@@ -115,7 +115,7 @@ CtoMSLexer.OPEN_CURL = 5;
 CtoMSLexer.CLOSE_CURL = 6;
 CtoMSLexer.EQUALS = 7;
 CtoMSLexer.PLUS = 8;
-CtoMSLexer.MINUS = 9;
+CtoMSLexer.SUB = 9;
 CtoMSLexer.MULT = 10;
 CtoMSLexer.DIV = 11;
 CtoMSLexer.MOD = 12;

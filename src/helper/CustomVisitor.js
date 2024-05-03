@@ -244,7 +244,7 @@ export default class CustomVisitor extends LanguageVisitor {
 	}
 
 	
-	visitSumRes(ctx) {
+	visitAddSub(ctx) {
 		const operation_data = this.visitChildren(ctx);
 		let SYMBOL = ctx.operation.type;
 		if (SYMBOL == LanguageParser.PLUS) {

@@ -85,13 +85,13 @@ export default class LanguageLexer extends antlr4.Lexer {
                          "'{'", "'}'", "'='", "'+'", "'-'", "'*'", "'%'", 
                          "'ptr'", "'/'", "'if'", "'else'", "'while'", "'do'" ];
 	static symbolicNames = [ null, null, "MAIN", "TYPE", "OPEN_PARENTH", "CLOSE_PARENTH", 
-                          "OPEN_CURL", "CLOSE_CURL", "EQUALS", "PLUS", "MINUS", 
+                          "OPEN_CURL", "CLOSE_CURL", "EQUALS", "PLUS", "SUB", 
                           "MULT", "MOD", "PRINT", "DIV", "IF_PR", "ELSE_PR", 
                           "WHILE_PR", "DO_PR", "COND_MAT", "COND_LOG", "STRING", 
                           "CHAR", "INT", "FLOAT", "SEMI", "NEWLINE", "ID", 
                           "WS" ];
 	static ruleNames = [ "T__0", "MAIN", "TYPE", "OPEN_PARENTH", "CLOSE_PARENTH", 
-                      "OPEN_CURL", "CLOSE_CURL", "EQUALS", "PLUS", "MINUS", 
+                      "OPEN_CURL", "CLOSE_CURL", "EQUALS", "PLUS", "SUB", 
                       "MULT", "MOD", "PRINT", "DIV", "IF_PR", "ELSE_PR", 
                       "WHILE_PR", "DO_PR", "COND_MAT", "COND_LOG", "STRING", 
                       "CHAR", "INT", "FLOAT", "SEMI", "NEWLINE", "ID", "WS" ];
@@ -112,7 +112,7 @@ LanguageLexer.OPEN_CURL = 6;
 LanguageLexer.CLOSE_CURL = 7;
 LanguageLexer.EQUALS = 8;
 LanguageLexer.PLUS = 9;
-LanguageLexer.MINUS = 10;
+LanguageLexer.SUB = 10;
 LanguageLexer.MULT = 11;
 LanguageLexer.MOD = 12;
 LanguageLexer.PRINT = 13;

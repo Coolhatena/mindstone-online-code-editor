@@ -82,7 +82,7 @@ export default class LanguageParser extends antlr4.Parser {
                             "'do'" ];
     static symbolicNames = [ null, null, "MAIN", "TYPE", "OPEN_PARENTH", 
                              "CLOSE_PARENTH", "OPEN_CURL", "CLOSE_CURL", 
-                             "EQUALS", "PLUS", "MINUS", "MULT", "MOD", "PRINT", 
+                             "EQUALS", "PLUS", "SUB", "MULT", "MOD", "PRINT", 
                              "DIV", "IF_PR", "ELSE_PR", "WHILE_PR", "DO_PR", 
                              "COND_MAT", "COND_LOG", "STRING", "CHAR", "INT", 
                              "FLOAT", "SEMI", "NEWLINE", "ID", "WS" ];
@@ -587,7 +587,7 @@ export default class LanguageParser extends antlr4.Parser {
 	                    break;
 
 	                case 2:
-	                    localctx = new SumResContext(this, new ValueContext(this, _parentctx, _parentState));
+	                    localctx = new AddSubContext(this, new ValueContext(this, _parentctx, _parentState));
 	                    this.pushNewRecursionContext(localctx, _startState, LanguageParser.RULE_value);
 	                    this.state = 115;
 	                    if (!( this.precpred(this._ctx, 9))) {
@@ -669,9 +669,9 @@ export default class LanguageParser extends antlr4.Parser {
 	            break;
 	        case 10:
 	            this.state = 129;
-	            this.match(LanguageParser.MINUS);
+	            this.match(LanguageParser.SUB);
 	            this.state = 130;
-	            this.match(LanguageParser.MINUS);
+	            this.match(LanguageParser.SUB);
 	            break;
 	        default:
 	            throw new antlr4.error.NoViableAltException(this);
@@ -945,7 +945,7 @@ LanguageParser.OPEN_CURL = 6;
 LanguageParser.CLOSE_CURL = 7;
 LanguageParser.EQUALS = 8;
 LanguageParser.PLUS = 9;
-LanguageParser.MINUS = 10;
+LanguageParser.SUB = 10;
 LanguageParser.MULT = 11;
 LanguageParser.MOD = 12;
 LanguageParser.PRINT = 13;
@@ -1411,46 +1411,6 @@ class MultDivContext extends ValueContext {
 
 LanguageParser.MultDivContext = MultDivContext;
 
-class SumResContext extends ValueContext {
-
-    constructor(parser, ctx) {
-        super(parser);
-        this.operation = null;;
-        super.copyFrom(ctx);
-    }
-
-	value = function(i) {
-	    if(i===undefined) {
-	        i = null;
-	    }
-	    if(i===null) {
-	        return this.getTypedRuleContexts(ValueContext);
-	    } else {
-	        return this.getTypedRuleContext(ValueContext,i);
-	    }
-	};
-
-	PLUS() {
-	    return this.getToken(LanguageParser.PLUS, 0);
-	};
-
-	MINUS() {
-	    return this.getToken(LanguageParser.MINUS, 0);
-	};
-
-	accept(visitor) {
-	    if ( visitor instanceof LanguageVisitor ) {
-	        return visitor.visitSumRes(this);
-	    } else {
-	        return visitor.visitChildren(this);
-	    }
-	}
-
-
-}
-
-LanguageParser.SumResContext = SumResContext;
-
 class NormalConditionContext extends ValueContext {
 
     constructor(parser, ctx) {
@@ -1490,6 +1450,46 @@ class NormalConditionContext extends ValueContext {
 }
 
 LanguageParser.NormalConditionContext = NormalConditionContext;
+
+class AddSubContext extends ValueContext {
+
+    constructor(parser, ctx) {
+        super(parser);
+        this.operation = null;;
+        super.copyFrom(ctx);
+    }
+
+	value = function(i) {
+	    if(i===undefined) {
+	        i = null;
+	    }
+	    if(i===null) {
+	        return this.getTypedRuleContexts(ValueContext);
+	    } else {
+	        return this.getTypedRuleContext(ValueContext,i);
+	    }
+	};
+
+	PLUS() {
+	    return this.getToken(LanguageParser.PLUS, 0);
+	};
+
+	SUB() {
+	    return this.getToken(LanguageParser.SUB, 0);
+	};
+
+	accept(visitor) {
+	    if ( visitor instanceof LanguageVisitor ) {
+	        return visitor.visitAddSub(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
+
+}
+
+LanguageParser.AddSubContext = AddSubContext;
 
 class ValueAsNumberContext extends ValueContext {
 
@@ -1535,8 +1535,8 @@ class SignNumbersContext extends ValueContext {
 	    return this.getToken(LanguageParser.PLUS, 0);
 	};
 
-	MINUS() {
-	    return this.getToken(LanguageParser.MINUS, 0);
+	SUB() {
+	    return this.getToken(LanguageParser.SUB, 0);
 	};
 
 	accept(visitor) {
@@ -1606,14 +1606,14 @@ class IncrementContext extends antlr4.ParserRuleContext {
 	};
 
 
-	MINUS = function(i) {
+	SUB = function(i) {
 		if(i===undefined) {
 			i = null;
 		}
 	    if(i===null) {
-	        return this.getTokens(LanguageParser.MINUS);
+	        return this.getTokens(LanguageParser.SUB);
 	    } else {
-	        return this.getToken(LanguageParser.MINUS, i);
+	        return this.getToken(LanguageParser.SUB, i);
 	    }
 	};
 

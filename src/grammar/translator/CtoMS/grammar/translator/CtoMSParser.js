@@ -78,7 +78,7 @@ export default class CtoMSParser extends antlr4.Parser {
                             null, null, "'printf'", "'void main()'" ];
     static symbolicNames = [ null, null, "TYPE", "OPEN_PARENTH", "CLOSE_PARENTH", 
                              "OPEN_CURL", "CLOSE_CURL", "EQUALS", "PLUS", 
-                             "MINUS", "MULT", "DIV", "MOD", "DOUBLE_QUOTE", 
+                             "SUB", "MULT", "DIV", "MOD", "DOUBLE_QUOTE", 
                              "SEMI", "IF_PR", "ELSE_PR", "WHILE_PR", "DO_PR", 
                              "COND_MAT", "COND_LOG", "PRINT", "MAIN", "CHAR", 
                              "INT", "FLOAT", "STRING", "ID", "INV_ID", "WS" ];
@@ -420,9 +420,9 @@ export default class CtoMSParser extends antlr4.Parser {
 	            break;
 	        case 9:
 	            this.state = 90;
-	            this.match(CtoMSParser.MINUS);
+	            this.match(CtoMSParser.SUB);
 	            this.state = 91;
-	            this.match(CtoMSParser.MINUS);
+	            this.match(CtoMSParser.SUB);
 	            break;
 	        default:
 	            throw new antlr4.error.NoViableAltException(this);
@@ -862,7 +862,7 @@ CtoMSParser.OPEN_CURL = 5;
 CtoMSParser.CLOSE_CURL = 6;
 CtoMSParser.EQUALS = 7;
 CtoMSParser.PLUS = 8;
-CtoMSParser.MINUS = 9;
+CtoMSParser.SUB = 9;
 CtoMSParser.MULT = 10;
 CtoMSParser.DIV = 11;
 CtoMSParser.MOD = 12;
@@ -1199,14 +1199,14 @@ class IncrementContext extends antlr4.ParserRuleContext {
 	};
 
 
-	MINUS = function(i) {
+	SUB = function(i) {
 		if(i===undefined) {
 			i = null;
 		}
 	    if(i===null) {
-	        return this.getTokens(CtoMSParser.MINUS);
+	        return this.getTokens(CtoMSParser.SUB);
 	    } else {
-	        return this.getToken(CtoMSParser.MINUS, i);
+	        return this.getToken(CtoMSParser.SUB, i);
 	    }
 	};
 
@@ -1663,8 +1663,8 @@ class ValueContext extends antlr4.ParserRuleContext {
 	    return this.getToken(CtoMSParser.PLUS, 0);
 	};
 
-	MINUS() {
-	    return this.getToken(CtoMSParser.MINUS, 0);
+	SUB() {
+	    return this.getToken(CtoMSParser.SUB, 0);
 	};
 
 	MOD() {
