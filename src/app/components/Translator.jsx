@@ -8,8 +8,8 @@ import CtoMSTranslator from '@/module/CtoMSTranslator';
 
 const Translator = ({ codeState=["", () => {}] }) => {
 	const [inputText, setInputText] = codeState;
-	const [inputTextCLang, setInputTextCLang] = useState("")
-	const inputFile = useRef(null) 
+	const [inputTextCLang, setInputTextCLang] = useState("");
+	const inputFile = useRef(null);
 
 	let handleTranslateCtoMS = () => {
 		let result = CtoMSTranslator(inputTextCLang)

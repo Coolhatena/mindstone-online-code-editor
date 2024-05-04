@@ -3,64 +3,61 @@
 import antlr4 from 'antlr4';
 import CtoMSVisitor from './CtoMSVisitor.js';
 
-const serializedATN = [4,1,29,187,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
+const serializedATN = [4,1,28,179,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
 4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,
 2,13,7,13,2,14,7,14,1,0,4,0,32,8,0,11,0,12,0,33,1,1,1,1,1,1,3,1,39,8,1,1,
 1,1,1,3,1,43,8,1,1,1,1,1,1,2,5,2,48,8,2,10,2,12,2,51,9,2,1,3,1,3,1,3,1,3,
 1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,3,3,68,8,3,1,4,1,4,1,4,1,4,3,
-4,74,8,4,1,4,1,4,1,4,1,4,3,4,80,8,4,3,4,82,8,4,1,5,1,5,1,5,1,5,1,6,1,6,1,
-6,1,6,1,6,3,6,93,8,6,1,7,1,7,1,7,1,7,1,7,1,8,1,8,5,8,102,8,8,10,8,12,8,105,
-9,8,1,8,3,8,108,8,8,1,9,1,9,1,9,1,9,1,9,1,9,5,9,116,8,9,10,9,12,9,119,9,
-9,1,9,1,9,1,10,1,10,1,10,1,11,1,11,1,11,5,11,129,8,11,10,11,12,11,132,9,
-11,1,11,1,11,1,12,1,12,1,12,1,12,1,12,1,12,5,12,142,8,12,10,12,12,12,145,
-9,12,1,12,1,12,1,13,1,13,1,13,5,13,152,8,13,10,13,12,13,155,9,13,1,13,1,
-13,1,13,1,13,1,13,1,13,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,
-1,14,3,14,174,8,14,1,14,1,14,1,14,1,14,1,14,1,14,5,14,182,8,14,10,14,12,
-14,185,9,14,1,14,1,49,1,28,15,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,0,
-3,2,0,24,24,28,28,1,0,19,20,1,0,8,12,199,0,31,1,0,0,0,2,35,1,0,0,0,4,49,
-1,0,0,0,6,67,1,0,0,0,8,81,1,0,0,0,10,83,1,0,0,0,12,87,1,0,0,0,14,94,1,0,
-0,0,16,99,1,0,0,0,18,109,1,0,0,0,20,122,1,0,0,0,22,125,1,0,0,0,24,135,1,
-0,0,0,26,148,1,0,0,0,28,173,1,0,0,0,30,32,3,2,1,0,31,30,1,0,0,0,32,33,1,
-0,0,0,33,31,1,0,0,0,33,34,1,0,0,0,34,1,1,0,0,0,35,36,5,22,0,0,36,38,5,5,
-0,0,37,39,5,1,0,0,38,37,1,0,0,0,38,39,1,0,0,0,39,40,1,0,0,0,40,42,3,4,2,
-0,41,43,5,1,0,0,42,41,1,0,0,0,42,43,1,0,0,0,43,44,1,0,0,0,44,45,5,6,0,0,
-45,3,1,0,0,0,46,48,3,6,3,0,47,46,1,0,0,0,48,51,1,0,0,0,49,50,1,0,0,0,49,
-47,1,0,0,0,50,5,1,0,0,0,51,49,1,0,0,0,52,53,3,14,7,0,53,54,5,14,0,0,54,68,
-1,0,0,0,55,56,3,8,4,0,56,57,5,14,0,0,57,68,1,0,0,0,58,59,3,10,5,0,59,60,
-5,14,0,0,60,68,1,0,0,0,61,62,3,12,6,0,62,63,5,14,0,0,63,68,1,0,0,0,64,68,
-3,16,8,0,65,68,3,24,12,0,66,68,3,26,13,0,67,52,1,0,0,0,67,55,1,0,0,0,67,
-58,1,0,0,0,67,61,1,0,0,0,67,64,1,0,0,0,67,65,1,0,0,0,67,66,1,0,0,0,68,7,
-1,0,0,0,69,70,5,2,0,0,70,73,5,27,0,0,71,72,5,7,0,0,72,74,3,28,14,0,73,71,
-1,0,0,0,73,74,1,0,0,0,74,82,1,0,0,0,75,76,5,2,0,0,76,79,7,0,0,0,77,78,5,
-7,0,0,78,80,3,28,14,0,79,77,1,0,0,0,79,80,1,0,0,0,80,82,1,0,0,0,81,69,1,
-0,0,0,81,75,1,0,0,0,82,9,1,0,0,0,83,84,5,27,0,0,84,85,5,7,0,0,85,86,3,28,
-14,0,86,11,1,0,0,0,87,92,5,27,0,0,88,89,5,8,0,0,89,93,5,8,0,0,90,91,5,9,
-0,0,91,93,5,9,0,0,92,88,1,0,0,0,92,90,1,0,0,0,93,13,1,0,0,0,94,95,5,21,0,
-0,95,96,5,3,0,0,96,97,3,28,14,0,97,98,5,4,0,0,98,15,1,0,0,0,99,103,3,18,
-9,0,100,102,3,20,10,0,101,100,1,0,0,0,102,105,1,0,0,0,103,101,1,0,0,0,103,
-104,1,0,0,0,104,107,1,0,0,0,105,103,1,0,0,0,106,108,3,22,11,0,107,106,1,
-0,0,0,107,108,1,0,0,0,108,17,1,0,0,0,109,110,5,15,0,0,110,111,5,3,0,0,111,
-112,3,28,14,0,112,113,5,4,0,0,113,117,5,5,0,0,114,116,3,6,3,0,115,114,1,
-0,0,0,116,119,1,0,0,0,117,115,1,0,0,0,117,118,1,0,0,0,118,120,1,0,0,0,119,
-117,1,0,0,0,120,121,5,6,0,0,121,19,1,0,0,0,122,123,5,16,0,0,123,124,3,18,
-9,0,124,21,1,0,0,0,125,126,5,16,0,0,126,130,5,5,0,0,127,129,3,6,3,0,128,
-127,1,0,0,0,129,132,1,0,0,0,130,128,1,0,0,0,130,131,1,0,0,0,131,133,1,0,
-0,0,132,130,1,0,0,0,133,134,5,6,0,0,134,23,1,0,0,0,135,136,5,17,0,0,136,
-137,5,3,0,0,137,138,3,28,14,0,138,139,5,4,0,0,139,143,5,5,0,0,140,142,3,
-6,3,0,141,140,1,0,0,0,142,145,1,0,0,0,143,141,1,0,0,0,143,144,1,0,0,0,144,
-146,1,0,0,0,145,143,1,0,0,0,146,147,5,6,0,0,147,25,1,0,0,0,148,149,5,18,
-0,0,149,153,5,5,0,0,150,152,3,6,3,0,151,150,1,0,0,0,152,155,1,0,0,0,153,
-151,1,0,0,0,153,154,1,0,0,0,154,156,1,0,0,0,155,153,1,0,0,0,156,157,5,6,
-0,0,157,158,5,17,0,0,158,159,5,3,0,0,159,160,3,28,14,0,160,161,5,4,0,0,161,
-27,1,0,0,0,162,163,6,14,-1,0,163,164,5,3,0,0,164,165,3,28,14,0,165,166,5,
-4,0,0,166,174,1,0,0,0,167,174,7,1,0,0,168,174,5,26,0,0,169,174,5,23,0,0,
-170,174,5,27,0,0,171,174,5,25,0,0,172,174,5,24,0,0,173,162,1,0,0,0,173,167,
-1,0,0,0,173,168,1,0,0,0,173,169,1,0,0,0,173,170,1,0,0,0,173,171,1,0,0,0,
-173,172,1,0,0,0,174,183,1,0,0,0,175,176,10,8,0,0,176,177,7,2,0,0,177,182,
-3,28,14,9,178,179,10,7,0,0,179,180,7,1,0,0,180,182,3,28,14,8,181,175,1,0,
-0,0,181,178,1,0,0,0,182,185,1,0,0,0,183,181,1,0,0,0,183,184,1,0,0,0,184,
-29,1,0,0,0,185,183,1,0,0,0,18,33,38,42,49,67,73,79,81,92,103,107,117,130,
-143,153,173,181,183];
+4,74,8,4,1,5,1,5,1,5,1,5,1,6,1,6,1,6,1,6,1,6,3,6,85,8,6,1,7,1,7,1,7,1,7,
+1,7,1,8,1,8,5,8,94,8,8,10,8,12,8,97,9,8,1,8,3,8,100,8,8,1,9,1,9,1,9,1,9,
+1,9,1,9,5,9,108,8,9,10,9,12,9,111,9,9,1,9,1,9,1,10,1,10,1,10,1,11,1,11,1,
+11,5,11,121,8,11,10,11,12,11,124,9,11,1,11,1,11,1,12,1,12,1,12,1,12,1,12,
+1,12,5,12,134,8,12,10,12,12,12,137,9,12,1,12,1,12,1,13,1,13,1,13,5,13,144,
+8,13,10,13,12,13,147,9,13,1,13,1,13,1,13,1,13,1,13,1,13,1,14,1,14,1,14,1,
+14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,3,14,166,8,14,1,14,1,14,1,14,1,14,
+1,14,1,14,5,14,174,8,14,10,14,12,14,177,9,14,1,14,1,49,1,28,15,0,2,4,6,8,
+10,12,14,16,18,20,22,24,26,28,0,2,1,0,19,20,1,0,8,12,189,0,31,1,0,0,0,2,
+35,1,0,0,0,4,49,1,0,0,0,6,67,1,0,0,0,8,69,1,0,0,0,10,75,1,0,0,0,12,79,1,
+0,0,0,14,86,1,0,0,0,16,91,1,0,0,0,18,101,1,0,0,0,20,114,1,0,0,0,22,117,1,
+0,0,0,24,127,1,0,0,0,26,140,1,0,0,0,28,165,1,0,0,0,30,32,3,2,1,0,31,30,1,
+0,0,0,32,33,1,0,0,0,33,31,1,0,0,0,33,34,1,0,0,0,34,1,1,0,0,0,35,36,5,22,
+0,0,36,38,5,5,0,0,37,39,5,1,0,0,38,37,1,0,0,0,38,39,1,0,0,0,39,40,1,0,0,
+0,40,42,3,4,2,0,41,43,5,1,0,0,42,41,1,0,0,0,42,43,1,0,0,0,43,44,1,0,0,0,
+44,45,5,6,0,0,45,3,1,0,0,0,46,48,3,6,3,0,47,46,1,0,0,0,48,51,1,0,0,0,49,
+50,1,0,0,0,49,47,1,0,0,0,50,5,1,0,0,0,51,49,1,0,0,0,52,53,3,14,7,0,53,54,
+5,14,0,0,54,68,1,0,0,0,55,56,3,8,4,0,56,57,5,14,0,0,57,68,1,0,0,0,58,59,
+3,10,5,0,59,60,5,14,0,0,60,68,1,0,0,0,61,62,3,12,6,0,62,63,5,14,0,0,63,68,
+1,0,0,0,64,68,3,16,8,0,65,68,3,24,12,0,66,68,3,26,13,0,67,52,1,0,0,0,67,
+55,1,0,0,0,67,58,1,0,0,0,67,61,1,0,0,0,67,64,1,0,0,0,67,65,1,0,0,0,67,66,
+1,0,0,0,68,7,1,0,0,0,69,70,5,2,0,0,70,73,5,27,0,0,71,72,5,7,0,0,72,74,3,
+28,14,0,73,71,1,0,0,0,73,74,1,0,0,0,74,9,1,0,0,0,75,76,5,27,0,0,76,77,5,
+7,0,0,77,78,3,28,14,0,78,11,1,0,0,0,79,84,5,27,0,0,80,81,5,8,0,0,81,85,5,
+8,0,0,82,83,5,9,0,0,83,85,5,9,0,0,84,80,1,0,0,0,84,82,1,0,0,0,85,13,1,0,
+0,0,86,87,5,21,0,0,87,88,5,3,0,0,88,89,3,28,14,0,89,90,5,4,0,0,90,15,1,0,
+0,0,91,95,3,18,9,0,92,94,3,20,10,0,93,92,1,0,0,0,94,97,1,0,0,0,95,93,1,0,
+0,0,95,96,1,0,0,0,96,99,1,0,0,0,97,95,1,0,0,0,98,100,3,22,11,0,99,98,1,0,
+0,0,99,100,1,0,0,0,100,17,1,0,0,0,101,102,5,15,0,0,102,103,5,3,0,0,103,104,
+3,28,14,0,104,105,5,4,0,0,105,109,5,5,0,0,106,108,3,6,3,0,107,106,1,0,0,
+0,108,111,1,0,0,0,109,107,1,0,0,0,109,110,1,0,0,0,110,112,1,0,0,0,111,109,
+1,0,0,0,112,113,5,6,0,0,113,19,1,0,0,0,114,115,5,16,0,0,115,116,3,18,9,0,
+116,21,1,0,0,0,117,118,5,16,0,0,118,122,5,5,0,0,119,121,3,6,3,0,120,119,
+1,0,0,0,121,124,1,0,0,0,122,120,1,0,0,0,122,123,1,0,0,0,123,125,1,0,0,0,
+124,122,1,0,0,0,125,126,5,6,0,0,126,23,1,0,0,0,127,128,5,17,0,0,128,129,
+5,3,0,0,129,130,3,28,14,0,130,131,5,4,0,0,131,135,5,5,0,0,132,134,3,6,3,
+0,133,132,1,0,0,0,134,137,1,0,0,0,135,133,1,0,0,0,135,136,1,0,0,0,136,138,
+1,0,0,0,137,135,1,0,0,0,138,139,5,6,0,0,139,25,1,0,0,0,140,141,5,18,0,0,
+141,145,5,5,0,0,142,144,3,6,3,0,143,142,1,0,0,0,144,147,1,0,0,0,145,143,
+1,0,0,0,145,146,1,0,0,0,146,148,1,0,0,0,147,145,1,0,0,0,148,149,5,6,0,0,
+149,150,5,17,0,0,150,151,5,3,0,0,151,152,3,28,14,0,152,153,5,4,0,0,153,27,
+1,0,0,0,154,155,6,14,-1,0,155,156,5,3,0,0,156,157,3,28,14,0,157,158,5,4,
+0,0,158,166,1,0,0,0,159,166,7,0,0,0,160,166,5,26,0,0,161,166,5,23,0,0,162,
+166,5,27,0,0,163,166,5,25,0,0,164,166,5,24,0,0,165,154,1,0,0,0,165,159,1,
+0,0,0,165,160,1,0,0,0,165,161,1,0,0,0,165,162,1,0,0,0,165,163,1,0,0,0,165,
+164,1,0,0,0,166,175,1,0,0,0,167,168,10,8,0,0,168,169,7,1,0,0,169,174,3,28,
+14,9,170,171,10,7,0,0,171,172,7,0,0,0,172,174,3,28,14,8,173,167,1,0,0,0,
+173,170,1,0,0,0,174,177,1,0,0,0,175,173,1,0,0,0,175,176,1,0,0,0,176,29,1,
+0,0,0,177,175,1,0,0,0,16,33,38,42,49,67,73,84,95,99,109,122,135,145,165,
+173,175];
 
 
 const atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -81,7 +78,7 @@ export default class CtoMSParser extends antlr4.Parser {
                              "SUB", "MULT", "DIV", "MOD", "DOUBLE_QUOTE", 
                              "SEMI", "IF_PR", "ELSE_PR", "WHILE_PR", "DO_PR", 
                              "COND_MAT", "COND_LOG", "PRINT", "MAIN", "CHAR", 
-                             "INT", "FLOAT", "STRING", "ID", "INV_ID", "WS" ];
+                             "INT", "FLOAT", "STRING", "ID", "WS" ];
     static ruleNames = [ "file", "init", "logic", "expression", "declaration", 
                          "assign", "increment", "log", "chained_conditional", 
                          "conditional", "conditional__elif", "conditional__else", 
@@ -310,55 +307,21 @@ export default class CtoMSParser extends antlr4.Parser {
 	    this.enterRule(localctx, 8, CtoMSParser.RULE_declaration);
 	    var _la = 0;
 	    try {
-	        this.state = 81;
+	        this.enterOuterAlt(localctx, 1);
+	        this.state = 69;
+	        this.match(CtoMSParser.TYPE);
+	        this.state = 70;
+	        this.match(CtoMSParser.ID);
+	        this.state = 73;
 	        this._errHandler.sync(this);
-	        var la_ = this._interp.adaptivePredict(this._input,7,this._ctx);
-	        switch(la_) {
-	        case 1:
-	            this.enterOuterAlt(localctx, 1);
-	            this.state = 69;
-	            this.match(CtoMSParser.TYPE);
-	            this.state = 70;
-	            this.match(CtoMSParser.ID);
-	            this.state = 73;
-	            this._errHandler.sync(this);
-	            _la = this._input.LA(1);
-	            if(_la===7) {
-	                this.state = 71;
-	                this.match(CtoMSParser.EQUALS);
-	                this.state = 72;
-	                this.value(0);
-	            }
-
-	            break;
-
-	        case 2:
-	            this.enterOuterAlt(localctx, 2);
-	            this.state = 75;
-	            this.match(CtoMSParser.TYPE);
-	            this.state = 76;
-	            localctx.id = this._input.LT(1);
-	            _la = this._input.LA(1);
-	            if(!(_la===24 || _la===28)) {
-	                localctx.id = this._errHandler.recoverInline(this);
-	            }
-	            else {
-	            	this._errHandler.reportMatch(this);
-	                this.consume();
-	            }
-	            this.state = 79;
-	            this._errHandler.sync(this);
-	            _la = this._input.LA(1);
-	            if(_la===7) {
-	                this.state = 77;
-	                this.match(CtoMSParser.EQUALS);
-	                this.state = 78;
-	                this.value(0);
-	            }
-
-	            break;
-
+	        _la = this._input.LA(1);
+	        if(_la===7) {
+	            this.state = 71;
+	            this.match(CtoMSParser.EQUALS);
+	            this.state = 72;
+	            this.value(0);
 	        }
+
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
@@ -380,11 +343,11 @@ export default class CtoMSParser extends antlr4.Parser {
 	    this.enterRule(localctx, 10, CtoMSParser.RULE_assign);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 83;
+	        this.state = 75;
 	        this.match(CtoMSParser.ID);
-	        this.state = 84;
+	        this.state = 76;
 	        this.match(CtoMSParser.EQUALS);
-	        this.state = 85;
+	        this.state = 77;
 	        this.value(0);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -407,21 +370,21 @@ export default class CtoMSParser extends antlr4.Parser {
 	    this.enterRule(localctx, 12, CtoMSParser.RULE_increment);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 87;
+	        this.state = 79;
 	        this.match(CtoMSParser.ID);
-	        this.state = 92;
+	        this.state = 84;
 	        this._errHandler.sync(this);
 	        switch(this._input.LA(1)) {
 	        case 8:
-	            this.state = 88;
+	            this.state = 80;
 	            this.match(CtoMSParser.PLUS);
-	            this.state = 89;
+	            this.state = 81;
 	            this.match(CtoMSParser.PLUS);
 	            break;
 	        case 9:
-	            this.state = 90;
+	            this.state = 82;
 	            this.match(CtoMSParser.SUB);
-	            this.state = 91;
+	            this.state = 83;
 	            this.match(CtoMSParser.SUB);
 	            break;
 	        default:
@@ -448,13 +411,13 @@ export default class CtoMSParser extends antlr4.Parser {
 	    this.enterRule(localctx, 14, CtoMSParser.RULE_log);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 94;
+	        this.state = 86;
 	        this.match(CtoMSParser.PRINT);
-	        this.state = 95;
+	        this.state = 87;
 	        this.match(CtoMSParser.OPEN_PARENTH);
-	        this.state = 96;
+	        this.state = 88;
 	        this.value(0);
-	        this.state = 97;
+	        this.state = 89;
 	        this.match(CtoMSParser.CLOSE_PARENTH);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -478,26 +441,26 @@ export default class CtoMSParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 99;
+	        this.state = 91;
 	        this.conditional();
-	        this.state = 103;
+	        this.state = 95;
 	        this._errHandler.sync(this);
-	        var _alt = this._interp.adaptivePredict(this._input,9,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,7,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
-	                this.state = 100;
+	                this.state = 92;
 	                this.conditional__elif(); 
 	            }
-	            this.state = 105;
+	            this.state = 97;
 	            this._errHandler.sync(this);
-	            _alt = this._interp.adaptivePredict(this._input,9,this._ctx);
+	            _alt = this._interp.adaptivePredict(this._input,7,this._ctx);
 	        }
 
-	        this.state = 107;
+	        this.state = 99;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        if(_la===16) {
-	            this.state = 106;
+	            this.state = 98;
 	            this.conditional__else();
 	        }
 
@@ -523,27 +486,27 @@ export default class CtoMSParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 109;
+	        this.state = 101;
 	        this.match(CtoMSParser.IF_PR);
-	        this.state = 110;
+	        this.state = 102;
 	        this.match(CtoMSParser.OPEN_PARENTH);
-	        this.state = 111;
+	        this.state = 103;
 	        this.value(0);
-	        this.state = 112;
+	        this.state = 104;
 	        this.match(CtoMSParser.CLOSE_PARENTH);
-	        this.state = 113;
+	        this.state = 105;
 	        this.match(CtoMSParser.OPEN_CURL);
-	        this.state = 117;
+	        this.state = 109;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 136740868) !== 0)) {
-	            this.state = 114;
+	            this.state = 106;
 	            this.expression();
-	            this.state = 119;
+	            this.state = 111;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        }
-	        this.state = 120;
+	        this.state = 112;
 	        this.match(CtoMSParser.CLOSE_CURL);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -566,9 +529,9 @@ export default class CtoMSParser extends antlr4.Parser {
 	    this.enterRule(localctx, 20, CtoMSParser.RULE_conditional__elif);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 122;
+	        this.state = 114;
 	        this.match(CtoMSParser.ELSE_PR);
-	        this.state = 123;
+	        this.state = 115;
 	        this.conditional();
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -592,21 +555,21 @@ export default class CtoMSParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 125;
+	        this.state = 117;
 	        this.match(CtoMSParser.ELSE_PR);
-	        this.state = 126;
+	        this.state = 118;
 	        this.match(CtoMSParser.OPEN_CURL);
-	        this.state = 130;
+	        this.state = 122;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 136740868) !== 0)) {
-	            this.state = 127;
+	            this.state = 119;
 	            this.expression();
-	            this.state = 132;
+	            this.state = 124;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        }
-	        this.state = 133;
+	        this.state = 125;
 	        this.match(CtoMSParser.CLOSE_CURL);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -630,27 +593,27 @@ export default class CtoMSParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 135;
+	        this.state = 127;
 	        this.match(CtoMSParser.WHILE_PR);
-	        this.state = 136;
+	        this.state = 128;
 	        this.match(CtoMSParser.OPEN_PARENTH);
-	        this.state = 137;
+	        this.state = 129;
 	        this.value(0);
-	        this.state = 138;
+	        this.state = 130;
 	        this.match(CtoMSParser.CLOSE_PARENTH);
-	        this.state = 139;
+	        this.state = 131;
 	        this.match(CtoMSParser.OPEN_CURL);
-	        this.state = 143;
+	        this.state = 135;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 136740868) !== 0)) {
-	            this.state = 140;
+	            this.state = 132;
 	            this.expression();
-	            this.state = 145;
+	            this.state = 137;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        }
-	        this.state = 146;
+	        this.state = 138;
 	        this.match(CtoMSParser.CLOSE_CURL);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -674,29 +637,29 @@ export default class CtoMSParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 148;
+	        this.state = 140;
 	        this.match(CtoMSParser.DO_PR);
-	        this.state = 149;
+	        this.state = 141;
 	        this.match(CtoMSParser.OPEN_CURL);
-	        this.state = 153;
+	        this.state = 145;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 136740868) !== 0)) {
-	            this.state = 150;
+	            this.state = 142;
 	            this.expression();
-	            this.state = 155;
+	            this.state = 147;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        }
-	        this.state = 156;
+	        this.state = 148;
 	        this.match(CtoMSParser.CLOSE_CURL);
-	        this.state = 157;
+	        this.state = 149;
 	        this.match(CtoMSParser.WHILE_PR);
-	        this.state = 158;
+	        this.state = 150;
 	        this.match(CtoMSParser.OPEN_PARENTH);
-	        this.state = 159;
+	        this.state = 151;
 	        this.value(0);
-	        this.state = 160;
+	        this.state = 152;
 	        this.match(CtoMSParser.CLOSE_PARENTH);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -726,20 +689,20 @@ export default class CtoMSParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 173;
+	        this.state = 165;
 	        this._errHandler.sync(this);
 	        switch(this._input.LA(1)) {
 	        case 3:
-	            this.state = 163;
+	            this.state = 155;
 	            this.match(CtoMSParser.OPEN_PARENTH);
-	            this.state = 164;
+	            this.state = 156;
 	            this.value(0);
-	            this.state = 165;
+	            this.state = 157;
 	            this.match(CtoMSParser.CLOSE_PARENTH);
 	            break;
 	        case 19:
 	        case 20:
-	            this.state = 167;
+	            this.state = 159;
 	            localctx.cond_sym = this._input.LT(1);
 	            _la = this._input.LA(1);
 	            if(!(_la===19 || _la===20)) {
@@ -751,50 +714,50 @@ export default class CtoMSParser extends antlr4.Parser {
 	            }
 	            break;
 	        case 26:
-	            this.state = 168;
+	            this.state = 160;
 	            this.match(CtoMSParser.STRING);
 	            break;
 	        case 23:
-	            this.state = 169;
+	            this.state = 161;
 	            this.match(CtoMSParser.CHAR);
 	            break;
 	        case 27:
-	            this.state = 170;
+	            this.state = 162;
 	            this.match(CtoMSParser.ID);
 	            break;
 	        case 25:
-	            this.state = 171;
+	            this.state = 163;
 	            this.match(CtoMSParser.FLOAT);
 	            break;
 	        case 24:
-	            this.state = 172;
+	            this.state = 164;
 	            this.match(CtoMSParser.INT);
 	            break;
 	        default:
 	            throw new antlr4.error.NoViableAltException(this);
 	        }
 	        this._ctx.stop = this._input.LT(-1);
-	        this.state = 183;
+	        this.state = 175;
 	        this._errHandler.sync(this);
-	        var _alt = this._interp.adaptivePredict(this._input,17,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,15,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
 	                    this.triggerExitRuleEvent();
 	                }
 	                _prevctx = localctx;
-	                this.state = 181;
+	                this.state = 173;
 	                this._errHandler.sync(this);
-	                var la_ = this._interp.adaptivePredict(this._input,16,this._ctx);
+	                var la_ = this._interp.adaptivePredict(this._input,14,this._ctx);
 	                switch(la_) {
 	                case 1:
 	                    localctx = new ValueContext(this, _parentctx, _parentState);
 	                    this.pushNewRecursionContext(localctx, _startState, CtoMSParser.RULE_value);
-	                    this.state = 175;
+	                    this.state = 167;
 	                    if (!( this.precpred(this._ctx, 8))) {
 	                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 8)");
 	                    }
-	                    this.state = 176;
+	                    this.state = 168;
 	                    localctx.operation = this._input.LT(1);
 	                    _la = this._input.LA(1);
 	                    if(!((((_la) & ~0x1f) === 0 && ((1 << _la) & 7936) !== 0))) {
@@ -804,18 +767,18 @@ export default class CtoMSParser extends antlr4.Parser {
 	                    	this._errHandler.reportMatch(this);
 	                        this.consume();
 	                    }
-	                    this.state = 177;
+	                    this.state = 169;
 	                    this.value(9);
 	                    break;
 
 	                case 2:
 	                    localctx = new ValueContext(this, _parentctx, _parentState);
 	                    this.pushNewRecursionContext(localctx, _startState, CtoMSParser.RULE_value);
-	                    this.state = 178;
+	                    this.state = 170;
 	                    if (!( this.precpred(this._ctx, 7))) {
 	                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 7)");
 	                    }
-	                    this.state = 179;
+	                    this.state = 171;
 	                    localctx.cond_sym = this._input.LT(1);
 	                    _la = this._input.LA(1);
 	                    if(!(_la===19 || _la===20)) {
@@ -825,15 +788,15 @@ export default class CtoMSParser extends antlr4.Parser {
 	                    	this._errHandler.reportMatch(this);
 	                        this.consume();
 	                    }
-	                    this.state = 180;
+	                    this.state = 172;
 	                    this.value(8);
 	                    break;
 
 	                } 
 	            }
-	            this.state = 185;
+	            this.state = 177;
 	            this._errHandler.sync(this);
-	            _alt = this._interp.adaptivePredict(this._input,17,this._ctx);
+	            _alt = this._interp.adaptivePredict(this._input,15,this._ctx);
 	        }
 
 	    } catch( error) {
@@ -881,8 +844,7 @@ CtoMSParser.INT = 24;
 CtoMSParser.FLOAT = 25;
 CtoMSParser.STRING = 26;
 CtoMSParser.ID = 27;
-CtoMSParser.INV_ID = 28;
-CtoMSParser.WS = 29;
+CtoMSParser.WS = 28;
 
 CtoMSParser.RULE_file = 0;
 CtoMSParser.RULE_init = 1;
@@ -1090,7 +1052,6 @@ class DeclarationContext extends antlr4.ParserRuleContext {
         super(parent, invokingState);
         this.parser = parser;
         this.ruleIndex = CtoMSParser.RULE_declaration;
-        this.id = null;
     }
 
 	TYPE() {
@@ -1107,14 +1068,6 @@ class DeclarationContext extends antlr4.ParserRuleContext {
 
 	value() {
 	    return this.getTypedRuleContext(ValueContext,0);
-	};
-
-	INV_ID() {
-	    return this.getToken(CtoMSParser.INV_ID, 0);
-	};
-
-	INT() {
-	    return this.getToken(CtoMSParser.INT, 0);
 	};
 
 	accept(visitor) {

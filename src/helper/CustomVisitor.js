@@ -153,6 +153,7 @@ export default class CustomVisitor extends LanguageVisitor {
 	visitExpression(ctx) {
 		console.log("Expresion");
 		console.log(ctx.getText());
+		if (ctx.loop__for()) return this.visitChildren(ctx);
 		if (ctx.loop__while()) return this.visitChildren(ctx);
 		if (ctx.loop__do_while()) return this.visitChildren(ctx);
 		if (ctx.chained_conditional()) return this.visitChildren(ctx);
@@ -477,6 +478,32 @@ export default class CustomVisitor extends LanguageVisitor {
 		while (condition) {
 			this.visit(ctx.expression());
 			condition = this.visit(ctx.value());
+			if (performance.now() - time > this.max_loop_time) {
+				this.logs.push({
+					type: "warning",
+					header: "WARNING",
+					text: "Posible infinite loop detected, stopping loop...",
+				});
+				break;
+			}
+		}
+		return condition;
+	}
+
+	visitLoop__for(ctx) {
+		console.log("Visitando For");
+		if (!ctx.declaration()) return false;
+		if (!ctx.value()) return false;
+		if (!ctx.increment()) return false;
+
+		this.visit(ctx.declaration());
+		let condition = this.visit(ctx.value());
+		let time = performance.now();
+		while (condition) {
+			this.visit(ctx.expression());
+			this.visit(ctx.increment());
+			condition = this.visit(ctx.value());
+
 			if (performance.now() - time > this.max_loop_time) {
 				this.logs.push({
 					type: "warning",

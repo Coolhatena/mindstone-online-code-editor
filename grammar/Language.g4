@@ -12,6 +12,7 @@ expression: declaration SEMI?
 	|	chained_conditional SEMI?
 	|	loop__while SEMI?
 	|	loop__do_while SEMI?
+	|	loop__for SEMI?
 	|	log SEMI?
 	|	increment SEMI?
 	;
@@ -46,6 +47,8 @@ conditional__elif: ELSE_PR conditional;
 conditional__else: ELSE_PR OPEN_CURL expression* CLOSE_CURL;
 
 loop__while: WHILE_PR OPEN_PARENTH value CLOSE_PARENTH OPEN_CURL expression* CLOSE_CURL;
+
+loop__for: FOR_PR OPEN_PARENTH declaration SEMI value SEMI increment SEMI CLOSE_PARENTH OPEN_CURL expression* CLOSE_CURL;
 
 loop__do_while: DO_PR OPEN_CURL expression* CLOSE_CURL WHILE_PR OPEN_PARENTH value CLOSE_PARENTH;
 

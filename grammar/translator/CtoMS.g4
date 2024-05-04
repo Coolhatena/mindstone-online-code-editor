@@ -18,7 +18,7 @@ expression:
 		;
 
 declaration:	TYPE ID (EQUALS value)? 
-			|	TYPE id=(INV_ID|INT) (EQUALS value)?
+			// |	TYPE id=(INV_ID|INT) (EQUALS value)?
 			;
 
 assign: ID EQUALS value;

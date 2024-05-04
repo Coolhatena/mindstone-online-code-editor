@@ -27,6 +27,7 @@ export default class CtoMSCustomVisitor extends CtoMSVisitor {
 	}
 
 	visitFile(ctx) {
+		console.log(ctx.getText())
 		this.visitChildren(ctx);
 		return this.translatedCode;
 	}
@@ -64,6 +65,7 @@ export default class CtoMSCustomVisitor extends CtoMSVisitor {
 	}
 
 	visitAssign(ctx) {
+		console.log("Assign");
 		let ID = ctx.ID().getText();
 		let VALUE = this.visit(ctx.value());
 		this.translatedCode += `\n${ID} = ${VALUE}!`;
@@ -84,6 +86,7 @@ export default class CtoMSCustomVisitor extends CtoMSVisitor {
 	}
 
 	visitLog(ctx) {
+		console.log("Log")
 		let content = this.visit(ctx.value());
 		this.translatedCode += `\nptr(${content})!`;
 		return ctx.getText();
@@ -91,6 +94,7 @@ export default class CtoMSCustomVisitor extends CtoMSVisitor {
 
 	// Visit a parse tree produced by CtoMSParser#chained_conditional.
 	visitChained_conditional(ctx) {
+		console.log("Chained conditional")
 		this.visit(ctx.conditional())
 		if(ctx.conditional__elif()) this.visit(ctx.conditional__elif())
 		if(ctx.conditional__else()) this.visit(ctx.conditional__else())
