@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Header from "./components/Header";
 import CodeSpace from "./components/CodeSpace";
 import Translator from './components/Translator';
+import DualSwitchButton from './components/DualSwitchButton';
 
 const page = () => {
 	const [switchSpaces, setSwitchSpaces] = useState(true)
@@ -13,10 +14,7 @@ const page = () => {
 		<>
 			<main>
 				<Header />
-				<div className='SwitchButton-container'>
-					<button className={!switchSpaces ? "SwitchButton" : "SwitchButton SwitchButton_selected"} onClick={() => setSwitchSpaces(true)}>Code</button>
-					<button className={switchSpaces ? "SwitchButton" : "SwitchButton SwitchButton_selected"} onClick={() => setSwitchSpaces(false)}>Translate</button>
-				</div>
+				<DualSwitchButton leftOption="Code" rightOption="Translate" switchVariable={switchSpaces} setSwitchVariable={setSwitchSpaces}/>
 				{
 				switchSpaces ? 
 					<CodeSpace codeState={[mindStoneCode, setMindStoneCode]}/> 
