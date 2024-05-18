@@ -338,7 +338,7 @@ export default class CustomVisitor extends LanguageVisitor {
 		const VALUE = this.visit(ctx.value());
 		this.logs.push({
 			type: "log",
-			header: `${VALUE_HEADER}`,
+			header: `Line ${ctx.start.line}`,
 			text: `${VALUE}`,
 		});
 
