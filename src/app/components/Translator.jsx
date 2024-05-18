@@ -5,6 +5,7 @@ import CodeMirror from "@uiw/react-codemirror";
 import { vscodeDark } from "@uiw/codemirror-theme-vscode";
 
 import CtoMSTranslator from '@/module/CtoMSTranslator';
+import MStoJazminTranslator from '@/module/MStoJazminTranslator';
 import DualSwitchButton from './DualSwitchButton';
 import CodeEditor from './codeEditor';
 
@@ -18,6 +19,11 @@ const Translator = ({ codeState=["", () => {}] }) => {
 	let handleTranslateCtoMS = () => {
 		let result = CtoMSTranslator(cCode)
 		setMindstoneCode(result)
+	};
+
+	let handleTranslateMStoJazmin = () => {
+		let result = MStoJazminTranslator(mindstoneCode)
+		setJazminCode(result)
 	};
 
 	return (
@@ -41,7 +47,7 @@ const Translator = ({ codeState=["", () => {}] }) => {
 				// MindStone to Jazmin
 				<div className='translator'>
 					<div className="container-translator">
-						<CodeEditor title="MindStone code" textVariable={mindstoneCode} setTextVariable={setMindstoneCode} isTranslateOption handleTranslate={handleTranslateCtoMS}/>
+						<CodeEditor title="MindStone code" textVariable={mindstoneCode} setTextVariable={setMindstoneCode} isTranslateOption handleTranslate={handleTranslateMStoJazmin}/>
 					</div>
 
 					<div className="container-translator">
