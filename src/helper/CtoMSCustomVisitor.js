@@ -1,4 +1,3 @@
-import CtoMSParser from "@/grammar/translator/CtoMS/grammar/translator/CtoMSParser";
 import CtoMSVisitor from "@/grammar/translator/CtoMS/grammar/translator/CtoMSVisitor";
 
 export default class CtoMSCustomVisitor extends CtoMSVisitor {

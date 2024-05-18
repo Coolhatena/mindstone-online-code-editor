@@ -15,16 +15,6 @@ let CtoMSTranslator = (input) => {
 
 	const parser = new CtoMSParser(tokens);
 	parser.buildParseTrees = true;
-	// parser.removeErrorListeners();
-	// parser.addErrorListener({
-	// 	syntaxError: (recognizer, offendingSymbol, line, column, msg, err) => {
-	// 		visitor.logs.push({
-	// 			type: "error",
-	// 			header: "ERROR",
-	// 			text: `Syntax error on line ${line}: ${offendingSymbol.text}`,
-	// 		});
-	// 	},
-	// });
 	const tree = parser.file();
 
 	return visitor.visitFile(tree);

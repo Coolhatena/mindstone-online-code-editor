@@ -1,6 +1,5 @@
 import LanguageParser from "@/grammar/LanguageParser";
 import LanguageVisitor from "@/grammar/LanguageVisitor";
-// This class defines a complete generic visitor for a parse tree produced by CalculadoraParser.
 
 export default class CustomVisitor extends LanguageVisitor {
 	constructor() {

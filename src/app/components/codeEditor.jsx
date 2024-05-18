@@ -20,7 +20,7 @@ const CodeEditor = ({title, textVariable, setTextVariable = () => {}, isTranslat
 
 	let handleClickFileLoad = () => {
 		inputFile.current.click();
-		inputFile.current.value = ""
+		inputFile.current.value = "";
 	}
 
   return (
