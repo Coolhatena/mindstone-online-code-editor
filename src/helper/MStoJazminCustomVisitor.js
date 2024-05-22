@@ -4,6 +4,10 @@ import MStoJazminVisitor from '@/grammar/translator/MStoJazmin/grammar/MStoJazmi
 export default class MStoJazminCustomVisitor extends MStoJazminVisitor {
 	constructor() {
 		super();
+		this.stackLimit = 1
+		this.localsLimit = 0
+		this.logs = []
+		this.variables = {}
 		this.jazminCode = "";
 	}
 
@@ -15,13 +19,17 @@ export default class MStoJazminCustomVisitor extends MStoJazminVisitor {
 	}
 
 	visitInit(ctx) {
-		this.jazminCode += ".class public JasminCode\n"
-		this.jazminCode += ".super java/lang/Object\n"
-		this.jazminCode += ".method public static main([Ljava/lang/String;)V\n"
 		this.visit(ctx.logic());
 		this.jazminCode += "\nreturn\n";
 		this.jazminCode += ".end method";
-		return;
+
+		let header = `.class public JasminCode
+.super java/lang/Object
+.method public static main([Ljava/lang/String;)V
+.limit stack ${this.stackLimit}
+${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
+
+		this.jazminCode = header + this.jazminCode;
 	}
 
 	
@@ -79,7 +87,11 @@ export default class MStoJazminCustomVisitor extends MStoJazminVisitor {
 		const operation_data = this.visitChildren(ctx);
 		let SYMBOL = ctx.operation.type;
 		if (SYMBOL == MStoJazminParser.PLUS) {
-			return operation_data[0] + operation_data[2];
+			this.stackLimit += 2;
+			this.jazminCode += `\nbipush ${operation_data[0]}\n`
+			this.jazminCode += `bipush ${operation_data[2]}\n`
+			this.jazminCode += `iadd\n`
+			return "swap";
 		} else {
 			return operation_data[0] - operation_data[2];
 		}
@@ -147,14 +159,6 @@ export default class MStoJazminCustomVisitor extends MStoJazminVisitor {
 	visitValueAsNumber(ctx) {
 		console.log("ValueAsnumber");
 		if (ctx.getText().includes(".")) {
-			if (/\.0$/.test(ctx.getText())) {
-				this.logs.push({
-					type: "warning",
-					header: "WARNING",
-					text: "The decimal values with '.0' are integers, use the correct data type",
-				});
-			}
-
 			return parseFloat(ctx.getText());
 		}
 
@@ -166,13 +170,16 @@ export default class MStoJazminCustomVisitor extends MStoJazminVisitor {
 		console.log("log");
 		const VALUE_HEADER = ctx.value().getText();
 		const VALUE = this.visit(ctx.value());
-		this.logs.push({
-			type: "log",
-			header: `Line ${ctx.start.line}`,
-			text: `${VALUE}`,
-		});
-
-		return undefined;
+		this.jazminCode += '\ninvokestatic java/lang/Integer/toString(I)Ljava/lang/String;'
+		this.jazminCode += '\ngetstatic java/lang/System/out Ljava/io/PrintStream;'
+		this.jazminCode += `\n${VALUE}`
+		this.jazminCode += '\ninvokevirtual java/io/PrintStream/println(Ljava/lang/String;)V\n'
+		
+		// this.logs.push({
+		// 	type: "log",
+		// 	header: `Line ${ctx.start.line}`,
+		// 	text: `${VALUE}`,
+		// });
 	}
 
 	
