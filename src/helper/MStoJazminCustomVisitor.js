@@ -11,10 +11,45 @@ export default class MStoJazminCustomVisitor extends MStoJazminVisitor {
 		this.jazminCode = "";
 	}
 
+	// HELPER METHODS
+	variableExist(variable_name) {
+		return !!this.variables[variable_name];
+	}
+
+	getVariableIndex(ID){
+		return this.variables[ID] ? this.variables[ID].index : -1
+	}
+
+	getVariableValue(ID){
+		return this.variables[ID].value
+	}
+
+	declare(TYPE, ID, VALUE) {
+		let is_variable_defined = this.variableExist(ID);
+		if (!is_variable_defined) {
+			if (VALUE){
+				this.variables[ID] = { index: this.localsLimit, value: VALUE };
+				this.jazminCode += `\nistore_${this.localsLimit} ${VALUE}\n`
+			} else {
+				this.variables[ID] = { index: this.localsLimit, value: undefined };
+			}
+			this.localsLimit++
+		} else {
+			this.logs.push({
+				type: "error",
+				header: "ERROR",
+				text: `La declaracion de "${ID}" está repetida`,
+			});
+		}
+
+		return [TYPE, ID];
+	}
+
 	// VISIT METHODS
 	visitFile(ctx) {
 		console.log(ctx.getText());
 		this.visitChildren(ctx);
+		console.log(this.variables)
 		return this.jazminCode;
 	}
 
@@ -54,14 +89,38 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 	}
 
 	visitDeclaration(ctx) {
-		this.jazminCode += "";
+		// this.jazminCode += "";
+		console.log("Declaration");
+		const TYPE = ctx.TYPE().getText();
+		const ID = ctx.ID().getText();
+		const VARIABLE_PATTERN = /^[A-Za-z]([A-Za-z0-9-_]+)?/;
+		const VALUE = ctx.value() ? this.visit(ctx.value()) : undefined;
+
+		if (VARIABLE_PATTERN.test(ID)) {
+			return this.declare(TYPE, ID, VALUE);
+		} else {
+			const TYPE = ctx.TYPE().getText();
+			this.logs.push({
+				type: "error",
+				header: "ERROR",
+				text: `ID "${ID}" is not a valid identifier`,
+			});
+
+			return [TYPE, ID];
+		}
+		
 	}
 
 	
 	visitAssign(ctx) {
 		console.log("Assign");
 		let VALUE = this.visit(ctx.value());
-		this.jazminCode += `\nistore ${VALUE}\n`;
+		const ID = ctx.ID().getText();
+		const INDEX = this.getVariableIndex(ID);
+		if (INDEX > -1){
+			this.variables[ID].value = VALUE
+			this.jazminCode += `\nistore_${INDEX} ${VALUE}\n`;
+		}
 
 	}
 
@@ -87,8 +146,10 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 		const operation_data = this.visitChildren(ctx);
 		let SYMBOL = ctx.operation.type;
 		if (SYMBOL == MStoJazminParser.PLUS) {
+			console.log(operation_data[0])
+			console.log(Number(operation_data[0]))
 			this.stackLimit += 2;
-			this.jazminCode += `\nbipush ${operation_data[0]}\n`
+			this.jazminCode += `${Number(operation_data[0]) ? `\nbipush ${operation_data[0]}\n` : ""}`
 			this.jazminCode += `bipush ${operation_data[2]}\n`
 			this.jazminCode += `iadd\n`
 			return "swap";
@@ -172,7 +233,11 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 		const VALUE = this.visit(ctx.value());
 		this.jazminCode += '\ninvokestatic java/lang/Integer/toString(I)Ljava/lang/String;'
 		this.jazminCode += '\ngetstatic java/lang/System/out Ljava/io/PrintStream;'
-		this.jazminCode += `\n${VALUE}`
+		if(VALUE == "swap"){
+			this.jazminCode += `\n${VALUE}`
+		} else {
+			this.jazminCode += `\nldc ${VALUE}`
+		}
 		this.jazminCode += '\ninvokevirtual java/io/PrintStream/println(Ljava/lang/String;)V\n'
 		
 		// this.logs.push({
