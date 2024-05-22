@@ -29,7 +29,7 @@ export default class MStoJazminCustomVisitor extends MStoJazminVisitor {
 		if (!is_variable_defined) {
 			if (VALUE){
 				this.variables[ID] = { index: this.localsLimit, value: VALUE };
-				this.jazminCode += `\nistore_${this.localsLimit} ${VALUE}\n`
+				this.jazminCode += `\nistore_${this.localsLimit}\n`
 			} else {
 				this.variables[ID] = { index: this.localsLimit, value: undefined };
 			}
@@ -119,7 +119,7 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 		const INDEX = this.getVariableIndex(ID);
 		if (INDEX > -1){
 			this.variables[ID].value = VALUE
-			this.jazminCode += `\nistore_${INDEX} ${VALUE}\n`;
+			this.jazminCode += `\nistore_${INDEX}\n\n`;
 		}
 
 	}
@@ -145,12 +145,13 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 	visitAddSub(ctx) {
 		const operation_data = this.visitChildren(ctx);
 		let SYMBOL = ctx.operation.type;
+		this.stackLimit += 2;
 		if (SYMBOL == MStoJazminParser.PLUS) {
 			console.log(operation_data[0])
 			console.log(Number(operation_data[0]))
-			this.stackLimit += 2;
-			this.jazminCode += `${Number(operation_data[0]) ? `\nbipush ${operation_data[0]}\n` : ""}`
-			this.jazminCode += `bipush ${operation_data[2]}\n`
+			// this.jazminCode += `${Number(operation_data[0]) ? `\nbipush ${operation_data[0]}\n` : ""}`
+			// this.jazminCode += `bipush ${operation_data[2]}\n`
+
 			this.jazminCode += `iadd\n`
 			return "swap";
 		} else {
@@ -197,8 +198,8 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 		console.log("ValueasID");
 		const ID = ctx.ID().getText();
 		if (this.variableExist(ID)) {
-			const TYPE = this.getVariableType(ID);
-			return this.getVariableValue(ID, TYPE);
+			this.jazminCode += `iload_${this.variables[ID].index}\n`
+			return this.variables[ID].value;
 		}
 
 		this.logs.push({
@@ -219,11 +220,17 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 	
 	visitValueAsNumber(ctx) {
 		console.log("ValueAsnumber");
+		let value; 
 		if (ctx.getText().includes(".")) {
-			return parseFloat(ctx.getText());
+			value =  parseFloat(ctx.getText());
+			this.jazminCode += `\nldc ${value}\n`
+			return value
+		} else {
+			value = Number(ctx.getText());
+			this.jazminCode += `\nldc ${value}`
+			return value
 		}
 
-		return Number(ctx.getText());
 	}
 
 	
