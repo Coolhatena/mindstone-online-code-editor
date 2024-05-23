@@ -128,16 +128,20 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 	visitMultDiv(ctx) {
 		const operation_data = this.visitChildren(ctx);
 		let SYMBOL = ctx.operation.type;
+		this.stackLimit += 2;
 		if (SYMBOL == MStoJazminParser.MULT) {
-			return operation_data[0] * operation_data[2];
+			this.jazminCode += `imul\n`
+			return "swap";
 		}
 		
 		if(SYMBOL == MStoJazminParser.DIV){
-			return operation_data[0] / operation_data[2];
+			this.jazminCode += `idiv\n`
+			return "swap";
 		}
 
 		if(SYMBOL == MStoJazminParser.MOD){
-			return operation_data[0] % operation_data[2];
+			this.jazminCode += `irem\n`
+			return "swap";
 		}
 	}
 
@@ -147,15 +151,11 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 		let SYMBOL = ctx.operation.type;
 		this.stackLimit += 2;
 		if (SYMBOL == MStoJazminParser.PLUS) {
-			console.log(operation_data[0])
-			console.log(Number(operation_data[0]))
-			// this.jazminCode += `${Number(operation_data[0]) ? `\nbipush ${operation_data[0]}\n` : ""}`
-			// this.jazminCode += `bipush ${operation_data[2]}\n`
-
 			this.jazminCode += `iadd\n`
 			return "swap";
 		} else {
-			return operation_data[0] - operation_data[2];
+			this.jazminCode += `isub\n`
+			return "swap";
 		}
 	}
 
@@ -170,16 +170,15 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 	visitIncrement(ctx) {
 		console.log("Visitando incremento");
 		const ID = ctx.ID().getText();
-		const TYPE = this.getVariableType(ID);
 
 		console.log(ctx.PLUS().length > 0);
 		if (TYPE) {
-			let variable = this.variables[TYPE].find(
-				(variable) => variable.id === ID
-			);
+			let variable = this.variables[ID]
 			if (ctx.PLUS().length > 0) {
+				this.jazminCode += `iinc ${variable.index} 1\n`
 				variable.value = variable.value + 1;
 			} else {
+				this.jazminCode += `iinc ${variable.index} -1\n`
 				variable.value = variable.value - 1;
 			}
 		} else {
@@ -227,7 +226,7 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 			return value
 		} else {
 			value = Number(ctx.getText());
-			this.jazminCode += `\nldc ${value}`
+			this.jazminCode += `\nldc ${value}\n`
 			return value
 		}
 
