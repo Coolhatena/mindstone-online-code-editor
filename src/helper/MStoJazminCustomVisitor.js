@@ -4,10 +4,11 @@ import MStoJazminVisitor from '@/grammar/translator/MStoJazmin/grammar/MStoJazmi
 export default class MStoJazminCustomVisitor extends MStoJazminVisitor {
 	constructor() {
 		super();
-		this.stackLimit = 1
-		this.localsLimit = 0
-		this.logs = []
-		this.variables = {}
+		this.stackLimit = 1;
+		this.localsLimit = 0;
+		this.labelCounter = 0;
+		this.logs = [];
+		this.variables = {};
 		this.jazminCode = "";
 	}
 
@@ -24,7 +25,7 @@ export default class MStoJazminCustomVisitor extends MStoJazminVisitor {
 		return this.variables[ID].value
 	}
 
-	declare(TYPE, ID, VALUE) {
+	declare(ID, VALUE) {
 		let is_variable_defined = this.variableExist(ID);
 		if (!is_variable_defined) {
 			if (VALUE){
@@ -42,7 +43,11 @@ export default class MStoJazminCustomVisitor extends MStoJazminVisitor {
 			});
 		}
 
-		return [TYPE, ID];
+		return ID;
+	}
+
+	generateLabel(label){
+		return label + (this.labelCounter++);
 	}
 
 	// VISIT METHODS
@@ -55,8 +60,8 @@ export default class MStoJazminCustomVisitor extends MStoJazminVisitor {
 
 	visitInit(ctx) {
 		this.visit(ctx.logic());
-		this.jazminCode += "\nreturn\n";
-		this.jazminCode += ".end method";
+		this.jazminCode += "\nreturn";
+		this.jazminCode += "\n.end method";
 
 		let header = `.class public JasminCode
 .super java/lang/Object
@@ -89,7 +94,6 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 	}
 
 	visitDeclaration(ctx) {
-		// this.jazminCode += "";
 		console.log("Declaration");
 		const TYPE = ctx.TYPE().getText();
 		const ID = ctx.ID().getText();
@@ -97,7 +101,7 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 		const VALUE = ctx.value() ? this.visit(ctx.value()) : undefined;
 
 		if (VARIABLE_PATTERN.test(ID)) {
-			return this.declare(TYPE, ID, VALUE);
+			return this.declare(ID, VALUE);
 		} else {
 			const TYPE = ctx.TYPE().getText();
 			this.logs.push({
@@ -119,7 +123,7 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 		const INDEX = this.getVariableIndex(ID);
 		if (INDEX > -1){
 			this.variables[ID].value = VALUE
-			this.jazminCode += `\nistore_${INDEX}\n\n`;
+			this.jazminCode += `\nistore_${INDEX}\n`;
 		}
 
 	}
@@ -130,17 +134,17 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 		let SYMBOL = ctx.operation.type;
 		this.stackLimit += 2;
 		if (SYMBOL == MStoJazminParser.MULT) {
-			this.jazminCode += `imul\n`
+			this.jazminCode += `\nimul\n`
 			return "swap";
 		}
 		
 		if(SYMBOL == MStoJazminParser.DIV){
-			this.jazminCode += `idiv\n`
+			this.jazminCode += `\nidiv\n`
 			return "swap";
 		}
 
 		if(SYMBOL == MStoJazminParser.MOD){
-			this.jazminCode += `irem\n`
+			this.jazminCode += `\nirem\n`
 			return "swap";
 		}
 	}
@@ -151,19 +155,12 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 		let SYMBOL = ctx.operation.type;
 		this.stackLimit += 2;
 		if (SYMBOL == MStoJazminParser.PLUS) {
-			this.jazminCode += `iadd\n`
+			this.jazminCode += `\niadd\n`
 			return "swap";
 		} else {
-			this.jazminCode += `isub\n`
+			this.jazminCode += `\nisub\n`
 			return "swap";
 		}
-	}
-
-
-	visitSignNumbers(ctx) {
-		let sign = ctx.operation.text;
-		let number = this.visit(ctx.value());
-		return Number(`${sign}${number}`);
 	}
 
 
@@ -175,10 +172,10 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 		if (TYPE) {
 			let variable = this.variables[ID]
 			if (ctx.PLUS().length > 0) {
-				this.jazminCode += `iinc ${variable.index} 1\n`
+				this.jazminCode += `\niinc ${variable.index} 1`
 				variable.value = variable.value + 1;
 			} else {
-				this.jazminCode += `iinc ${variable.index} -1\n`
+				this.jazminCode += `\niinc ${variable.index} -1`
 				variable.value = variable.value - 1;
 			}
 		} else {
@@ -197,7 +194,7 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 		console.log("ValueasID");
 		const ID = ctx.ID().getText();
 		if (this.variableExist(ID)) {
-			this.jazminCode += `iload_${this.variables[ID].index}\n`
+			this.jazminCode += `\niload_${this.variables[ID].index}`
 			return this.variables[ID].value;
 		}
 
@@ -220,13 +217,14 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 	visitValueAsNumber(ctx) {
 		console.log("ValueAsnumber");
 		let value; 
+		this.stackLimit++
 		if (ctx.getText().includes(".")) {
-			value =  parseFloat(ctx.getText());
-			this.jazminCode += `\nldc ${value}\n`
+			value = parseFloat(ctx.getText());
+			this.jazminCode += `\nldc ${value}`
 			return value
 		} else {
 			value = Number(ctx.getText());
-			this.jazminCode += `\nldc ${value}\n`
+			this.jazminCode += `\nldc ${value}`
 			return value
 		}
 
@@ -237,11 +235,13 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 		console.log("log");
 		const VALUE_HEADER = ctx.value().getText();
 		const VALUE = this.visit(ctx.value());
-		this.jazminCode += '\ninvokestatic java/lang/Integer/toString(I)Ljava/lang/String;'
-		this.jazminCode += '\ngetstatic java/lang/System/out Ljava/io/PrintStream;'
-		if(VALUE == "swap"){
-			this.jazminCode += `\n${VALUE}`
+		if(VALUE == "swap" || !isNaN(VALUE)){
+			this.jazminCode += '\ninvokestatic java/lang/Integer/toString(I)Ljava/lang/String;'
+			this.jazminCode += '\ngetstatic java/lang/System/out Ljava/io/PrintStream;'
+			this.jazminCode += `\nswap`
 		} else {
+			this.stackLimit++
+			this.jazminCode += '\ngetstatic java/lang/System/out Ljava/io/PrintStream;'
 			this.jazminCode += `\nldc ${VALUE}`
 		}
 		this.jazminCode += '\ninvokevirtual java/io/PrintStream/println(Ljava/lang/String;)V\n'
@@ -263,22 +263,72 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 	
 	visitChained_conditional(ctx) {
 		console.log("Chained conditional");
-		let isIfTrue = this.visit(ctx.conditional());
+		const endIfLabel = this.generateLabel("endIfLabel")
+		// How many elements of conditions array will be skipped
+		let skipThreshold = 1;
 
-		if (!isIfTrue) {
-			const elifs = ctx.conditional__elif();
-			let isElifTrue = false;
-			for (let i = 0; i < elifs.length; i++) {
-				isElifTrue = this.visit(elifs[i]);
-				if (isElifTrue) break;
+		// conditions array contains the metadata of every condition 
+		const conditions = [] 
+
+		// add if metadata at the start of the conditions array
+		const [ifCondition, ifContent] = this.visit(ctx.conditional())
+		conditions.push({
+			"instruction": ifCondition,
+			"content": ifContent
+		})
+
+		// add elif metadata if exists
+		if(ctx.conditional__elif()) {
+			for( let elif of this.visit(ctx.conditional__elif())){
+				conditions.push({
+					"instruction": elif[0],
+					"content": elif[1],
+					"label": this.generateLabel("elifLabel")
+				})
 			}
 
-			if (!isElifTrue && ctx.conditional__else()) {
-				this.visit(ctx.conditional__else());
+		}
+		
+		// add else metadata if exists
+		let elseData = null;
+		if(ctx.conditional__else()) {
+			skipThreshold++;
+			let elseLabel = this.generateLabel("elseLabel");
+			const elseContent = this.visit(ctx.conditional__else());
+			conditions.push({
+				"label": elseLabel
+			});
+
+			elseData = {
+				"label": elseLabel,
+				"content": elseContent
+			};
+		}
+		
+		// Set the end of the If as the last element of the condition array
+		conditions.push({
+			"label": endIfLabel
+		});
+		
+		// Generate translated code
+		for (let i = 0; i < conditions.length - skipThreshold; i++) {
+			const condition = conditions[i];
+			if (condition.label){
+				this.jazminCode += `\n${condition.label}:`;
 			}
+			const instruction = this.visit(condition.instruction);
+			this.jazminCode += `\n${instruction} ${conditions[i+1].label}`;
+			this.visit(condition.content);
+			this.jazminCode += `\ngoto ${endIfLabel}\n`;
+		}
+		
+		if (elseData) {
+			this.jazminCode += `\n${elseData.label}:`;
+			this.visit(elseData.content);
 		}
 
-		return null;
+		this.jazminCode += `\n${endIfLabel}:`;
+
 	}
 
 	
@@ -290,40 +340,34 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 	
 	visitConditional__else(ctx) {
 		console.log("Conditional__else");
-		this.visit(ctx.expression());
-		return null;
+		return ctx.expression();
 	}
 
 	
 	visitConditional(ctx) {
 		console.log("Conditional");
-		if (!ctx.value()) return false;
-
-		let condition_result = this.visit(ctx.value());
-		if (condition_result) {
-			this.visit(ctx.expression());
-		}
-		return condition_result;
+		return [ctx.value(), ctx.expression()];
 	}
 
 	
 	visitNormalCondition(ctx) {
 		console.log("Condition");
-		let [first_val, second_val] = this.visit(ctx.value());
+		// let [first_val, second_val] = this.visit(ctx.value());
+		this.visit(ctx.value())
 		let symbol = ctx.cond_sym.text;
 
 		switch (symbol) {
 			case ">":
-				return first_val > second_val;
+				return "if_icmplt";
 
 			case "<":
-				return first_val < second_val;
+				return "if_icmpgt";
 
 			case ">=":
-				return first_val >= second_val;
+				return "if_icmple";
 
 			case "<=":
-				return first_val <= second_val;
+				return "if_icmpge";
 
 			case "||":
 				return first_val || second_val;
@@ -332,10 +376,10 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 				return first_val && second_val;
 
 			case "==":
-				return first_val == second_val;
+				return "if_icmpne";
 
 			case "!=":
-				return first_val != second_val;
+				return "if_icmpeq";
 
 			case "true":
 				return true;
