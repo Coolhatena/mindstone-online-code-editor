@@ -27,7 +27,7 @@ const Translator = ({ codeState = ["", () => {}] }) => {
 			<div className="translator-switch">
 				<DualSwitchButton
 					leftOption="C to MindStone"
-					rightOption="MindStone to Jazmin"
+					rightOption="MindStone to Jasmin"
 					switchVariable={switchTranslation}
 					setSwitchVariable={setSwitchTranslation}
 				/>
@@ -70,7 +70,7 @@ const Translator = ({ codeState = ["", () => {}] }) => {
 
 					<div className="container-translator">
 						<CodeEditor
-							title="Jazmin code"
+							title="Jasmin code"
 							textVariable={jazminCode}
 							setTextVariable={setJazminCode}
 						/>
