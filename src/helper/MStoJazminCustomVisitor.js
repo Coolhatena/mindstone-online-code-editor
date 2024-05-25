@@ -28,7 +28,7 @@ export default class MStoJazminCustomVisitor extends MStoJazminVisitor {
 	declare(ID, VALUE) {
 		let is_variable_defined = this.variableExist(ID);
 		if (!is_variable_defined) {
-			if (VALUE){
+			if (VALUE != undefined){
 				this.variables[ID] = { index: this.localsLimit, value: VALUE };
 				this.jazminCode += `\nistore_${this.localsLimit}\n`
 			} else {
@@ -169,7 +169,7 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 		const ID = ctx.ID().getText();
 
 		console.log(ctx.PLUS().length > 0);
-		if (TYPE) {
+		if (this.getVariableIndex(ID) > -1) {
 			let variable = this.variables[ID]
 			if (ctx.PLUS().length > 0) {
 				this.jazminCode += `\niinc ${variable.index} 1`
@@ -402,22 +402,19 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n`: ""}`
 	
 	visitLoop__while(ctx) {
 		console.log("Visitando While");
-		if (!ctx.value()) return false;
-		let condition = this.visit(ctx.value());
-		let time = performance.now();
-		while (condition) {
-			this.visit(ctx.expression());
-			condition = this.visit(ctx.value());
-			if (performance.now() - time > this.max_loop_time) {
-				this.logs.push({
-					type: "warning",
-					header: "WARNING",
-					text: "Posible infinite loop detected, stopping loop...",
-				});
-				break;
-			}
-		}
-		return condition;
+		console.log("YES")
+		const whileStartLabel = this.generateLabel("whileStartLabel");
+		const whileEndLabel = this.generateLabel("whileEndLabel");
+		this.jazminCode += `\n${whileStartLabel}:`;
+		const instruction = this.visit(ctx.value());
+		this.jazminCode += `\n${instruction} ${whileEndLabel}`;
+		this.visit(ctx.expression());
+		this.jazminCode += `\ngoto ${whileStartLabel}`;
+		this.jazminCode += `\n${whileEndLabel}:`;
+		// this.translatedCode += `\nwhile (${CONDITION}){`;	
+		// this.visit(ctx.expression())
+		// this.translatedCode += `\n}`;	
+		// return
 	}
 
 
