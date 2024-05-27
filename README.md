@@ -66,6 +66,19 @@ start --> {
 }
 ```
 
+### **Conditions**
+Currently, MindStone has the following condition operators available:
+- '>'
+- '<'
+- '>='
+- '<='
+- '||'
+- '&&'
+- '=='
+- '!='
+- 'true'
+- 'false'
+
 ### **Conditional sentences**
 Conditionals are the pillar of responsive programing, in MindStone, you can change the flow of your code based on a condition using the conditional sentences.
 #### If Statement
@@ -98,18 +111,22 @@ start --> {
     ptr("Hello else!")!
   }!
 ```
-#### Condition operators
-Currently, MindStone has the following condition operators available:
-- '>'
-- '<'
-- '>='
-- '<='
-- '||'
-- '&&'
-- '=='
-- '!='
-- 'true'
-- 'false'
+
+### **Loop structures**
+Using loops, we can resolve problems that require iterative logic:
+
+#### While loop
+The while loop keeps executing his code block as long as his asociated condition evaluates as True.
+The sintax for the while loop is the following:
+```
+// This example will print the numbers from 0 to 10
+start --> {
+  ent i = 0!
+  while( i <= 10){
+    ptr(i)!
+    i++!
+  }
+```
 
 # INTERNAL DEVELOPMENT ONLY
 
