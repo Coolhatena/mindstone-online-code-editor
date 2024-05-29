@@ -1,7 +1,7 @@
 import MStoJazminParser from "@/grammar/translator/MStoJazmin/grammar/MStoJazminParser";
-import MStoJazminVisitor from "@/grammar/translator/MStoJazmin/grammar/MStoJazminVisitor";
+import LanguageVisitor from '@/grammar/LanguageVisitor';
 
-export default class MStoJazminCustomVisitor extends MStoJazminVisitor {
+export default class MStoJazminCustomVisitor extends LanguageVisitor {
 	constructor() {
 		super();
 		this.stackLimit = 1;
@@ -116,7 +116,8 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n` : ""}`;
 		}
 	}
 
-	visitAssign(ctx) {
+	// Visit a parse tree produced by LanguageParser#normalAssign.
+	visitNormalAssign(ctx) {
 		console.log("Assign");
 		let VALUE = this.visit(ctx.value());
 		const ID = ctx.ID().getText();
@@ -126,6 +127,43 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n` : ""}`;
 			this.jazminCode += `\nistore_${INDEX}\n`;
 		}
 	}
+	
+	// Visit a parse tree produced by LanguageParser#mathAssign.
+	visitMathAssign(ctx) {
+		console.log("Assign");
+		let VALUE = this.visit(ctx.value());
+		const ID = ctx.ID().getText();
+		const INDEX = this.getVariableIndex(ID);
+		const OPERATOR = ctx.MATH_EQUALS().getText();
+
+		if (INDEX > -1) {
+			// this.variables[ID].value = VALUE;
+			this.jazminCode += `\niload_${INDEX}`;
+			switch (OPERATOR) {
+				case '+=':
+					this.jazminCode += '\niadd';
+					break;
+				
+				case '-=':
+					this.jazminCode += '\nisub';
+					break;
+
+				case '*=':
+					this.jazminCode += '\nimul';
+					break;
+
+				case '/=':
+					this.jazminCode += '\nidiv';
+					break;
+
+				case '%=':
+					this.jazminCode += '\nirem';
+					break;
+			}
+			this.jazminCode += `\nistore_${INDEX}\n`;
+		}
+	}
+
 
 	visitMultDiv(ctx) {
 		const operation_data = this.visitChildren(ctx);
@@ -338,16 +376,18 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n` : ""}`;
 
 		switch (symbol) {
 			case ">":
-				return "if_icmplt";
-
-			case "<":
-				return "if_icmpgt";
-
-			case ">=":
 				return "if_icmple";
 
-			case "<=":
+			case "<":
+				//2
 				return "if_icmpge";
+
+			case ">=":
+				return "if_icmplt";
+
+			case "<=":
+				// 1
+				return "if_icmpgt";
 
 			case "||":
 				return first_val || second_val;
