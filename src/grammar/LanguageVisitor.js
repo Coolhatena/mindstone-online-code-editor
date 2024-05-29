@@ -36,8 +36,14 @@ export default class LanguageVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
-	// Visit a parse tree produced by LanguageParser#assign.
-	visitAssign(ctx) {
+	// Visit a parse tree produced by LanguageParser#normalAssign.
+	visitNormalAssign(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by LanguageParser#mathAssign.
+	visitMathAssign(ctx) {
 	  return this.visitChildren(ctx);
 	}
 

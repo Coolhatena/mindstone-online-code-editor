@@ -19,7 +19,9 @@ expression: declaration SEMI?
 
 declaration: TYPE ID (EQUALS value)?;
 
-assign: ID EQUALS value;
+assign: ID EQUALS value			#normalAssign
+	|	ID MATH_EQUALS value	#mathAssign
+	;
 
 log: PRINT OPEN_PARENTH value CLOSE_PARENTH;
 

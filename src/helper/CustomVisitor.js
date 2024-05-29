@@ -141,6 +141,61 @@ export default class CustomVisitor extends LanguageVisitor {
 		return [TYPE, ID];
 	}
 
+
+	assign(ID, VALUE, OPERATOR = '=') {
+		console.log("Assign");
+		const TYPE = this.getVariableType(ID);
+
+		if (TYPE) {
+			if (this.assertTypeWithValue(TYPE, VALUE)) {
+				let variable = this.variables[TYPE].find(
+					(variable) => variable.id === ID
+				);
+
+				switch (OPERATOR) {
+					case '=':
+						variable.value = VALUE;
+						break;
+
+					case '+=':
+						variable.value = variable.value + VALUE;
+						break;
+					
+					case '-=':
+						variable.value = variable.value - VALUE;
+						break;
+
+					case '*=':
+						variable.value = variable.value * VALUE;
+						break;
+
+					case '/=':
+						variable.value = variable.value / VALUE;
+						break;
+
+					case '%=':
+						variable.value = variable.value % VALUE;
+						break;
+				}
+				
+			} else {
+				this.logs.push({
+					type: "error",
+					header: "ERROR",
+					text: `Cant assign "${VALUE}" to type "${TYPE}"`,
+				});
+			}
+		} else {
+			this.logs.push({
+				type: "error",
+				header: "ERROR",
+				text: `Variable "${ID}" is not defined`,
+			});
+		}
+
+		return true;
+	}
+
 	// VISIT METHODS
 	visitFile(ctx) {
 		console.log(ctx.getText());
@@ -195,38 +250,27 @@ export default class CustomVisitor extends LanguageVisitor {
 		}
 	}
 
-	
-	visitAssign(ctx) {
+	// Visit a parse tree produced by LanguageParser#normalAssign.
+	visitNormalAssign(ctx) {
 		console.log("Assign");
 		const ID = ctx.ID().getText();
 		const VALUE = this.visit(ctx.value());
-		const TYPE = this.getVariableType(ID);
-
-		if (TYPE) {
-			if (this.assertTypeWithValue(TYPE, VALUE)) {
-				let variable = this.variables[TYPE].find(
-					(variable) => variable.id === ID
-				);
-				variable.value = VALUE;
-			} else {
-				this.logs.push({
-					type: "error",
-					header: "ERROR",
-					text: `Cant assign "${VALUE}" to type "${TYPE}"`,
-				});
-			}
-		} else {
-			this.logs.push({
-				type: "error",
-				header: "ERROR",
-				text: `Variable "${ID}" is not defined`,
-			});
-		}
-
-		return this.visitChildren(ctx);
+		
+		return this.assign(ID, VALUE);
 	}
-
 	
+	
+	// Visit a parse tree produced by LanguageParser#mathAssign.
+	visitMathAssign(ctx) {
+		console.log("Assign");
+		const ID = ctx.ID().getText();
+		const VALUE = this.visit(ctx.value());
+		const OPERATOR = ctx.MATH_EQUALS().getText();
+		
+		return this.assign(ID, VALUE, OPERATOR);
+	}
+	
+
 	visitMultDiv(ctx) {
 		const operation_data = this.visitChildren(ctx);
 		let SYMBOL = ctx.operation.type;
