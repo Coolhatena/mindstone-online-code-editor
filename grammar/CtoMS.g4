@@ -21,7 +21,7 @@ declaration:	TYPE ID (EQUALS value)?
 			// |	TYPE id=(INV_ID|INT) (EQUALS value)?
 			;
 
-assign: ID EQUALS value;
+assign: ID eq=(EQUALS|MATH_EQUALS) value;
 
 increment: ID (PLUS PLUS | SUB SUB);
 

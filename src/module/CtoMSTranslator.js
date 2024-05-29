@@ -1,6 +1,6 @@
 import antlr4 from "antlr4";
-import CtoMSLexer from '@/grammar/translator/CtoMS/grammar/translator/CtoMSLexer.js';
-import CtoMSParser from '@/grammar/translator/CtoMS/grammar/translator/CtoMSParser.js';
+import CtoMSLexer from '@/grammar/translator/CtoMS/grammar/CtoMSLexer';
+import CtoMSParser from '@/grammar/translator/CtoMS/grammar/CtoMSParser';
 import CtoMSCustomVisitor from '@/helper/CtoMSCustomVisitor';
 
 import automata from '@/helper/automata.js';

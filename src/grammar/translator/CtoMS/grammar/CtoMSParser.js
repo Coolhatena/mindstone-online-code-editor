@@ -1,9 +1,9 @@
-// Generated from ./grammar/translator/CtoMS.g4 by ANTLR 4.13.1
+// Generated from ./grammar/CtoMS.g4 by ANTLR 4.13.1
 // jshint ignore: start
 import antlr4 from 'antlr4';
 import CtoMSVisitor from './CtoMSVisitor.js';
 
-const serializedATN = [4,1,28,179,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
+const serializedATN = [4,1,29,179,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
 4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,
 2,13,7,13,2,14,7,14,1,0,4,0,32,8,0,11,0,12,0,33,1,1,1,1,1,1,3,1,39,8,1,1,
 1,1,1,3,1,43,8,1,1,1,1,1,1,2,5,2,48,8,2,10,2,12,2,51,9,2,1,3,1,3,1,3,1,3,
@@ -16,48 +16,48 @@ const serializedATN = [4,1,28,179,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
 8,13,10,13,12,13,147,9,13,1,13,1,13,1,13,1,13,1,13,1,13,1,14,1,14,1,14,1,
 14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,3,14,166,8,14,1,14,1,14,1,14,1,14,
 1,14,1,14,5,14,174,8,14,10,14,12,14,177,9,14,1,14,1,49,1,28,15,0,2,4,6,8,
-10,12,14,16,18,20,22,24,26,28,0,2,1,0,19,20,1,0,8,12,189,0,31,1,0,0,0,2,
-35,1,0,0,0,4,49,1,0,0,0,6,67,1,0,0,0,8,69,1,0,0,0,10,75,1,0,0,0,12,79,1,
-0,0,0,14,86,1,0,0,0,16,91,1,0,0,0,18,101,1,0,0,0,20,114,1,0,0,0,22,117,1,
-0,0,0,24,127,1,0,0,0,26,140,1,0,0,0,28,165,1,0,0,0,30,32,3,2,1,0,31,30,1,
-0,0,0,32,33,1,0,0,0,33,31,1,0,0,0,33,34,1,0,0,0,34,1,1,0,0,0,35,36,5,22,
-0,0,36,38,5,5,0,0,37,39,5,1,0,0,38,37,1,0,0,0,38,39,1,0,0,0,39,40,1,0,0,
-0,40,42,3,4,2,0,41,43,5,1,0,0,42,41,1,0,0,0,42,43,1,0,0,0,43,44,1,0,0,0,
-44,45,5,6,0,0,45,3,1,0,0,0,46,48,3,6,3,0,47,46,1,0,0,0,48,51,1,0,0,0,49,
-50,1,0,0,0,49,47,1,0,0,0,50,5,1,0,0,0,51,49,1,0,0,0,52,53,3,14,7,0,53,54,
-5,14,0,0,54,68,1,0,0,0,55,56,3,8,4,0,56,57,5,14,0,0,57,68,1,0,0,0,58,59,
-3,10,5,0,59,60,5,14,0,0,60,68,1,0,0,0,61,62,3,12,6,0,62,63,5,14,0,0,63,68,
-1,0,0,0,64,68,3,16,8,0,65,68,3,24,12,0,66,68,3,26,13,0,67,52,1,0,0,0,67,
-55,1,0,0,0,67,58,1,0,0,0,67,61,1,0,0,0,67,64,1,0,0,0,67,65,1,0,0,0,67,66,
-1,0,0,0,68,7,1,0,0,0,69,70,5,2,0,0,70,73,5,27,0,0,71,72,5,7,0,0,72,74,3,
-28,14,0,73,71,1,0,0,0,73,74,1,0,0,0,74,9,1,0,0,0,75,76,5,27,0,0,76,77,5,
-7,0,0,77,78,3,28,14,0,78,11,1,0,0,0,79,84,5,27,0,0,80,81,5,8,0,0,81,85,5,
-8,0,0,82,83,5,9,0,0,83,85,5,9,0,0,84,80,1,0,0,0,84,82,1,0,0,0,85,13,1,0,
-0,0,86,87,5,21,0,0,87,88,5,3,0,0,88,89,3,28,14,0,89,90,5,4,0,0,90,15,1,0,
-0,0,91,95,3,18,9,0,92,94,3,20,10,0,93,92,1,0,0,0,94,97,1,0,0,0,95,93,1,0,
-0,0,95,96,1,0,0,0,96,99,1,0,0,0,97,95,1,0,0,0,98,100,3,22,11,0,99,98,1,0,
-0,0,99,100,1,0,0,0,100,17,1,0,0,0,101,102,5,15,0,0,102,103,5,3,0,0,103,104,
-3,28,14,0,104,105,5,4,0,0,105,109,5,5,0,0,106,108,3,6,3,0,107,106,1,0,0,
-0,108,111,1,0,0,0,109,107,1,0,0,0,109,110,1,0,0,0,110,112,1,0,0,0,111,109,
-1,0,0,0,112,113,5,6,0,0,113,19,1,0,0,0,114,115,5,16,0,0,115,116,3,18,9,0,
-116,21,1,0,0,0,117,118,5,16,0,0,118,122,5,5,0,0,119,121,3,6,3,0,120,119,
-1,0,0,0,121,124,1,0,0,0,122,120,1,0,0,0,122,123,1,0,0,0,123,125,1,0,0,0,
-124,122,1,0,0,0,125,126,5,6,0,0,126,23,1,0,0,0,127,128,5,17,0,0,128,129,
-5,3,0,0,129,130,3,28,14,0,130,131,5,4,0,0,131,135,5,5,0,0,132,134,3,6,3,
-0,133,132,1,0,0,0,134,137,1,0,0,0,135,133,1,0,0,0,135,136,1,0,0,0,136,138,
-1,0,0,0,137,135,1,0,0,0,138,139,5,6,0,0,139,25,1,0,0,0,140,141,5,18,0,0,
-141,145,5,5,0,0,142,144,3,6,3,0,143,142,1,0,0,0,144,147,1,0,0,0,145,143,
-1,0,0,0,145,146,1,0,0,0,146,148,1,0,0,0,147,145,1,0,0,0,148,149,5,6,0,0,
-149,150,5,17,0,0,150,151,5,3,0,0,151,152,3,28,14,0,152,153,5,4,0,0,153,27,
-1,0,0,0,154,155,6,14,-1,0,155,156,5,3,0,0,156,157,3,28,14,0,157,158,5,4,
-0,0,158,166,1,0,0,0,159,166,7,0,0,0,160,166,5,26,0,0,161,166,5,23,0,0,162,
-166,5,27,0,0,163,166,5,25,0,0,164,166,5,24,0,0,165,154,1,0,0,0,165,159,1,
-0,0,0,165,160,1,0,0,0,165,161,1,0,0,0,165,162,1,0,0,0,165,163,1,0,0,0,165,
-164,1,0,0,0,166,175,1,0,0,0,167,168,10,8,0,0,168,169,7,1,0,0,169,174,3,28,
-14,9,170,171,10,7,0,0,171,172,7,0,0,0,172,174,3,28,14,8,173,167,1,0,0,0,
-173,170,1,0,0,0,174,177,1,0,0,0,175,173,1,0,0,0,175,176,1,0,0,0,176,29,1,
-0,0,0,177,175,1,0,0,0,16,33,38,42,49,67,73,84,95,99,109,122,135,145,165,
-173,175];
+10,12,14,16,18,20,22,24,26,28,0,3,1,0,7,8,1,0,20,21,1,0,9,13,189,0,31,1,
+0,0,0,2,35,1,0,0,0,4,49,1,0,0,0,6,67,1,0,0,0,8,69,1,0,0,0,10,75,1,0,0,0,
+12,79,1,0,0,0,14,86,1,0,0,0,16,91,1,0,0,0,18,101,1,0,0,0,20,114,1,0,0,0,
+22,117,1,0,0,0,24,127,1,0,0,0,26,140,1,0,0,0,28,165,1,0,0,0,30,32,3,2,1,
+0,31,30,1,0,0,0,32,33,1,0,0,0,33,31,1,0,0,0,33,34,1,0,0,0,34,1,1,0,0,0,35,
+36,5,23,0,0,36,38,5,5,0,0,37,39,5,1,0,0,38,37,1,0,0,0,38,39,1,0,0,0,39,40,
+1,0,0,0,40,42,3,4,2,0,41,43,5,1,0,0,42,41,1,0,0,0,42,43,1,0,0,0,43,44,1,
+0,0,0,44,45,5,6,0,0,45,3,1,0,0,0,46,48,3,6,3,0,47,46,1,0,0,0,48,51,1,0,0,
+0,49,50,1,0,0,0,49,47,1,0,0,0,50,5,1,0,0,0,51,49,1,0,0,0,52,53,3,14,7,0,
+53,54,5,15,0,0,54,68,1,0,0,0,55,56,3,8,4,0,56,57,5,15,0,0,57,68,1,0,0,0,
+58,59,3,10,5,0,59,60,5,15,0,0,60,68,1,0,0,0,61,62,3,12,6,0,62,63,5,15,0,
+0,63,68,1,0,0,0,64,68,3,16,8,0,65,68,3,24,12,0,66,68,3,26,13,0,67,52,1,0,
+0,0,67,55,1,0,0,0,67,58,1,0,0,0,67,61,1,0,0,0,67,64,1,0,0,0,67,65,1,0,0,
+0,67,66,1,0,0,0,68,7,1,0,0,0,69,70,5,2,0,0,70,73,5,28,0,0,71,72,5,7,0,0,
+72,74,3,28,14,0,73,71,1,0,0,0,73,74,1,0,0,0,74,9,1,0,0,0,75,76,5,28,0,0,
+76,77,7,0,0,0,77,78,3,28,14,0,78,11,1,0,0,0,79,84,5,28,0,0,80,81,5,9,0,0,
+81,85,5,9,0,0,82,83,5,10,0,0,83,85,5,10,0,0,84,80,1,0,0,0,84,82,1,0,0,0,
+85,13,1,0,0,0,86,87,5,22,0,0,87,88,5,3,0,0,88,89,3,28,14,0,89,90,5,4,0,0,
+90,15,1,0,0,0,91,95,3,18,9,0,92,94,3,20,10,0,93,92,1,0,0,0,94,97,1,0,0,0,
+95,93,1,0,0,0,95,96,1,0,0,0,96,99,1,0,0,0,97,95,1,0,0,0,98,100,3,22,11,0,
+99,98,1,0,0,0,99,100,1,0,0,0,100,17,1,0,0,0,101,102,5,16,0,0,102,103,5,3,
+0,0,103,104,3,28,14,0,104,105,5,4,0,0,105,109,5,5,0,0,106,108,3,6,3,0,107,
+106,1,0,0,0,108,111,1,0,0,0,109,107,1,0,0,0,109,110,1,0,0,0,110,112,1,0,
+0,0,111,109,1,0,0,0,112,113,5,6,0,0,113,19,1,0,0,0,114,115,5,17,0,0,115,
+116,3,18,9,0,116,21,1,0,0,0,117,118,5,17,0,0,118,122,5,5,0,0,119,121,3,6,
+3,0,120,119,1,0,0,0,121,124,1,0,0,0,122,120,1,0,0,0,122,123,1,0,0,0,123,
+125,1,0,0,0,124,122,1,0,0,0,125,126,5,6,0,0,126,23,1,0,0,0,127,128,5,18,
+0,0,128,129,5,3,0,0,129,130,3,28,14,0,130,131,5,4,0,0,131,135,5,5,0,0,132,
+134,3,6,3,0,133,132,1,0,0,0,134,137,1,0,0,0,135,133,1,0,0,0,135,136,1,0,
+0,0,136,138,1,0,0,0,137,135,1,0,0,0,138,139,5,6,0,0,139,25,1,0,0,0,140,141,
+5,19,0,0,141,145,5,5,0,0,142,144,3,6,3,0,143,142,1,0,0,0,144,147,1,0,0,0,
+145,143,1,0,0,0,145,146,1,0,0,0,146,148,1,0,0,0,147,145,1,0,0,0,148,149,
+5,6,0,0,149,150,5,18,0,0,150,151,5,3,0,0,151,152,3,28,14,0,152,153,5,4,0,
+0,153,27,1,0,0,0,154,155,6,14,-1,0,155,156,5,3,0,0,156,157,3,28,14,0,157,
+158,5,4,0,0,158,166,1,0,0,0,159,166,7,1,0,0,160,166,5,27,0,0,161,166,5,24,
+0,0,162,166,5,28,0,0,163,166,5,26,0,0,164,166,5,25,0,0,165,154,1,0,0,0,165,
+159,1,0,0,0,165,160,1,0,0,0,165,161,1,0,0,0,165,162,1,0,0,0,165,163,1,0,
+0,0,165,164,1,0,0,0,166,175,1,0,0,0,167,168,10,8,0,0,168,169,7,2,0,0,169,
+174,3,28,14,9,170,171,10,7,0,0,171,172,7,1,0,0,172,174,3,28,14,8,173,167,
+1,0,0,0,173,170,1,0,0,0,174,177,1,0,0,0,175,173,1,0,0,0,175,176,1,0,0,0,
+176,29,1,0,0,0,177,175,1,0,0,0,16,33,38,42,49,67,73,84,95,99,109,122,135,
+145,165,173,175];
 
 
 const atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -70,12 +70,12 @@ export default class CtoMSParser extends antlr4.Parser {
 
     static grammarFileName = "CtoMS.g4";
     static literalNames = [ null, "'\\n'", null, "'('", "')'", "'{'", "'}'", 
-                            "'='", "'+'", "'-'", "'*'", "'/'", "'%'", "'\"'", 
-                            "';'", "'if'", "'else'", "'while'", "'do'", 
-                            null, null, "'printf'", "'void main()'" ];
+                            "'='", null, "'+'", "'-'", "'*'", "'/'", "'%'", 
+                            "'\"'", "';'", "'if'", "'else'", "'while'", 
+                            "'do'", null, null, "'printf'", "'void main()'" ];
     static symbolicNames = [ null, null, "TYPE", "OPEN_PARENTH", "CLOSE_PARENTH", 
-                             "OPEN_CURL", "CLOSE_CURL", "EQUALS", "PLUS", 
-                             "SUB", "MULT", "DIV", "MOD", "DOUBLE_QUOTE", 
+                             "OPEN_CURL", "CLOSE_CURL", "EQUALS", "MATH_EQUALS", 
+                             "PLUS", "SUB", "MULT", "DIV", "MOD", "DOUBLE_QUOTE", 
                              "SEMI", "IF_PR", "ELSE_PR", "WHILE_PR", "DO_PR", 
                              "COND_MAT", "COND_LOG", "PRINT", "MAIN", "CHAR", 
                              "INT", "FLOAT", "STRING", "ID", "WS" ];
@@ -130,7 +130,7 @@ export default class CtoMSParser extends antlr4.Parser {
 	            this.state = 33; 
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	        } while(_la===22);
+	        } while(_la===23);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
@@ -341,12 +341,21 @@ export default class CtoMSParser extends antlr4.Parser {
 	assign() {
 	    let localctx = new AssignContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 10, CtoMSParser.RULE_assign);
+	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 75;
 	        this.match(CtoMSParser.ID);
 	        this.state = 76;
-	        this.match(CtoMSParser.EQUALS);
+	        localctx.eq = this._input.LT(1);
+	        _la = this._input.LA(1);
+	        if(!(_la===7 || _la===8)) {
+	            localctx.eq = this._errHandler.recoverInline(this);
+	        }
+	        else {
+	        	this._errHandler.reportMatch(this);
+	            this.consume();
+	        }
 	        this.state = 77;
 	        this.value(0);
 	    } catch (re) {
@@ -375,13 +384,13 @@ export default class CtoMSParser extends antlr4.Parser {
 	        this.state = 84;
 	        this._errHandler.sync(this);
 	        switch(this._input.LA(1)) {
-	        case 8:
+	        case 9:
 	            this.state = 80;
 	            this.match(CtoMSParser.PLUS);
 	            this.state = 81;
 	            this.match(CtoMSParser.PLUS);
 	            break;
-	        case 9:
+	        case 10:
 	            this.state = 82;
 	            this.match(CtoMSParser.SUB);
 	            this.state = 83;
@@ -459,7 +468,7 @@ export default class CtoMSParser extends antlr4.Parser {
 	        this.state = 99;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if(_la===16) {
+	        if(_la===17) {
 	            this.state = 98;
 	            this.conditional__else();
 	        }
@@ -499,7 +508,7 @@ export default class CtoMSParser extends antlr4.Parser {
 	        this.state = 109;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 136740868) !== 0)) {
+	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 273481732) !== 0)) {
 	            this.state = 106;
 	            this.expression();
 	            this.state = 111;
@@ -562,7 +571,7 @@ export default class CtoMSParser extends antlr4.Parser {
 	        this.state = 122;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 136740868) !== 0)) {
+	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 273481732) !== 0)) {
 	            this.state = 119;
 	            this.expression();
 	            this.state = 124;
@@ -606,7 +615,7 @@ export default class CtoMSParser extends antlr4.Parser {
 	        this.state = 135;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 136740868) !== 0)) {
+	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 273481732) !== 0)) {
 	            this.state = 132;
 	            this.expression();
 	            this.state = 137;
@@ -644,7 +653,7 @@ export default class CtoMSParser extends antlr4.Parser {
 	        this.state = 145;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 136740868) !== 0)) {
+	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 273481732) !== 0)) {
 	            this.state = 142;
 	            this.expression();
 	            this.state = 147;
@@ -700,12 +709,12 @@ export default class CtoMSParser extends antlr4.Parser {
 	            this.state = 157;
 	            this.match(CtoMSParser.CLOSE_PARENTH);
 	            break;
-	        case 19:
 	        case 20:
+	        case 21:
 	            this.state = 159;
 	            localctx.cond_sym = this._input.LT(1);
 	            _la = this._input.LA(1);
-	            if(!(_la===19 || _la===20)) {
+	            if(!(_la===20 || _la===21)) {
 	                localctx.cond_sym = this._errHandler.recoverInline(this);
 	            }
 	            else {
@@ -713,23 +722,23 @@ export default class CtoMSParser extends antlr4.Parser {
 	                this.consume();
 	            }
 	            break;
-	        case 26:
+	        case 27:
 	            this.state = 160;
 	            this.match(CtoMSParser.STRING);
 	            break;
-	        case 23:
+	        case 24:
 	            this.state = 161;
 	            this.match(CtoMSParser.CHAR);
 	            break;
-	        case 27:
+	        case 28:
 	            this.state = 162;
 	            this.match(CtoMSParser.ID);
 	            break;
-	        case 25:
+	        case 26:
 	            this.state = 163;
 	            this.match(CtoMSParser.FLOAT);
 	            break;
-	        case 24:
+	        case 25:
 	            this.state = 164;
 	            this.match(CtoMSParser.INT);
 	            break;
@@ -760,7 +769,7 @@ export default class CtoMSParser extends antlr4.Parser {
 	                    this.state = 168;
 	                    localctx.operation = this._input.LT(1);
 	                    _la = this._input.LA(1);
-	                    if(!((((_la) & ~0x1f) === 0 && ((1 << _la) & 7936) !== 0))) {
+	                    if(!((((_la) & ~0x1f) === 0 && ((1 << _la) & 15872) !== 0))) {
 	                        localctx.operation = this._errHandler.recoverInline(this);
 	                    }
 	                    else {
@@ -781,7 +790,7 @@ export default class CtoMSParser extends antlr4.Parser {
 	                    this.state = 171;
 	                    localctx.cond_sym = this._input.LT(1);
 	                    _la = this._input.LA(1);
-	                    if(!(_la===19 || _la===20)) {
+	                    if(!(_la===20 || _la===21)) {
 	                        localctx.cond_sym = this._errHandler.recoverInline(this);
 	                    }
 	                    else {
@@ -824,27 +833,28 @@ CtoMSParser.CLOSE_PARENTH = 4;
 CtoMSParser.OPEN_CURL = 5;
 CtoMSParser.CLOSE_CURL = 6;
 CtoMSParser.EQUALS = 7;
-CtoMSParser.PLUS = 8;
-CtoMSParser.SUB = 9;
-CtoMSParser.MULT = 10;
-CtoMSParser.DIV = 11;
-CtoMSParser.MOD = 12;
-CtoMSParser.DOUBLE_QUOTE = 13;
-CtoMSParser.SEMI = 14;
-CtoMSParser.IF_PR = 15;
-CtoMSParser.ELSE_PR = 16;
-CtoMSParser.WHILE_PR = 17;
-CtoMSParser.DO_PR = 18;
-CtoMSParser.COND_MAT = 19;
-CtoMSParser.COND_LOG = 20;
-CtoMSParser.PRINT = 21;
-CtoMSParser.MAIN = 22;
-CtoMSParser.CHAR = 23;
-CtoMSParser.INT = 24;
-CtoMSParser.FLOAT = 25;
-CtoMSParser.STRING = 26;
-CtoMSParser.ID = 27;
-CtoMSParser.WS = 28;
+CtoMSParser.MATH_EQUALS = 8;
+CtoMSParser.PLUS = 9;
+CtoMSParser.SUB = 10;
+CtoMSParser.MULT = 11;
+CtoMSParser.DIV = 12;
+CtoMSParser.MOD = 13;
+CtoMSParser.DOUBLE_QUOTE = 14;
+CtoMSParser.SEMI = 15;
+CtoMSParser.IF_PR = 16;
+CtoMSParser.ELSE_PR = 17;
+CtoMSParser.WHILE_PR = 18;
+CtoMSParser.DO_PR = 19;
+CtoMSParser.COND_MAT = 20;
+CtoMSParser.COND_LOG = 21;
+CtoMSParser.PRINT = 22;
+CtoMSParser.MAIN = 23;
+CtoMSParser.CHAR = 24;
+CtoMSParser.INT = 25;
+CtoMSParser.FLOAT = 26;
+CtoMSParser.STRING = 27;
+CtoMSParser.ID = 28;
+CtoMSParser.WS = 29;
 
 CtoMSParser.RULE_file = 0;
 CtoMSParser.RULE_init = 1;
@@ -1095,18 +1105,23 @@ class AssignContext extends antlr4.ParserRuleContext {
         super(parent, invokingState);
         this.parser = parser;
         this.ruleIndex = CtoMSParser.RULE_assign;
+        this.eq = null;
     }
 
 	ID() {
 	    return this.getToken(CtoMSParser.ID, 0);
 	};
 
+	value() {
+	    return this.getTypedRuleContext(ValueContext,0);
+	};
+
 	EQUALS() {
 	    return this.getToken(CtoMSParser.EQUALS, 0);
 	};
 
-	value() {
-	    return this.getTypedRuleContext(ValueContext,0);
+	MATH_EQUALS() {
+	    return this.getToken(CtoMSParser.MATH_EQUALS, 0);
 	};
 
 	accept(visitor) {

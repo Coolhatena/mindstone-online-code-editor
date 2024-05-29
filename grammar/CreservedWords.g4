@@ -5,6 +5,7 @@ CLOSE_PARENTH	: ')';
 OPEN_CURL		: '{';
 CLOSE_CURL		: '}';
 EQUALS			: '=';
+MATH_EQUALS		: ('+='|'-='|'*='|'/='|'%=');
 PLUS			: '+';
 SUB				: '-';
 MULT			: '*';

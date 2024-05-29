@@ -1,4 +1,4 @@
-import CtoMSVisitor from "@/grammar/translator/CtoMS/grammar/translator/CtoMSVisitor";
+import CtoMSVisitor from '@/grammar/translator/CtoMS/grammar/CtoMSVisitor';
 
 export default class CtoMSCustomVisitor extends CtoMSVisitor {
 	constructor() {
@@ -67,9 +67,7 @@ export default class CtoMSCustomVisitor extends CtoMSVisitor {
 		console.log("Assign");
 		let ID = ctx.ID().getText();
 		let VALUE = this.visit(ctx.value());
-		this.translatedCode += `\n${ID} = ${VALUE}!`;
-
-		return;
+		this.translatedCode += `\n${ID} ${ctx.eq.text} ${VALUE}!`;
 	}
 
 	visitIncrement(ctx) {
