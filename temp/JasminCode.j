@@ -25,7 +25,7 @@ goto endIfLabel0
 endIfLabel0:
 iload_0
 ldc 2
-imul
+irem
 
 ldc 0
 if_icmpne elseLabel2

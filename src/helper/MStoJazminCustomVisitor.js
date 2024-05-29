@@ -1,4 +1,4 @@
-import MStoJazminParser from "@/grammar/translator/MStoJazmin/grammar/MStoJazminParser";
+import LanguageParser from '@/grammar/LanguageParser';
 import LanguageVisitor from '@/grammar/LanguageVisitor';
 
 export default class MStoJazminCustomVisitor extends LanguageVisitor {
@@ -169,17 +169,21 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n` : ""}`;
 		const operation_data = this.visitChildren(ctx);
 		let SYMBOL = ctx.operation.type;
 		this.stackLimit += 2;
-		if (SYMBOL == MStoJazminParser.MULT) {
+		console.log("SIMBOLOOOOOO")
+		console.log(SYMBOL)
+		if (SYMBOL == LanguageParser.MULT) {
+			console.log("NOOOO")
 			this.jazminCode += `\nimul\n`;
 			return "swap";
 		}
 
-		if (SYMBOL == MStoJazminParser.DIV) {
+		if (SYMBOL == LanguageParser.DIV) {
 			this.jazminCode += `\nidiv\n`;
 			return "swap";
 		}
 
-		if (SYMBOL == MStoJazminParser.MOD) {
+		if (SYMBOL == LanguageParser.MOD) {
+			console.log("YESSSS")
 			this.jazminCode += `\nirem\n`;
 			return "swap";
 		}
@@ -189,7 +193,7 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n` : ""}`;
 		const operation_data = this.visitChildren(ctx);
 		let SYMBOL = ctx.operation.type;
 		this.stackLimit += 2;
-		if (SYMBOL == MStoJazminParser.PLUS) {
+		if (SYMBOL == LanguageParser.PLUS) {
 			this.jazminCode += `\niadd\n`;
 			return "swap";
 		} else {
