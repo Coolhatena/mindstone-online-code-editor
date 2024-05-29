@@ -22,6 +22,32 @@ const Translator = ({ codeState = ["", () => {}] }) => {
 		setJazminCode(result);
 	};
 
+	const handleCompileJasmin = async (e) => {
+		e.preventDefault();
+
+		const filename = 'JasminCode'
+		const response = await fetch('api/convert', {
+			method: 'POST',
+			headers: {
+			'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ code: jazminCode, filename }),
+		});
+
+		if (response.ok) {
+			const blob = await response.blob();
+			const url = window.URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = `${filename}.class`;
+			document.body.appendChild(a);
+			a.click();
+			a.remove();
+		} else {
+			console.error('Error en la conversión');
+		}
+	};
+
 	return (
 		<div>
 			<div className="translator-switch">
@@ -73,6 +99,8 @@ const Translator = ({ codeState = ["", () => {}] }) => {
 							title="Jasmin code"
 							textVariable={jazminCode}
 							setTextVariable={setJazminCode}
+							isCompileOption
+							handleCompile={handleCompileJasmin}
 						/>
 					</div>
 				</div>

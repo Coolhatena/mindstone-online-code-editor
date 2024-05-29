@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react'
 import CodeMirror from "@uiw/react-codemirror";
 import { vscodeDark } from "@uiw/codemirror-theme-vscode";
 
-const CodeEditor = ({title, textVariable, setTextVariable = () => {}, isTranslateOption, handleTranslate = () => {}, isLoadFileOption = false, acceptedFileTypes = '.txt'}) => {
+const CodeEditor = ({title, textVariable, setTextVariable = () => {}, isTranslateOption = false, handleTranslate = () => {}, isCompileOption = false, handleCompile = (e) => { e.preventDefault() }, isLoadFileOption = false, acceptedFileTypes = '.txt'}) => {
 	const inputFile = useRef(null);
 
 	let handleFileLoad = (e) => {
@@ -28,6 +28,14 @@ const CodeEditor = ({title, textVariable, setTextVariable = () => {}, isTranslat
 		<div className="editor-header">
 			<h2>{title}</h2>
 			<div className="button-container">
+				{
+					isCompileOption ?
+						<form onSubmit={handleCompile}>
+							<button type="submit" id="compile" className="editor-button">Compile</button>
+						</form>
+					:
+						<></>
+				}
 				{
 					isLoadFileOption ?
 						<button id="load-file-button" className="editor-button" onClick={handleClickFileLoad}>
