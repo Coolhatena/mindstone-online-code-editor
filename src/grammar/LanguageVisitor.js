@@ -66,6 +66,12 @@ export default class LanguageVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by LanguageParser#compCondition.
+	visitCompCondition(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 	// Visit a parse tree produced by LanguageParser#multDiv.
 	visitMultDiv(ctx) {
 	  return this.visitChildren(ctx);

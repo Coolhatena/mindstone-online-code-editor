@@ -31,6 +31,7 @@ value:	OPEN_PARENTH value CLOSE_PARENTH 			#parentheses
 	|	operation=(PLUS|SUB) value					#signNumbers
 	|	cond_sym=(COND_LOG|COND_MAT)				#normalCondition
 	|	value cond_sym=(COND_LOG|COND_MAT) value	#normalCondition
+	|	value cond_sym=(AND_OP|OR_OP) value			#compCondition
 	|	STRING										#valueAsChar
 	|	CHAR										#valueAsChar
 	|	FLOAT										#valueAsNumber

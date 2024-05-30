@@ -483,6 +483,21 @@ export default class CustomVisitor extends LanguageVisitor {
 		}
 	}
 
+	// Visit a parse tree produced by LanguageParser#compCondition.
+	visitCompCondition(ctx) {
+		console.log("comp Condition");
+		let [first_val, second_val] = this.visit(ctx.value());
+		let symbol = ctx.cond_sym.text;
+
+		switch (symbol) {
+			case "||":
+				return first_val || second_val;
+
+			case "&&":
+				return first_val && second_val;
+		}
+	}
+
 	
 	visitParenthesesCondition(ctx) {
 		console.log("PARENTHESES CONDITION");

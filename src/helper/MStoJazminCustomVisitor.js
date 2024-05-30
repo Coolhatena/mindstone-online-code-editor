@@ -169,10 +169,7 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n` : ""}`;
 		const operation_data = this.visitChildren(ctx);
 		let SYMBOL = ctx.operation.type;
 		this.stackLimit += 2;
-		console.log("SIMBOLOOOOOO")
-		console.log(SYMBOL)
 		if (SYMBOL == LanguageParser.MULT) {
-			console.log("NOOOO")
 			this.jazminCode += `\nimul\n`;
 			return "swap";
 		}
@@ -183,7 +180,6 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n` : ""}`;
 		}
 
 		if (SYMBOL == LanguageParser.MOD) {
-			console.log("YESSSS")
 			this.jazminCode += `\nirem\n`;
 			return "swap";
 		}
@@ -301,6 +297,7 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n` : ""}`;
 
 		// add if metadata at the start of the conditions array
 		const [ifCondition, ifContent] = this.visit(ctx.conditional());
+		console.log("test")
 		conditions.push({
 			instruction: ifCondition,
 			content: ifContent,
@@ -345,9 +342,54 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n` : ""}`;
 				this.jazminCode += `\n${condition.label}:`;
 			}
 			const instruction = this.visit(condition.instruction);
-			this.jazminCode += `\n${instruction} ${conditions[i + 1].label}`;
-			this.visit(condition.content);
-			this.jazminCode += `\ngoto ${endIfLabel}\n`;
+
+			switch (instruction.conditionSentence) {
+				case 'AND': 
+					let repLabelAND = conditions[i + 1].label;
+					for (let value of instruction.conditionValues){
+						this.visit(value.conditionValues)
+						this.jazminCode += `\n${value.conditionSentence} ${repLabelAND}`;
+					}
+					this.visit(condition.content);
+					this.jazminCode += `\ngoto ${endIfLabel}\n`;
+					break
+				
+				case 'OR': 
+					let ORLabel1 = this.generateLabel("ORLabel1");
+					let ORLabel2 = this.generateLabel("ORLabel1");
+					let trueLabel = this.generateLabel("ifORTrue");
+					let repLabelOR = conditions[i + 1].label;
+					
+					this.jazminCode += `\ngoto ${ORLabel1}\n`;
+					this.jazminCode += `\n${trueLabel}:\n`;
+					this.visit(condition.content);
+					this.jazminCode += `\ngoto ${endIfLabel}\n`;
+
+					this.jazminCode += `\n${ORLabel1}:`;
+					let isArray = Array.isArray(instruction.conditionValues[0].conditionValues)
+					if (isArray){
+						this.visit(instruction.conditionValues[0].conditionValues)
+					} else {
+						this.visit(instruction.conditionValues[0].conditionValues.conditionValues)
+
+					}
+					this.jazminCode += `\n${instruction.conditionValues[0].conditionSentence} ${ORLabel2}`;
+					this.jazminCode += `\ngoto ${trueLabel}\n`;
+
+					this.jazminCode += `\n${ORLabel2}:`;
+					this.visit(instruction.conditionValues[1].conditionValues)
+					this.jazminCode += `\n${instruction.conditionValues[1].conditionSentence} ${repLabelOR}`;
+					this.jazminCode += `\ngoto ${trueLabel}\n`;
+					break
+
+				default: 
+					console.log("single if")
+					this.visit(instruction.conditionValues)
+					this.jazminCode += `\n${instruction.conditionSentence} ${conditions[i + 1].label}`;
+					this.visit(condition.content);
+					this.jazminCode += `\ngoto ${endIfLabel}\n`;
+					break
+			}
 		}
 
 		if (elseData) {
@@ -375,35 +417,48 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n` : ""}`;
 
 	visitNormalCondition(ctx) {
 		console.log("Condition");
-		this.visit(ctx.value());
+		// this.visit(ctx.value());
+		// let [first_val, second_val] = this.visit();
+		
 		let symbol = ctx.cond_sym.text;
-
 		switch (symbol) {
 			case ">":
-				return "if_icmple";
+				return {
+					conditionValues: ctx.value(),
+					conditionSentence: "if_icmple"
+				};
 
 			case "<":
 				//2
-				return "if_icmpge";
+				return {
+					conditionValues: ctx.value(),
+					conditionSentence: "if_icmpge"
+				};
 
 			case ">=":
-				return "if_icmplt";
+				return {
+					conditionValues: ctx.value(),
+					conditionSentence: "if_icmplt"
+				};
 
 			case "<=":
 				// 1
-				return "if_icmpgt";
-
-			case "||":
-				return first_val || second_val;
-
-			case "&&":
-				return first_val && second_val;
+				return {
+					conditionValues: ctx.value(),
+					conditionSentence: "if_icmpgt"
+				};
 
 			case "==":
-				return "if_icmpne";
+				return {
+					conditionValues: ctx.value(),
+					conditionSentence: "if_icmpne"
+				};
 
 			case "!=":
-				return "if_icmpeq";
+				return {
+					conditionValues: ctx.value(),
+					conditionSentence: "if_icmpeq"
+				};
 
 			case "true":
 				return true;
@@ -416,6 +471,32 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n` : ""}`;
 		}
 	}
 
+	// Visit a parse tree produced by LanguageParser#compCondition.
+	visitCompCondition(ctx) {
+		console.log("COMP Condition");
+		// this.visit(ctx.value());
+		let [first_val, second_val] = this.visit(ctx.value());
+		
+		let symbol = ctx.cond_sym.text;
+		switch (symbol) {
+			
+			case "||":
+				return {
+					conditionValues: [first_val, second_val],
+					conditionSentence: "OR"
+				};
+
+			case "&&":
+				return {
+					conditionValues: [first_val, second_val],
+					conditionSentence: "AND"
+				};
+
+			default:
+				return false;
+		}
+	  }
+
 	visitParenthesesCondition(ctx) {
 		console.log("PARENTHESES CONDITION");
 		let result = this.visit(ctx.condition());
@@ -424,12 +505,12 @@ ${this.localsLimit ? `.limit locals ${this.localsLimit}\n` : ""}`;
 
 	visitLoop__while(ctx) {
 		console.log("Visitando While");
-		console.log("YES");
 		const whileStartLabel = this.generateLabel("whileStartLabel");
 		const whileEndLabel = this.generateLabel("whileEndLabel");
 		this.jazminCode += `\n${whileStartLabel}:`;
 		const instruction = this.visit(ctx.value());
-		this.jazminCode += `\n${instruction} ${whileEndLabel}`;
+		this.visit(instruction.conditionValues)
+		this.jazminCode += `\n${instruction.conditionSentence} ${whileEndLabel}`;
 		this.visit(ctx.expression());
 		this.jazminCode += `\ngoto ${whileStartLabel}`;
 		this.jazminCode += `\n${whileEndLabel}:`;

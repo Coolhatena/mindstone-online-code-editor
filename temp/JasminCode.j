@@ -1,98 +1,101 @@
 .class public JasminCode
 .super java/lang/Object
 .method public static main([Ljava/lang/String;)V
-.limit stack 18
+.limit stack 16
 .limit locals 3
 
-ldc 5
+ldc 10
 istore_0
 
 ldc 0
 istore_1
 
-ldc 0
+ldc 6
 istore_2
 
-iload_0
-ldc 0
-if_icmple endIfLabel0
-getstatic java/lang/System/out Ljava/io/PrintStream;
-ldc "El número es positivo.\n"
-invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V
-
-goto endIfLabel0
-
-endIfLabel0:
-iload_0
-ldc 2
-irem
-
-ldc 0
-if_icmpne elseLabel2
-getstatic java/lang/System/out Ljava/io/PrintStream;
-ldc "El número es par.\n"
-invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V
-
-goto endIfLabel1
-
-elseLabel2:
-getstatic java/lang/System/out Ljava/io/PrintStream;
-ldc "El número es impar.\n"
-invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V
-
-endIfLabel1:
-iload_0
-ldc 0
-if_icmple elifLabel4
-getstatic java/lang/System/out Ljava/io/PrintStream;
-ldc "El número es positivo.\n"
-invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V
-
-goto endIfLabel3
-
-elifLabel4:
-iload_0
-ldc 0
-if_icmpge elseLabel5
-getstatic java/lang/System/out Ljava/io/PrintStream;
-ldc "El número es negativo.\n"
-invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V
-
-goto endIfLabel3
-
-elseLabel5:
-getstatic java/lang/System/out Ljava/io/PrintStream;
-ldc "El número es cero.\n"
-invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V
-
-endIfLabel3:
-whileStartLabel6:
+whileStartLabel0:
 iload_1
-iload_0
-if_icmpgt whileEndLabel7
+ldc 3
+if_icmpge whileEndLabel1
 iload_1
+invokestatic java/lang/Integer/toString(I)Ljava/lang/String;
+getstatic java/lang/System/out Ljava/io/PrintStream;
+swap
+invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V
+
 iload_2
-iadd
-istore_2
+ldc 1
+if_icmplt elifLabel3
+iload_2
+ldc 3
+if_icmpgt elifLabel3
+getstatic java/lang/System/out Ljava/io/PrintStream;
+ldc "numero en rango permitido"
+invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V
+
+iload_2
+invokestatic java/lang/Integer/toString(I)Ljava/lang/String;
+getstatic java/lang/System/out Ljava/io/PrintStream;
+swap
+invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V
+
+goto endIfLabel2
+
+elifLabel3:
+iload_2
+ldc 4
+if_icmplt elseLabel4
+iload_2
+ldc 7
+if_icmpgt elseLabel4
+getstatic java/lang/System/out Ljava/io/PrintStream;
+ldc "Numero en rango invalido"
+invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V
+
+iload_2
+invokestatic java/lang/Integer/toString(I)Ljava/lang/String;
+getstatic java/lang/System/out Ljava/io/PrintStream;
+swap
+invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V
+
+goto endIfLabel2
+
+elseLabel4:
+getstatic java/lang/System/out Ljava/io/PrintStream;
+ldc "Número fuera de rango. Inténtalo de nuevo.\n"
+invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V
 
 iinc 1 1
-goto whileStartLabel6
-whileEndLabel7:
+endIfLabel2:
+iload_1
+ldc 3
+if_icmpne endIfLabel5
 getstatic java/lang/System/out Ljava/io/PrintStream;
-ldc "La suma de los primeros números naturales es:"
+ldc "Has alcanzado el máximo de intentos permitidos.\n"
 invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V
 
+whileStartLabel6:
+iload_0
+ldc 0
+if_icmple whileEndLabel7
 iload_0
 invokestatic java/lang/Integer/toString(I)Ljava/lang/String;
 getstatic java/lang/System/out Ljava/io/PrintStream;
 swap
 invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V
 
-iload_2
-invokestatic java/lang/Integer/toString(I)Ljava/lang/String;
-getstatic java/lang/System/out Ljava/io/PrintStream;
-swap
-invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V
+ldc 1
+iload_0
+isub
+istore_0
 
+goto whileStartLabel6
+whileEndLabel7:
+goto endIfLabel5
+
+endIfLabel5:
+iinc 1 1
+goto whileStartLabel0
+whileEndLabel1:
 return
 .end method
